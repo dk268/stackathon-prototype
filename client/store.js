@@ -4,8 +4,6 @@ import rootReducer from "./reducers/index.js";
 import loggingMiddleware from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 
-console.log(rootReducer);
-
 export default createStore(
   rootReducer,
   applyMiddleware(
