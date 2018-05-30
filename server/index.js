@@ -14,8 +14,8 @@ const volleyball = require("volleyball");
 app.use(volleyball);
 
 app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.static(path.join(__dirname, "../server/public")));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.use(
   session({
@@ -44,11 +44,11 @@ passport.deserializeUser((id, done) => {
     .catch(done);
 });
 
+app.use("/", require("./routes/index.js"));
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 }); // Send index.html for any other requests
-
-app.use("/", require("./routes/index.js"));
 
 // error handling middleware
 app.use((req, res, next) => {
