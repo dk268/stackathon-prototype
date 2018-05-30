@@ -10,8 +10,8 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const dbStore = new SequelizeStore({ db });
 dbStore.sync();
 
-// const volleyball = require("volleyball");
-// app.use(volleyball);
+const volleyball = require("volleyball");
+app.use(volleyball);
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -45,7 +45,7 @@ passport.deserializeUser((id, done) => {
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../server/public/index.html"));
+  res.sendFile(path.join(__dirname, "../public/index.html"));
 }); // Send index.html for any other requests
 
 app.use("/", require("./routes/index.js"));

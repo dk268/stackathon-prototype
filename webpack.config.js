@@ -6,7 +6,7 @@ module.exports = {
   entry: ["babel-polyfill", "./client/index.js"],
   output: {
     path: __dirname,
-    filename: "./server/public/bundle.js"
+    filename: "./public/bundle.js"
   },
   mode: "development",
   context: __dirname,

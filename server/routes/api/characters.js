@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 
 // /api/characters/
+console.log("...");
+
 router.get("/", async (req, res, next) => {
   console.log("/api/characters reached");
   console.log("point reached");
