@@ -13,8 +13,8 @@ console.log(chalk.blue(`process.env.SHELL: ${process.env.SHELL}`));
 
 // create the database instance that can be used in other database files
 const db = new Sequelize(
-  // `postgres://postgres:moop@localhost:5432/${pkg.name}`,
-  `postgres://localhost:5432/${pkg.name}`,
+  `postgres://postgres:moop@localhost:5432/${pkg.name}`,
+  // `postgres://localhost:5432/${pkg.name}`,
   {
     logging: false // so we don't see all the SQL queries getting made
   }

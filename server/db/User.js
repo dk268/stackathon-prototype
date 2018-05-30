@@ -1,4 +1,4 @@
-const db = require("./index.js");
+const db = require("./database.js");
 const Sequelize = require("sequelize");
 const crypto = require("crypto");
 const _ = require("lodash");
@@ -37,7 +37,7 @@ User.prototype.sanitize = function() {
   return _.omit(this.toJSON(), ["password", "salt"]);
 };
 
-User.prototype.hasMatchingPassword(pw) = function() {}
+// User.prototype.hasMatchingPassword(pw) = function() {}
 
 // class methods
 User.generateSalt = function() {
