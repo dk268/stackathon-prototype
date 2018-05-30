@@ -1,5 +1,4 @@
 "use strict";
-console.log("top of wring index");
 const express = require("express");
 const path = require("path");
 const app = express();
@@ -48,6 +47,7 @@ passport.deserializeUser((id, done) => {
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../server/public/index.html"));
 }); // Send index.html for any other requests
+
 app.use("/", require("./routes/index.js"));
 
 // error handling middleware

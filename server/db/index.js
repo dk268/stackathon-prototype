@@ -2,8 +2,7 @@
 
 const db = require("./database.js");
 const Sequelize = require("sequelize");
-const crypto = require("crypto");
-const _ = require("lodash");
+
 const User = require("./User.js");
 const Item = require("./Item.js");
 const Raid = require("./Raid.js");
