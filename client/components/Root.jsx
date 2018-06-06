@@ -9,8 +9,23 @@ import {
 
 class Root extends Component {
   render() {
-    return <h2>Hi there from redux!!</h2>;
+    return (
+      <div id="root-component-div">
+        <h2 id="hello-world">Hi there from redux!!</h2>{" "}
+        <Router>
+          <Route exact path="/characters" component={AllCharacters} />
+          <Route exact path="/items" component={AllItems} />
+          <Route exact path="/raids" component={AllRaids} />
+          <Route exact path="/characters/:charId" component={SingleCharacter} />
+          <Route exact path="/items/:itemId" component={SingleItem} />
+          <Route exact path="/raids/:raidId" component={SingleRaid} />
+        </Router>
+      </div>
+    );
   }
 }
 
-export default connect(null, null)(Root);
+export default connect(
+  null,
+  null
+)(Root);

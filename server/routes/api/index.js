@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 // /api/
-console.log("/api reached");
 
 router.use("/characters", require("./characters.js"));
 
