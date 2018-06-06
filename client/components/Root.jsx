@@ -26,4 +26,7 @@ class Root extends Component {
   }
 }
 
-export default connect(null, null)(Root);
+export default connect(
+  null,
+  null
+)(Root);

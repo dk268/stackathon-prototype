@@ -24,16 +24,16 @@ class AllCharacters extends Component {
           <div id="all-characters">
             {this.props.allCharacters.map(character => (
               <div key={character.id}>
-                <ul class="character-details">
+                <ul className="character-details">
                   <Link to={`/characters/${character.id}`}>
-                    <li class="character-details-character-name">
+                    <li className="character-details-character-name">
                       Char Name: {character.characterName}
                     </li>
                   </Link>
-                  <li class="character-details-character-dkp">
+                  <li className="character-details-character-dkp">
                     DKP total: {character.dkp}
                   </li>
-                  <li class="character-details-character-is-alt">
+                  <li className="character-details-character-is-alt">
                     {character.isAlt ? `alternate` : `main`}
                   </li>
                 </ul>
@@ -55,5 +55,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = { getCharacters };
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(AllCharacters)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AllCharacters)
 );
