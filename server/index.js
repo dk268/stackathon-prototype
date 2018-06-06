@@ -46,10 +46,6 @@ passport.deserializeUser((id, done) => {
 
 app.use("/", require("./routes/index.js"));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
-}); // Send index.html for any other requests
-
 // error handling middleware
 app.use((req, res, next) => {
   try {

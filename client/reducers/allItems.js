@@ -2,9 +2,9 @@ import Axios from "axios";
 import { LOADING, LOADED, ERROR, UNASKED, aCC } from ".";
 
 const DIRECT_OBJECT = "ITEMS";
-const LOADING_ITEMS = `${LOADING}_${DIRECT_OBJECT}`;
-const LOADED_ITEMS = `${LOADED}_${DIRECT_OBJECT}`;
-const ERROR_ITEMS = `${ERROR}_${DIRECT_OBJECT}`;
+const LOADING_ITEMS = `LOADING_` + DIRECT_OBJECT;
+const LOADED_ITEMS = `LOADED_` + DIRECT_OBJECT;
+const ERROR_ITEMS = `ERROR_` + DIRECT_OBJECT;
 
 export const getItems = () => async dispatch => {
   try {
@@ -30,3 +30,5 @@ const allItems = (state = initialState, action) => {
       return state;
   }
 };
+
+export default allItems;

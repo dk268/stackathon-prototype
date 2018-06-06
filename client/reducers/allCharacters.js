@@ -2,9 +2,9 @@ import Axios from "axios";
 import { LOADING, LOADED, ERROR, UNASKED, aCC } from ".";
 
 const DIRECT_OBJECT = "CHARACTERS";
-const LOADING_CHARACTERS = `${LOADING}_${DIRECT_OBJECT}`;
-const LOADED_CHARACTERS = `${LOADED}_${DIRECT_OBJECT}`;
-const ERROR_CHARACTERS = `${ERROR}_${DIRECT_OBJECT}`;
+const LOADING_CHARACTERS = `LOADING_` + DIRECT_OBJECT;
+const LOADED_CHARACTERS = `LOADED_` + DIRECT_OBJECT;
+const ERROR_CHARACTERS = `ERROR_` + DIRECT_OBJECT;
 
 export const getCharacters = () => async dispatch => {
   try {
@@ -30,3 +30,5 @@ const allCharacters = (state = initialState, action) => {
       return state;
   }
 };
+
+export default allCharacters;

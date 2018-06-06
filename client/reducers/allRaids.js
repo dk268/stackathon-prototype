@@ -2,9 +2,9 @@ import Axios from "axios";
 import { LOADING, LOADED, ERROR, UNASKED, aCC } from ".";
 
 const DIRECT_OBJECT = "RAIDS";
-const LOADING_RAIDS = `${LOADING}_${DIRECT_OBJECT}`;
-const LOADED_RAIDS = `${LOADED}_${DIRECT_OBJECT}`;
-const ERROR_RAIDS = `${ERROR}_${DIRECT_OBJECT}`;
+const LOADING_RAIDS = `LOADING_` + DIRECT_OBJECT;
+const LOADED_RAIDS = `LOADED_` + DIRECT_OBJECT;
+const ERROR_RAIDS = `ERROR_` + DIRECT_OBJECT;
 
 export const getRaids = () => async dispatch => {
   try {
@@ -30,3 +30,5 @@ const allRaids = (state = initialState, action) => {
       return state;
   }
 };
+
+export default allRaids;

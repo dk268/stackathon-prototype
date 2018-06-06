@@ -13,7 +13,7 @@ console.log(chalk.blue(`process.env.SHELL: ${process.env.SHELL}`));
 
 // create the database instance that can be used in other database files
 const db = new Sequelize(
-  !process.env.SHELL
+  process.env.SHELL === "C:\\Program Files\\Git\\usr\\bin\\bash.exe"
     ? `postgres://postgres:moop@localhost:5432/${pkg.name}`
     : `postgres://localhost:5432/${pkg.name}`,
   {
