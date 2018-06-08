@@ -10,6 +10,8 @@ export const getRaids = () => async dispatch => {
   try {
     dispatch(aCC(LOADING_RAIDS));
     const allRaids = await Axios.get(`/api/raids`);
+    console.log(allRaids.data);
+    console.log(allRaids.data[0].id);
     dispatch(aCC(LOADED_RAIDS, allRaids.data));
   } catch (e) {
     dispatch(aCC(ERROR_RAIDS, e));

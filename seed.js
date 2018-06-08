@@ -1,10 +1,17 @@
-const { db, Character, Raid, Item, User } = require("./server/db/index.js");
+const {
+  db,
+  Character,
+  Raid,
+  Item,
+  User,
+  Checkpoint,
+} = require('./server/db/index.js');
 
 const seed = async () => {
   await db.sync({ force: true });
 
   const picard = await User.create({
-    email: `captain@picard.ufp`
+    email: `captain@picard.ufp`,
   });
 
   async function createCharacter(
@@ -16,7 +23,7 @@ const seed = async () => {
     const newChar = await Character.create({
       characterName,
       dkp,
-      isAlt
+      isAlt,
     });
     await newChar.setUser(user);
     return newChar;
@@ -24,24 +31,36 @@ const seed = async () => {
 
   async function createItem(itemName, charactersArr) {
     const newItem = await Item.create({
-      itemName
+      itemName,
     });
     return newItem;
   }
 
   async function createRaid(raidName) {
     const newRaid = await Raid.create({
-      raidName
+      raidName,
     });
     return newRaid;
   }
 
-  const Slamfist = await createCharacter("Slamfist", picard, 0, false);
-  const truthSword1000 = await createItem("Sword of a Thousand Truths");
-  await truthSword1000.addCharacter(Slamfist);
-  const boarHunting = await createRaid("Boar Hunting");
+  async function createCheckpoint(checkpointName, dkp) {
+    const newCheckpoint = await Checkpoint.create({
+      checkpointName,
+      dkp,
+    });
+    return newCheckpoint;
+  }
+
+  const Slamfist = await createCharacter('Slamfist', picard, 0, false);
+  const truthSword1000 = await createItem('Sword of a Thousand Truths');
+  await truthSword1000.setCharacter(Slamfist);
+  const boarHunting = await createRaid('Boar Hunting');
   await boarHunting.addCharacter(Slamfist);
   await boarHunting.addItem(truthSword1000);
+  for (let i = 8; i < 13; i++) {
+    const newCheckpoint = await createCheckpoint(i * 100 + '', 10);
+    await boarHunting.addCheckpoint(newCheckpoint);
+  }
 
   db.close();
   console.log(` Seed successful~!

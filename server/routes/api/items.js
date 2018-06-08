@@ -1,4 +1,10 @@
-const { User, Item, Raid, Character } = require("../../db/index.js");
+const {
+  User,
+  Item,
+  Raid,
+  Character,
+  Checkpoint,
+} = require("../../db/index.js");
 const express = require("express");
 const router = express.Router();
 
@@ -7,14 +13,14 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   console.log("hlloooo!!");
   const allItems = await Item.findAll({
-    include: [Character, Raid, User]
+    include: [Character, Raid],
   });
   res.json(allItems);
 });
 
 router.get("/:itemId", async (req, res, next) => {
   const oneItem = await Item.findById(req.params.itemId, {
-    include: [Character, Raid, User]
+    include: [Character, Raid],
   });
   res.json(oneItem);
 });
@@ -32,10 +38,10 @@ router.put("/:itemId", async (req, res, next) => {
   try {
     const [, updatedItem] = await Item.update(req.body, {
       where: {
-        id: itemId
+        id: itemId,
       },
       returning: true,
-      plain: true
+      plain: true,
     });
   } catch (e) {
     next(e);

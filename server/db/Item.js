@@ -21,6 +21,10 @@ const Item = db.define("item", {
   itemStatBlockUrl: {
     type: Sequelize.STRING,
     defaultValue: `www.rickroll.com`
+  },
+  itemId: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1337
   }
 });
 

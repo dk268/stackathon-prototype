@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { getCharacters } from "../reducers/allCharacters";
-import { UNASKED, LOADING, LOADED } from "../reducers";
+import { UNASKED, LOADING, LOADED, ERROR } from "../reducers";
 import Unasked from "./Unasked";
 import Loading from "./Loading";
+import Error from "./Error";
 
 class AllCharacters extends Component {
   componentDidMount = () => {
@@ -17,6 +18,8 @@ class AllCharacters extends Component {
     switch (this.props.status) {
       case UNASKED:
         return <Unasked />;
+      case ERROR:
+        return <Error componentName="AllCharacters" />;
       case LOADING:
         return <Loading name="all characters" />;
       case LOADED:
@@ -49,7 +52,7 @@ class AllCharacters extends Component {
 
 const mapStateToProps = state => ({
   allCharacters: state.allCharacters.collection,
-  status: state.allCharacters.status
+  status: state.allCharacters.status,
 });
 
 const mapDispatchToProps = { getCharacters };

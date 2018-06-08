@@ -1,4 +1,10 @@
-const { User, Item, Raid, Character } = require("../../db/index.js");
+const {
+  User,
+  Item,
+  Raid,
+  Character,
+  Checkpoint,
+} = require("../../db/index.js");
 const express = require("express");
 const router = express.Router();
 
@@ -7,14 +13,14 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   console.log("/api/raids reached");
   const allRaids = await Raid.findAll({
-    include: [Item, Character, User]
+    include: [Item, Character, Checkpoint],
   });
   res.json(allRaids);
 });
 
 router.get("/:raidId", async (req, res, next) => {
   const oneRaid = await Item.findById(req.params.raidId, {
-    include: [Item, Character, User]
+    include: [Item, Character, Checkpoint],
   });
   res.json(oneRaid);
 });
@@ -32,10 +38,10 @@ router.put("/:raidId", async (req, res, next) => {
   try {
     const [, updatedRaid] = await Raid.update(req.body, {
       where: {
-        id: raidId
+        id: raidId,
       },
       returning: true,
-      plain: true
+      plain: true,
     });
   } catch (e) {
     next(e);

@@ -1,4 +1,10 @@
-const { User, Item, Raid, Character } = require("../../db/index.js");
+const {
+  User,
+  Item,
+  Raid,
+  Character,
+  Checkpoint,
+} = require("../../db/index.js");
 const express = require("express");
 const router = express.Router();
 
@@ -7,7 +13,7 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   try {
     const allCharacters = await Character.findAll({
-      include: [Item, Raid, User]
+      include: [Item, Raid, User, Checkpoint],
     });
     res.json(allCharacters);
   } catch (e) {
@@ -17,7 +23,7 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:charId", async (req, res, next) => {
   const oneCharacter = await Character.findById(req.params.charId, {
-    include: [Item, Raid, User]
+    include: [Item, Raid, User, Checkpoint],
   });
   res.json(oneCharacter);
 });
@@ -35,10 +41,10 @@ router.put("/:charId", async (req, res, next) => {
   try {
     const [, updatedCharacter] = await Character.update(req.body, {
       where: {
-        id: charId
+        id: charId,
       },
       returning: true,
-      plain: true
+      plain: true,
     });
   } catch (e) {
     next(e);
