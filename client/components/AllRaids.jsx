@@ -7,6 +7,8 @@ import Unasked from "./Unasked";
 import Loading from "./Loading";
 import Error from "./Error";
 import Checkpoint from "./Checkpoint";
+import RowCharactersMapper from "./RowCharacter";
+import RowItemsMapper from "./RowItem";
 
 class AllRaids extends Component {
   componentDidMount = () => {
@@ -37,11 +39,8 @@ class AllRaids extends Component {
                   <li className="raid-details-raid-dkp">
                     Checkpoints: <Checkpoint raid={raid} />
                   </li>
-                  <Link to={`/characters/${raid.character.id}`}>
-                    <li className="raid-details-buyer-name">
-                      Buyer Name: {raid.character.characterName}
-                    </li>
-                  </Link>
+                  <RowCharactersMapper characters={raid.characters} />
+                  <RowItemsMapper items={raid.items} />
                 </ul>
               </div>
             ))}
