@@ -7,7 +7,7 @@ const RowCharacter = props => {
       <Link to={`/characters/${props.character.id}`}>
         {props.character.characterName}
       </Link>
-      <p>{props.character.dkp}</p>
+      <p>character DKP total: {props.character.dkp}</p>
       <p>{props.character.isAlt ? `alt` : ``}</p>
     </div>
   );

@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 const RowItem = props => {
   return (
     <div id="row-item-div">
-      <Link to={`/items/${props.item.id}`}>{props.item.itemName}</Link>
-      <p>{props.item.itemDKPCost}</p>
+      <Link to={`/items/${props.item.id}`}>
+        Item name:{props.item.itemName}
+      </Link>
+      <p>item DKP cost: {props.item.itemDKPCost}</p>
     </div>
   );
 };
