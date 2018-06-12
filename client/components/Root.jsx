@@ -33,7 +33,7 @@ class Root extends Component {
                 component={SingleCharacter}
               />
               <Route exact path="/items/:itemId" component={SingleItem} />
-              {/* <Route exact path="/raids/:raidId" component={} /> */}
+              <Route exact path="/raids/:raidId" component={} />
             </Switch>
           </div>
         </Router>
