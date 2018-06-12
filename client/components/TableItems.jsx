@@ -5,6 +5,7 @@ import Unasked from "./Unasked";
 import Loading from "./Loading";
 import Error from "./Error";
 import { getItems } from "../reducers/allItems";
+import { Link } from "react-router-dom";
 
 class TableItems extends Component {
   componentDidMount = () => {
@@ -22,7 +23,19 @@ class TableItems extends Component {
         const filteredItems = this.props.allItems.filter(
           item => item.character.id === this.props.character.id
         );
-        return <div id="table-raids-div">Hi!</div>;
+        return (
+          <div id="table-raids-div">
+            {filteredItems.map(item => (
+              <p>
+                name: <Link to={`/items/${item.id}`}>{item.itemName}</Link>{" "}
+                raid:
+                <Link to={`/raids/${item.RaidAcquired.id}`}>
+                  {item.RaidAcquired.raidName}
+                </Link>
+              </p>
+            ))}
+          </div>
+        );
       }
       default:
         return <Unasked />;
