@@ -1,25 +1,24 @@
-const { User, Item, Checkpoint, Character } = require('../../db/index.js');
-const express = require('express');
+const { User, Raid, Checkpoint, Character } = require("../../db/index.js");
+const express = require("express");
 const router = express.Router();
 
 // /api/checkpoints/
 
-router.get('/', async (req, res, next) => {
-  console.log('/api/checkpoints reached');
+router.get("/", async (req, res, next) => {
   const allCheckpoints = await Checkpoint.findAll({
-    include: [Item, Character, Checkpoint],
+    include: [Character, Raid],
   });
   res.json(allCheckpoints);
 });
 
-router.get('/:checkpointId', async (req, res, next) => {
-  const oneCheckpoint = await Item.findById(req.params.checkpointId, {
-    include: [Item, Character, Checkpoint],
+router.get("/:checkpointId", async (req, res, next) => {
+  const oneCheckpoint = await Checkpoint.findById(req.params.checkpointId, {
+    include: [Character, Raid],
   });
   res.json(oneCheckpoint);
 });
 
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const newCheckpoint = await Checkpoint.create(req.body);
     res.json(newCheckpoint);
@@ -28,7 +27,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.put('/:checkpointId', async (req, res, next) => {
+router.put("/:checkpointId", async (req, res, next) => {
   try {
     const [, updatedCheckpoint] = await Checkpoint.update(req.body, {
       where: {
@@ -42,7 +41,7 @@ router.put('/:checkpointId', async (req, res, next) => {
   }
 });
 
-router.delete('/:checkpointId', async (req, res, next) => {
+router.delete("/:checkpointId", async (req, res, next) => {
   try {
     await Checkpoint.destroy({ where: { id: req.params.checkpointId } });
     const remainingCheckpoints = await Checkpoint.findAll();

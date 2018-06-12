@@ -6,6 +6,7 @@ import singleCharacter from "./singleCharacter.js";
 import singleItem from "./singleItem.js";
 import singleRaid from "./singleRaid.js";
 import Axios from "axios";
+import allCheckpoints from "./allCheckpoints.js";
 
 export const [UNASKED, LOADING, LOADED, ERROR] = [
   `UNASKED`,
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   allCharacters,
   allItems,
   allRaids,
+  allCheckpoints,
   singleCharacter,
   singleItem,
   singleRaid,

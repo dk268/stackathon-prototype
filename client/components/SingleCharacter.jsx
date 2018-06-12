@@ -7,13 +7,15 @@ import { UNASKED, LOADING, LOADED, ERROR } from "../reducers";
 import Unasked from "./Unasked";
 import Loading from "./Loading";
 import Error from "./Error";
+import TableRaids from "./TableRaids";
 
 class SingleCharacter extends Component {
   componentDidMount = () => {
-    getSingleCharacter();
-    getAllRaids();
+    this.props.getSingleCharacter(this.props.match.params.charId);
   };
+
   render = () => {
+    console.log(this.props.status);
     switch (this.props.status) {
       case UNASKED:
         return <Unasked />;
@@ -25,12 +27,12 @@ class SingleCharacter extends Component {
         return (
           <div id="single-character-div">
             <h2>{this.props.singleCharacter.characterName}</h2>
-            <h6>{this.props.singleCharacter.dkp}</h6>
-            <p>attendance: </p>
+            <h6>DKP: {this.props.singleCharacter.dkp}</h6>
+            <TableRaids character={this.props.singleCharacter} />
           </div>
         );
       default:
-        return <p>DOOOM</p>;
+        return <p>DOOOM default reached</p>;
     }
   };
 }
@@ -38,7 +40,6 @@ class SingleCharacter extends Component {
 const mapStateToProps = state => ({
   singleCharacter: state.singleCharacter.collection,
   status: state.singleCharacter.status,
-  allRaids: state.allRaids.collection,
 });
 
 const mapDispatchToProps = { getSingleCharacter, getAllRaids };

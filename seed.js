@@ -5,7 +5,7 @@ const {
   Item,
   User,
   Checkpoint,
-} = require('./server/db/index.js');
+} = require("./server/db/index.js");
 
 const seed = async () => {
   await db.sync({ force: true });
@@ -51,14 +51,15 @@ const seed = async () => {
     return newCheckpoint;
   }
 
-  const Slamfist = await createCharacter('Slamfist', picard, 0, false);
-  const truthSword1000 = await createItem('Sword of a Thousand Truths');
+  const Slamfist = await createCharacter("Slamfist", picard, 0, false);
+  const truthSword1000 = await createItem("Sword of a Thousand Truths");
   await truthSword1000.setCharacter(Slamfist);
-  const boarHunting = await createRaid('Boar Hunting');
+  const boarHunting = await createRaid("Boar Hunting");
   await boarHunting.addCharacter(Slamfist);
   await boarHunting.addItem(truthSword1000);
   for (let i = 8; i < 13; i++) {
-    const newCheckpoint = await createCheckpoint(i * 100 + '', 10);
+    const newCheckpoint = await createCheckpoint(i * 100 + "", 10);
+    if (i < 12) await newCheckpoint.addCharacter(Slamfist);
     await boarHunting.addCheckpoint(newCheckpoint);
   }
 
