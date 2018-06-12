@@ -11,6 +11,11 @@ const Checkpoint = props => (
           {"dkp value: "}
           {checkpoint.checkpointDKP}
         </li>
+        <li className="checkpoint-detail-raid-li">
+          <Link to={`/raids/${checkpoint.raid.id}`}>
+            {checkpoint.raid.raidName}
+          </Link>
+        </li>
       </ul>
     ))}
   </div>

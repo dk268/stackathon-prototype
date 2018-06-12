@@ -6,7 +6,7 @@ import { UNASKED, LOADING, LOADED, ERROR } from "../reducers";
 import Unasked from "./Unasked";
 import Loading from "./Loading";
 import Error from "./Error";
-import Checkpoint from "./Checkpoint";
+import RowCheckpoint from "./RowCheckpoint";
 import RowCharactersMapper from "./RowCharacter";
 import RowItemsMapper from "./RowItem";
 
@@ -35,10 +35,8 @@ class AllCheckpoints extends Component {
                     </li>
                   </Link>
                   <li className="checkpoint-details-checkpoint-dkp">
-                    Checkpoints: <Checkpoint checkpoint={checkpoint} />
+                    Checkpoints: <Row checkpoint={checkpoint} />
                   </li>
-                  <RowCharactersMapper characters={checkpoint.characters} />
-                  <RowItemsMapper items={checkpoint.items} />
                 </ul>
               </div>
             ))}
