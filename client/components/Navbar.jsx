@@ -12,6 +12,9 @@ const Navbar = props => (
     <Link to="/raids" className="navbar-link">
       All Raids
     </Link>
+    <Link to="/checkpoints" className="navbar-link">
+      All Checkpoints
+    </Link>
   </div>
 );
 
