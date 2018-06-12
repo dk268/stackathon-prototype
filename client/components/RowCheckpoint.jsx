@@ -1,6 +1,6 @@
 import React from "react";
 
-const Checkpoint = props => (
+const RowCheckpoint = props => (
   <div id="checkpoint-outer-div">
     {props.raid.checkpoints.map(checkpoint => (
       <ul key={checkpoint.id} className="checkpoint-detail-map-item">
@@ -21,4 +21,4 @@ const Checkpoint = props => (
   </div>
 );
 
-export default Checkpoint;
+export default RowCheckpoint;
