@@ -7,8 +7,6 @@ import Unasked from "./Unasked";
 import Loading from "./Loading";
 import Error from "./Error";
 import RowCheckpoint from "./RowCheckpoint";
-import RowCharactersMapper from "./RowCharacter";
-import RowItemsMapper from "./RowItem";
 
 class AllCheckpoints extends Component {
   componentDidMount = () => {
@@ -29,13 +27,14 @@ class AllCheckpoints extends Component {
             {this.props.allCheckpoints.map(checkpoint => (
               <div key={checkpoint.id}>
                 <ul className="checkpoint-details">
-                  <Link to={`/checkpoints/${checkpoint.id}`}>
-                    <li className="checkpoint-details-checkpoint-name">
-                      Checkpoint Name: {checkpoint.checkpointName}
-                    </li>
-                  </Link>
+                  <li className="checkpoint-details-checkpoint-name">
+                    Checkpoint Name:{" "}
+                    <Link to={`/checkpoints/${checkpoint.id}`}>
+                      {checkpoint.checkpointName}
+                    </Link>
+                  </li>
                   <li className="checkpoint-details-checkpoint-dkp">
-                    Checkpoints: <Row checkpoint={checkpoint} />
+                    Checkpoints: <RowCheckpoint checkpoint={checkpoint} />
                   </li>
                 </ul>
               </div>
