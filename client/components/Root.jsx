@@ -11,6 +11,7 @@ import Navbar from "./Navbar";
 import AllItems from "./AllItems";
 import AllRaids from "./AllRaids";
 import SingleCharacter from "./SingleCharacter";
+import AllCheckpoints from "./AllCheckpoints";
 
 class Root extends Component {
   render() {
@@ -24,6 +25,7 @@ class Root extends Component {
               <Route exact path="/characters" component={AllCharacters} />
               <Route exact path="/items" component={AllItems} />
               <Route exact path="/raids" component={AllRaids} />
+              <Route exact path="/checkpoints" component={AllCheckpoints} />
               <Route
                 exact
                 path="/characters/:charId"

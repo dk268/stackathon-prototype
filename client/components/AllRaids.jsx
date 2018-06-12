@@ -6,7 +6,7 @@ import { UNASKED, LOADING, LOADED, ERROR } from "../reducers";
 import Unasked from "./Unasked";
 import Loading from "./Loading";
 import Error from "./Error";
-import Checkpoint from "./Checkpoint";
+import RowCheckpoint from "./RowCheckpoint";
 import RowCharactersMapper from "./RowCharacter";
 import RowItemsMapper from "./RowItem";
 
@@ -35,7 +35,7 @@ class AllRaids extends Component {
                     </li>
                   </Link>
                   <li className="raid-details-raid-dkp">
-                    Checkpoints: <Checkpoint raid={raid} />
+                    Checkpoints: <RowCheckpoint raid={raid} />
                   </li>
                   <RowCharactersMapper characters={raid.characters} />
                   <RowItemsMapper items={raid.items} />
