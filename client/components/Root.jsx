@@ -12,6 +12,7 @@ import AllItems from "./AllItems";
 import AllRaids from "./AllRaids";
 import SingleCharacter from "./SingleCharacter";
 import AllCheckpoints from "./AllCheckpoints";
+import SingleItem from "./SingleItem";
 
 class Root extends Component {
   render() {
@@ -31,8 +32,8 @@ class Root extends Component {
                 path="/characters/:charId"
                 component={SingleCharacter}
               />
-              {/*<Route exact path="/items/:itemId" component={SingleItem} />
-          <Route exact path="/raids/:raidId" component={SingleRaid} /> */}
+              <Route exact path="/items/:itemId" component={SingleItem} />
+              {/* <Route exact path="/raids/:raidId" component={} /> */}
             </Switch>
           </div>
         </Router>
