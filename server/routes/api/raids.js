@@ -19,7 +19,7 @@ router.get("/", async (req, res, next) => {
 });
 
 router.get("/:raidId", async (req, res, next) => {
-  const oneRaid = await Item.findById(req.params.raidId, {
+  const oneRaid = await Raid.findById(req.params.raidId, {
     include: [Item, Character, Checkpoint],
   });
   res.json(oneRaid);
