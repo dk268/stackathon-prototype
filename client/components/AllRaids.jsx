@@ -12,9 +12,7 @@ import RowItemsMapper from "./RowItem";
 
 class AllRaids extends Component {
   componentDidMount = () => {
-    console.log(this.props);
     this.props.getRaids();
-    console.log(this.props);
   };
 
   render = () => {
