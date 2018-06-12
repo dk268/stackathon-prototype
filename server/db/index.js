@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
-const db = require('./database.js');
-const Sequelize = require('sequelize');
+const db = require("./database.js");
+const Sequelize = require("sequelize");
 
-const User = require('./User.js');
-const Item = require('./Item.js');
-const Raid = require('./Raid.js');
-const Character = require('./Character.js');
-const Checkpoint = require('./Checkpoint.js');
+const User = require("./User.js");
+const Item = require("./Item.js");
+const Raid = require("./Raid.js");
+const Character = require("./Character.js");
+const Checkpoint = require("./Checkpoint.js");
 
 // models! If there's a lot, make /models folder
 Character.belongsToMany(Raid, { through: `character_raid` });
@@ -15,6 +15,7 @@ Character.belongsToMany(Checkpoint, { through: `character_checkpoint` });
 Character.hasMany(Item);
 Item.belongsTo(Character);
 Item.belongsToMany(Raid, { through: `item_raid` });
+Item.belongsTo(Raid, { as: `RaidAcquired` });
 Raid.belongsToMany(Character, { through: `character_raid` });
 Raid.belongsToMany(Item, { through: `item_raid` });
 Raid.hasMany(Checkpoint);
