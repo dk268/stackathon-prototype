@@ -9,9 +9,7 @@ import Error from "./Error";
 
 class AllCharacters extends Component {
   componentDidMount = () => {
-    console.log(this.props);
     this.props.getCharacters();
-    console.log(this.props);
   };
 
   render = () => {

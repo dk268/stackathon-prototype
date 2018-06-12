@@ -14,18 +14,20 @@ export const [UNASKED, LOADING, LOADED, ERROR] = [
   `ERROR`,
 ];
 
-initialState = { status: UNASKED };
+const initialState = UNASKED;
 
-const status = (state = initialState, action) => {
+const globalStatus = (state = initialState, action) => {
   switch (action.type) {
     case UNASKED:
-      return { ...state, UNASKED };
+      return UNASKED;
     case LOADING:
-      return { ...state, LOADING };
+      return LOADING;
     case LOADED:
-      return { ...state, LOADED };
+      return LOADED;
     case ERROR:
-      return { ...state, ERROR };
+      return ERROR;
+    default:
+      return state;
   }
 };
 
@@ -36,7 +38,7 @@ const rootReducer = combineReducers({
   singleCharacter,
   singleItem,
   singleRaid,
-  status,
+  globalStatus,
 });
 
 export const aCC = (type, payload) => ({ type, payload });
