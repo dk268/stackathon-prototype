@@ -25,9 +25,9 @@ class TableCheckpoints extends Component {
       case UNASKED:
         return <Unasked />;
       case ERROR:
-        return <Error componentName="TableRaids" />;
+        return <Error componentName="TableCheckpoints" />;
       case LOADING: {
-        return <Loading name="table of raids" />;
+        return <Loading name="table of checkpoints" />;
       }
       case LOADED: {
         return (
