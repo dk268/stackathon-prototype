@@ -8,6 +8,7 @@ import Unasked from "./Unasked";
 import Loading from "./Loading";
 import Error from "./Error";
 import TableRaids from "./TableRaids";
+import TableItems from "./TableItems";
 
 class SingleCharacter extends Component {
   componentDidMount = () => {
@@ -28,7 +29,10 @@ class SingleCharacter extends Component {
           <div id="single-character-div">
             <h2>{this.props.singleCharacter.characterName}</h2>
             <h6>DKP: {this.props.singleCharacter.dkp}</h6>
+            <h3>Raids</h3>
             <TableRaids character={this.props.singleCharacter} />
+            <h3>Items</h3>
+            <TableItems character={this.props.singleCharacter} />
           </div>
         );
       default:
