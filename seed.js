@@ -57,6 +57,7 @@ const seed = async () => {
   const boarHunting = await createRaid("Boar Hunting");
   await boarHunting.addCharacter(Slamfist);
   await boarHunting.addItem(truthSword1000);
+  await truthSword1000.setRaidAcquired(boarHunting);
   for (let i = 8; i < 13; i++) {
     const newCheckpoint = await createCheckpoint(i * 100 + "", 10);
     if (i < 12) await newCheckpoint.addCharacter(Slamfist);
