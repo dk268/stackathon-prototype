@@ -41,6 +41,11 @@ class AllItems extends Component {
                       Buyer Name: {item.character.characterName}
                     </li>
                   </Link>
+                  <Link to={`/raids/${item.RaidAcquired.id}`}>
+                    <li className="item-details-raid-acquired">
+                      Acquired at Raid: {item.RaidAcquired.raidName}
+                    </li>
+                  </Link>
                 </ul>
               </div>
             ))}
