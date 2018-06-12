@@ -26,12 +26,13 @@ class TableItems extends Component {
         return (
           <div id="table-raids-div">
             {filteredItems.map(item => (
-              <p>
+              <p key={item.id}>
                 name: <Link to={`/items/${item.id}`}>{item.itemName}</Link>{" "}
-                raid:
+                raid:{" "}
                 <Link to={`/raids/${item.RaidAcquired.id}`}>
                   {item.RaidAcquired.raidName}
-                </Link>
+                </Link>{" "}
+                for {item.itemDKPCost} dkp
               </p>
             ))}
           </div>
