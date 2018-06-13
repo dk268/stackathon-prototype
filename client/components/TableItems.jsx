@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { UNASKED, LOADING, LOADED, ERROR } from "../reducers";
 import Unasked from "./Unasked";
 import Loading from "./Loading";
 import Error from "./Error";
 import { getItems } from "../reducers/allItems";
 import { Link } from "react-router-dom";
+import { getSingleRaid } from "../reducers/singleRaid";
 
 class TableItems extends Component {
   componentDidMount = () => {
-    if (this.props.character) this.props.getItems();
+    this.props.getItems();
   };
 
   TableItemsCharacter = props => {
@@ -73,9 +75,11 @@ const mapStateToProps = state => {
     allItems: state.allItems.collection,
   };
 };
-const mapDispatchToProps = { getItems };
+const mapDispatchToProps = { getItems, getSingleRaid };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TableItems);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(TableItems)
+);

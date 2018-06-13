@@ -11,7 +11,6 @@ const router = express.Router();
 // /api/raids/
 
 router.get("/", async (req, res, next) => {
-  console.log("/api/raids reached");
   const allRaids = await Raid.findAll({
     include: [Item, Character, Checkpoint],
   });

@@ -1,6 +1,10 @@
 import React from "react";
 import { Router, Link } from "react-router-dom";
 
+// const LoginPane = props => (
+//   <form
+// )
+
 const Navbar = props => (
   <div id="navbar-links-div">
     <Link to="/characters" className="navbar-link">
