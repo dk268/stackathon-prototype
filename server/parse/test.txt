@@ -1,0 +1,62 @@
+[Tue Jun 12 20:09:19 2018] You told kaizo, 'BEGIN 800 ATTENDANCE'
+[Tue Jun 12 20:09:20 2018] Players in EverQuest:
+[Tue Jun 12 20:09:20 2018] ---------------------------
+
+[Tue Jun 12 20:09:20 2018] [52 Illusionist (Enchanter)] Snuuk (Dark Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [53 Minstrel (Bard)] Freddi (Half Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [53 Disciple (Monk)] Ballatics (Dark Elf) <Ashen Oath> ZONE: airplane   LFG
+[Tue Jun 12 20:09:20 2018] [ANONYMOUS] Meeseeks <Ashen Oath> 
+[Tue Jun 12 20:09:20 2018] [53 Heretic (Necromancer)] Littlehex (Gnome) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [53 Elementalist (Magician)] Thwackit (Skeleton) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [51 Reaver (Shadow Knight)] Aggrenox (Dark Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [ANONYMOUS] Sera <Ashen Oath> 
+[Tue Jun 12 20:09:20 2018] [56 Myrmidon (Warrior)] Arkon (Barbarian) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [51 Champion (Warrior)] Snowpint (Halfling) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [50 Shadow Knight] Zakaz (Iksar) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [ANONYMOUS] Does <Ashen Oath> 
+[Tue Jun 12 20:09:20 2018] [54 Rake (Rogue)] Silence (Half Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [52 Cavalier (Paladin)] Homeless (Dwarf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [52 Rake (Rogue)] Kade (Halfling) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [54 Channeler (Wizard)] Squigs (Gnome) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [52 Elementalist (Magician)] Demize (Dark Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [53 Elementalist (Magician)] Fearai (Dark Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [56 Luminary (Shaman)] Hafthur (Barbarian) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [54 Vicar (Cleric)] Lagg (Human) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [ANONYMOUS] Noctivagant <Ashen Oath> 
+[Tue Jun 12 20:09:20 2018] [52 Mystic (Shaman)] Majortom (Barbarian) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [53 Elementalist (Magician)] Lamtham (Human) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [ANONYMOUS] Idium <Ashen Oath> 
+[Tue Jun 12 20:09:20 2018] [56 Myrmidon (Warrior)] Klaud (Skeleton) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [ANONYMOUS] Dottinsheet <Ashen Oath> 
+[Tue Jun 12 20:09:20 2018] [51 Cavalier (Paladin)] Rickard (Erudite) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [52 Heretic (Necromancer)] Diehard (Dark Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [54 Heretic (Necromancer)] Kikachamp (Skeleton) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [57 Luminary (Shaman)] Tiki (Dark Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [58 Conjurer (Magician)] Rosh (Erudite) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [ANONYMOUS] Kaizo <Ashen Oath> 
+[Tue Jun 12 20:09:20 2018] [57 Beguiler (Enchanter)] Mirabelle (High Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [53 Illusionist (Enchanter)] Giggabyte (Skeleton) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [54 Minstrel (Bard)] Trilian (Dark Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [52 Mystic (Shaman)] Tooslow (Ogre) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [50 Monk] Laogong (Human) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [ANONYMOUS] Deep <Ashen Oath> 
+[Tue Jun 12 20:09:20 2018] [54 Disciple (Monk)] Scalvet (Human) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [50 Bard] Enigmax (Wood Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [52 Vicar (Cleric)] Shidara (High Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [53 Illusionist (Enchanter)] Picarrd (Gnome) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [57 Outrider (Ranger)] Kooh (Wolf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [53 Vicar (Cleric)] Kaleki (Dwarf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [ANONYMOUS] Bundle <Ashen Oath> 
+[Tue Jun 12 20:09:20 2018] [55 Troubadour (Bard)] Skytone (Half Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [52 Rake (Rogue)] Tiero (Wood Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [54 Disciple (Monk)] Klubs (Human) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [52 Channeler (Wizard)] Tiam (Dark Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [52 Disciple (Monk)] Nithral (Human) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [54 Vicar (Cleric)] Jester (Dwarf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [ANONYMOUS] Menion <Ashen Oath> 
+[Tue Jun 12 20:09:20 2018] [57 Blackguard (Rogue)] Larisa (Wood Elf) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] [50 Warrior] Goliath (Ogre) <Ashen Oath> ZONE: airplane  
+[Tue Jun 12 20:09:20 2018] There are 54 players in EverQuest.
+[Tue Jun 12 20:09:22 2018] Your guildmate Lokrian has completed Karnor's Castle Traveler achievement.
+[Tue Jun 12 20:09:23 2018] Traxen tells General3:1, '21 necro lfg'
+[Tue Jun 12 20:09:25 2018] You told kaizo, 'END 800 ATTENDANCE'
