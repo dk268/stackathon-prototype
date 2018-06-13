@@ -28,10 +28,22 @@ class SingleCheckpoint extends Component {
           <div id="single-checkpoint-div">
             <h2>{this.props.singleCheckpoint.checkpointName}</h2>
             <h6>DKP: {this.props.singleCheckpoint.checkpointDKP}</h6>
-            <h3>Raid: </h3>
-            <Link to={`/raids/${this.props.singleCheckpoint.raid.id}`}>
-              {this.props.singleCheckpoint.raid.raidName}
-            </Link>
+            <h3>
+              Raid:{" "}
+              <Link to={`/raids/${this.props.singleCheckpoint.raid.id}`}>
+                {this.props.singleCheckpoint.raid.raidName}
+              </Link>{" "}
+            </h3>
+            <h4>Characters in attendance:</h4>
+            <ul id="single-checkpoint-characters-ul">
+              {this.props.singleCheckpoint.characters.map(character => (
+                <li key={character.id}>
+                  <Link to={`/characters/${character.id}`}>
+                    {character.characterName}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         );
       default:
