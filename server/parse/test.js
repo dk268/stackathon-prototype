@@ -3,7 +3,9 @@ const fs = require("fs");
 //on a trimmed line, slice 27 to get rid of the time/date/whatever header
 
 fs.readFile(
-  "D:\\Users\\Public\\Daybreak Game Company\\Installed Games\\EverQuest\\Logs\\eqlog_Goliath_coirnav.txt",
+  process.env.SHELL === "C:\\Program Files\\Git\\usr\\bin\\bash.exe"
+    ? "D:\\Users\\Public\\Daybreak Game Company\\Installed Games\\EverQuest\\Logs\\eqlog_Goliath_coirnav.txt"
+    : "./test.txt",
   "utf8",
   (err, data) => {
     try {
@@ -15,7 +17,8 @@ fs.readFile(
       );
       let itemDrops = findItemDrops(processedArray);
       let items = itemDrops.map(drop => parseItemDrop(drop));
-      console.log(findRaidStartAndEnd(processedArray));
+      // console.log(findDummyRaidName(processedArray));
+      // console.log(findRaidStartAndEnd(processedArray))
       // console.log(items);
       // console.log(attendance);
     } catch (e) {
@@ -109,4 +112,8 @@ function findRaidStartAndEnd(processedArr) {
     ),
     processedArr.find(e => e.includes("Raidname")).split(" ")[4],
   ];
+}
+
+function findDummyRaidName() {
+  return "TUE12JUN2018";
 }
