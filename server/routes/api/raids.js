@@ -14,6 +14,7 @@ router.get("/", async (req, res, next) => {
   const allRaids = await Raid.findAll({
     include: [Item, Character, Checkpoint],
   });
+  console.log(req.user);
   res.json(allRaids);
 });
 
