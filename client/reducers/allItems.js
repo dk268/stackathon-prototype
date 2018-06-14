@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { LOADING, LOADED, ERROR, UNASKED, aCC } from ".";
-import { ADD_ITEM, EDIT_ITEM, DELETE_ITEM } from "./singleItem";
+import { ADD_ITEM, DELETE_ITEM } from "./singleItem";
 
 const DIRECT_OBJECT = "ITEMS";
 const LOADING_ITEMS = `LOADING_` + DIRECT_OBJECT;

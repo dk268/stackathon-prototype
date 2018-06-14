@@ -1,10 +1,6 @@
 import Axios from "axios";
 import { LOADING, LOADED, ERROR, UNASKED, aCC } from ".";
-import {
-  ADD_CHECKPOINT,
-  EDIT_CHECKPOINT,
-  DELETE_CHECKPOINT,
-} from "./singleCheckpoint";
+import { ADD_CHECKPOINT, DELETE_CHECKPOINT } from "./singleCheckpoint";
 
 const DIRECT_OBJECT = "CHECKPOINTS";
 const LOADING_CHECKPOINTS = `LOADING_` + DIRECT_OBJECT;
