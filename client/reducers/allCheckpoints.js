@@ -31,7 +31,7 @@ export const deleteCheckpoint = id => async dispatch => {
   try {
     dispatch(aCC(LOADING_CHECKPOINTS));
     const remainingCheckpoints = await Axios.delete(`/api/checkpoints/${id}`);
-    dispatch(aCC(DELETE_CHECKPOINT, id));
+    dispatch(aCC(DELETE_CHECKPOINT, remainingCheckpoints));
   } catch (e) {
     dispatch(aCC(ERROR_CHECKPOINTS, e));
   }

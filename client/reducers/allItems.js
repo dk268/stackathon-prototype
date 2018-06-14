@@ -30,7 +30,7 @@ export const addItem = itemData => async dispatch => {
 export const deleteItem = id => async dispatch => {
   try {
     dispatch(aCC(LOADING_ITEMS));
-    await Axios.delete(`/api/items/${id}`);
+    const remainingItems = await Axios.delete(`/api/items/${id}`);
     dispatch(aCC(DELETE_ITEM, id));
   } catch (e) {
     dispatch(aCC(ERROR_ITEMS, e));
@@ -55,7 +55,7 @@ const allItems = (state = initialState, action) => {
       return {
         ...state,
         status: LOADED,
-        collection: state.collection.filter(item => action.payload !== item.id),
+        collection: action.payload,
       };
     case ERROR_ITEMS:
       return { ...state, status: ERROR };

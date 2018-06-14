@@ -29,7 +29,7 @@ export const addRaid = raidData => async dispatch => {
 export const deleteRaid = id => async dispatch => {
   try {
     dispatch(aCC(LOADING_RAIDS));
-    await Axios.delete(`/api/raids/${id}`);
+    const remainingRaids = await Axios.delete(`/api/raids/${id}`);
     dispatch(aCC(DELETE_RAID, id));
   } catch (e) {
     dispatch(aCC(ERROR_RAIDS, e));
@@ -53,7 +53,7 @@ const allRaids = (state = initialState, action) => {
       return {
         ...state,
         status: LOADED,
-        collection: state.collection.filter(raid => action.payload !== raid.id),
+        collection: action.payload,
       };
     case ERROR_RAIDS:
       return { ...state, status: ERROR };
