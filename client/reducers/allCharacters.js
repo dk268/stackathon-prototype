@@ -1,5 +1,10 @@
 import Axios from "axios";
 import { LOADING, LOADED, ERROR, UNASKED, aCC } from ".";
+import {
+  ADD_CHARACTER,
+  EDIT_CHARACTER,
+  DELETE_CHARACTER,
+} from "./singleCharacter";
 
 const DIRECT_OBJECT = "CHARACTERS";
 const LOADING_CHARACTERS = `LOADING_` + DIRECT_OBJECT;
