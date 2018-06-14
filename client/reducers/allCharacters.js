@@ -11,6 +11,26 @@ const LOADING_CHARACTERS = `LOADING_` + DIRECT_OBJECT;
 const LOADED_CHARACTERS = `LOADED_` + DIRECT_OBJECT;
 const ERROR_CHARACTERS = `ERROR_` + DIRECT_OBJECT;
 
+export const addCharacter = characterData => async dispatch => {
+  try {
+    dispatch(aCC(LOADING_CHARACTERS));
+    const newCharacter = await Axios.post(`/api/characters`, characterData);
+    dispatch(aCC(ADD_CHARACTER, newCharacter.data));
+  } catch (e) {
+    dispatch(aCC(ERROR_CHARACTERS, e));
+  }
+};
+
+export const deleteCharacter = id => async dispatch => {
+  try {
+    dispatch(aCC(LOADING_CHARACTERS));
+    await Axios.delete(`/api/characters/${id}`);
+    dispatch(aCC(DELETE_CHARACTER, id));
+  } catch (e) {
+    dispatch(aCC(ERROR_CHARACTERS, e));
+  }
+};
+
 export const getCharacters = () => async dispatch => {
   try {
     dispatch(aCC(LOADING_CHARACTERS));
