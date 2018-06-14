@@ -3,11 +3,11 @@ import { LOADING, LOADED, ERROR, UNASKED, aCC } from ".";
 import { CLEAR_AUTH_FIELDS } from "./forms";
 
 const DIRECT_OBJECT = "AUTH";
-const LOADING_AUTH = "LOADING_" + DIRECT_OBJECT;
-const NO_LOGIN_AUTH = "NO_LOGIN_" + DIRECT_OBJECT;
-const LOGGED_IN_AUTH = "LOGGED_IN_" + DIRECT_OBJECT;
-const ADMIN_AUTH = "ADMIN_" + DIRECT_OBJECT;
-const ERROR_AUTH = `ERROR_` + DIRECT_OBJECT;
+export const LOADING_AUTH = "LOADING_" + DIRECT_OBJECT;
+export const NO_LOGIN_AUTH = "NO_LOGIN_" + DIRECT_OBJECT;
+export const LOGGED_IN_AUTH = "LOGGED_IN_" + DIRECT_OBJECT;
+export const ADMIN_AUTH = "ADMIN_" + DIRECT_OBJECT;
+export const ERROR_AUTH = `ERROR_` + DIRECT_OBJECT;
 
 export const login = (userInfo, route) => async dispatch => {
   try {

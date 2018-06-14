@@ -21,7 +21,7 @@ const initialState = {
   loginPassword: "",
   signupEmail: "",
   signupPassword: "",
-  isLogin: false,
+  isLogin: true,
 };
 
 const forms = (state = initialState, action) => {
