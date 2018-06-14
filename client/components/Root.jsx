@@ -43,6 +43,15 @@ class Root extends Component {
   }
 }
 
+// Route exact path="/characters/add" render={() => <CreateForm formName="addCharacter" />}
+// Route exact path="/characters/edit/:charId"
+// Route exact path="/checkpoints/add"
+// Route exact path="/checkpoints/edit/:checkpointId"
+// Route exact path="/items/add"
+// Route exact path="/items/edit/:itemId"
+// Route exact path="/raids/add"
+// Route exact path="/raids/edit/:raidId"
+
 export default connect(
   null,
   null
