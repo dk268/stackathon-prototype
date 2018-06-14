@@ -19,6 +19,19 @@ export const getSingleCheckpoint = id => async dispatch => {
   }
 };
 
+export const editCheckpoint = async checkpointData => {
+  try {
+    dispatch(aCC(LOADING_CHARACTER));
+    const singleCheckpoint = await Axios.put(
+      `/api/checkpoints/${checkpointData.id}`,
+      { checkpointData, where: { id: checkpointData.id } }
+    );
+    dispatch(aCC(EDIT_CHARACTER, singleCheckpoint.data));
+  } catch (e) {
+    dispatch(aCC(ERROR_CHARACTER, e));
+  }
+};
+
 const initialState = { status: UNASKED, collection: {} };
 
 const singleCheckpoint = (state = initialState, action) => {

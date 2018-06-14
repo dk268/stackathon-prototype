@@ -46,6 +46,7 @@ router.put("/:charId", async (req, res, next) => {
       returning: true,
       plain: true,
     });
+    res.json(updatedCharacter);
   } catch (e) {
     next(e);
   }

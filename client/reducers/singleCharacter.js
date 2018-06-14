@@ -22,7 +22,7 @@ export const getSingleCharacter = id => async dispatch => {
 export const editCharacter = async characterData => {
   try {
     dispatch(aCC(LOADING_CHARACTER));
-    const [, singleCharacter] = await Axios.put(
+    const singleCharacter = await Axios.put(
       `/api/characters/${characterData.id}`,
       { characterData, where: { id: characterData.id } }
     );

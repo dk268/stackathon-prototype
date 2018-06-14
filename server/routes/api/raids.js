@@ -43,6 +43,7 @@ router.put("/:raidId", async (req, res, next) => {
       returning: true,
       plain: true,
     });
+    res.json(updatedRaid);
   } catch (e) {
     next(e);
   }

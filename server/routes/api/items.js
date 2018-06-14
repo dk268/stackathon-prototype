@@ -43,6 +43,7 @@ router.put("/:itemId", async (req, res, next) => {
       returning: true,
       plain: true,
     });
+    res.json(updatedItem);
   } catch (e) {
     next(e);
   }

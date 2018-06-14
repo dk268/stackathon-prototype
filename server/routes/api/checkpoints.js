@@ -36,6 +36,7 @@ router.put("/:checkpointId", async (req, res, next) => {
       returning: true,
       plain: true,
     });
+    res.json(updatedCheckpoint);
   } catch (e) {
     next(e);
   }
