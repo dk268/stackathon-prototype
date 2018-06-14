@@ -23,10 +23,7 @@ fs.readFile(
         name => (attendance[name] = renderAttendance(slicedArray, name))
       );
       let items = findItemDrops(slicedArray);
-      // console.log(items);
-      // console.log(findDummyRaidName(processedArray));
-      // console.log(findRaidStartAndEnd(slicedArray));
-      // console.log(attendance);
+
       populateDatabase(raidName, attendance, items);
       return 1;
     } catch (e) {

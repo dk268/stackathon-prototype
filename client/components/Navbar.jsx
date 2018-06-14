@@ -1,5 +1,7 @@
 import React from "react";
 import { Router, Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { login, login as signup } from "../reducers/auth";
 
 // const LoginPane = props => (
 //   <form
@@ -22,4 +24,13 @@ const Navbar = props => (
   </div>
 );
 
-export default Navbar;
+const mapStateToProps = state => ({
+  loginStatus: state.auth.status,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Navbar);
