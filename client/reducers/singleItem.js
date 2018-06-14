@@ -19,6 +19,19 @@ export const getSingleItem = id => async dispatch => {
   }
 };
 
+export const editItem = async itemData => {
+  try {
+    dispatch(aCC(LOADING_ITEM));
+    const [, singleItem] = await Axios.put(`/api/items/${itemData.id}`, {
+      itemData,
+      where: { id: itemData.id },
+    });
+    dispatch(aCC(EDIT_ITEM, singleItem.data));
+  } catch (e) {
+    dispatch(aCC(ERROR_ITEM, e));
+  }
+};
+
 const initialState = { status: UNASKED, collection: {} };
 
 const singleItem = (state = initialState, action) => {
