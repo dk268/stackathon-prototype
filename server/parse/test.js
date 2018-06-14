@@ -197,7 +197,6 @@ async function populateDatabase(raidName, attendance, itemsObjArr) {
         where: { characterName: itemsObjArr[i].characterName },
       });
       await char.spendDKP(item.itemDKPCost);
-      await char.update({ dkp: 45000 }); // remove this line
       await newRaid[0].addItem(item);
       await item.setCharacter(char);
     }
