@@ -30,7 +30,7 @@ export const addCheckpoint = checkpointData => async dispatch => {
 export const deleteCheckpoint = id => async dispatch => {
   try {
     dispatch(aCC(LOADING_CHECKPOINTS));
-    await Axios.delete(`/api/checkpoints/${id}`);
+    const remainingCheckpoints = await Axios.delete(`/api/checkpoints/${id}`);
     dispatch(aCC(DELETE_CHECKPOINT, id));
   } catch (e) {
     dispatch(aCC(ERROR_CHECKPOINTS, e));
@@ -55,9 +55,7 @@ const allCheckpoints = (state = initialState, action) => {
       return {
         ...state,
         status: LOADED,
-        collection: state.collection.filter(
-          checkpoint => action.payload !== checkpoint.id
-        ),
+        collection: remainingCheckpoints,
       };
     case ERROR_CHECKPOINTS:
       return { ...state, status: ERROR };
