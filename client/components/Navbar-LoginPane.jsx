@@ -8,7 +8,6 @@ import {
   WRITE_LOGIN_PASSWORD,
   WRITE_SIGNUP_EMAIL,
   WRITE_SIGNUP_PASSWORD,
-  CLEAR_AUTH_FIELDS,
   SWAP_TYPE,
 } from "../reducers/forms";
 import { aCC } from "../reducers";
@@ -41,6 +40,9 @@ const AuthForm = props => {
             type="text"
             value={emailValue}
           />
+          <label htmlFor="error-status">
+            <small>{error.data && error.data.response}</small>
+          </label>
         </div>
         <div>
           <label htmlFor="password">
@@ -92,12 +94,17 @@ const mapSignup = state => {
 const mapDispatch = (dispatch, ownProps) => {
   return {
     handleSubmit(evt) {
-      evt.preventDefault();
-      const formName = evt.target.name;
-      const email = evt.target.email.value;
-      const password = evt.target.password.value;
-      dispatch(aCC(CLEAR_AUTH_FIELDS));
-      dispatch(login({ email, password }, formName));
+      try {
+        evt.preventDefault();
+        const formName = evt.target.name;
+        const email = evt.target.email.value;
+        const password = evt.target.password.value;
+        dispatch(login({ email, password }, formName));
+      } catch (e) {
+        console.log("reached error state");
+        console.log(e);
+        dispatch(login({ email, password }, formName));
+      }
     },
     handleChange: e => {
       console.log("called", ownProps.name);

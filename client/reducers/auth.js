@@ -1,5 +1,6 @@
 import Axios from "axios";
 import { LOADING, LOADED, ERROR, UNASKED, aCC } from ".";
+import { CLEAR_AUTH_FIELDS } from "./forms";
 
 const DIRECT_OBJECT = "AUTH";
 const LOADING_AUTH = "LOADING_" + DIRECT_OBJECT;
@@ -19,10 +20,20 @@ export const login = (userInfo, route) => async dispatch => {
       case false:
         dispatch(aCC(LOGGED_IN_AUTH), currentUser.data);
       default:
-        dispatch(aCC(NO_LOGIN_AUTH));
+        dispatch(aCC(CLEAR_AUTH_FIELDS));
     }
   } catch (e) {
-    dispatch(aCC(ERROR_AUTH, { error: e }));
+    dispatch(aCC(ERROR_AUTH, e));
+  }
+};
+
+export const logout = () => async dispatch => {
+  try {
+    dispatch(aCC(LOADING_AUTH));
+    await Axios.post(`/users/logout`);
+    dispatch(aCC(NO_LOGIN_AUTH));
+  } catch (e) {
+    console.log(e);
   }
 };
 
@@ -31,11 +42,21 @@ const initialState = { status: NO_LOGIN_AUTH, collection: {}, error: {} };
 const auth = (state = initialState, action) => {
   switch (action.type) {
     case NO_LOGIN_AUTH:
-      return { ...state, status: NO_LOGIN_AUTH };
+      return { ...state, status: NO_LOGIN_AUTH, collection: {} };
     case LOGGED_IN_AUTH:
-      return { ...state, status: LOGGED_IN_AUTH, collection: action.payload };
+      return {
+        ...state,
+        status: LOGGED_IN_AUTH,
+        collection: action.payload,
+        error: {},
+      };
     case ADMIN_AUTH:
-      return { ...state, status: ADMIN_AUTH, collection: action.payload };
+      return {
+        ...state,
+        status: ADMIN_AUTH,
+        collection: action.payload,
+        error: {},
+      };
     case ERROR_AUTH:
       return { ...state, status: ERROR, error: action.payload };
     default:

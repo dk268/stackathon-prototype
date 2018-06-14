@@ -35,7 +35,7 @@ const forms = (state = initialState, action) => {
     case WRITE_SIGNUP_PASSWORD:
       return { ...state, signupPassword: action.payload };
     case CLEAR_AUTH_FIELDS:
-      return state;
+      return initialState;
     case SWAP_TYPE:
       return { ...state, isLogin: !state.isLogin };
     default:
