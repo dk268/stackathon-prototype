@@ -20,8 +20,8 @@ export const addCharacter = characterData => async dispatch => {
 export const deleteCharacter = id => async dispatch => {
   try {
     dispatch(aCC(LOADING_CHARACTERS));
-    await Axios.delete(`/api/characters/${id}`);
-    dispatch(aCC(DELETE_CHARACTER, id));
+    const remainingCharacters = await Axios.delete(`/api/characters/${id}`);
+    dispatch(aCC(DELETE_CHARACTER, remainingCharacters));
   } catch (e) {
     dispatch(aCC(ERROR_CHARACTERS, e));
   }
@@ -55,9 +55,7 @@ const allCharacters = (state = initialState, action) => {
       return {
         ...state,
         status: LOADED,
-        collection: state.collection.filter(
-          character => action.payload !== character.id
-        ),
+        collection: action.payload,
       };
     case ERROR_CHARACTERS:
       return { ...state, status: ERROR };
