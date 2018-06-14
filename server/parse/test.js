@@ -203,6 +203,7 @@ async function populateDatabase(raidName, attendance, itemsObjArr) {
       let char = await Character.findOne({
         where: { characterName: itemsObjArr[i].characterName },
       });
+      await char.spendDKP(item.itemDKPCost);
       await newRaid[0].addItem(item);
       await item.setCharacter(char);
     }
