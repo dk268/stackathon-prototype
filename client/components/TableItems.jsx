@@ -37,12 +37,18 @@ class TableItems extends Component {
 
   TableItemsRaid = props => {
     {
+      const filteredItems = props.allItems.filter(item =>
+        props.raid.items.map(item => item.id).includes(item.id)
+      );
       return (
         <div id="table-raids-div">
-          {props.raid.items.map(item => (
+          {filteredItems.map(item => (
             <p key={item.id}>
-              name: <Link to={`/items/${item.id}`}>{item.itemName}</Link> for{" "}
-              {item.itemDKPCost} dkp
+              name: <Link to={`/items/${item.id}`}>{item.itemName}</Link> to{" "}
+              <Link to={`/characters/${item.character.id}`}>{`${
+                item.character.characterName
+              }`}</Link>{" "}
+              for {item.itemDKPCost} dkp
             </p>
           ))}
         </div>
