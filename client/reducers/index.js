@@ -9,6 +9,7 @@ import Axios from "axios";
 import allCheckpoints from "./allCheckpoints.js";
 import singleCheckpoint from "./singleCheckpoint.js";
 import auth from "./auth.js";
+import forms from "./forms.js";
 
 export const [UNASKED, LOADING, LOADED, ERROR] = [
   `UNASKED`,
@@ -33,12 +34,14 @@ const globalStatus = (state = initialState, action) => {
       return state;
   }
 };
+
 const rootReducer = combineReducers({
   allCharacters,
   allItems,
   allRaids,
   allCheckpoints,
   auth,
+  forms,
   singleCharacter,
   singleItem,
   singleRaid,

@@ -22,11 +22,11 @@ export const login = (userInfo, route) => async dispatch => {
         dispatch(aCC(NO_LOGIN_AUTH));
     }
   } catch (e) {
-    dispatch(aCC(ERROR_CHARACTER, e));
+    dispatch(aCC(ERROR_AUTH, { error: e }));
   }
 };
 
-const initialState = { status: NO_LOGIN_AUTH, collection: {} };
+const initialState = { status: NO_LOGIN_AUTH, collection: {}, error: {} };
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
@@ -37,7 +37,7 @@ const auth = (state = initialState, action) => {
     case ADMIN_AUTH:
       return { ...state, status: ADMIN_AUTH, collection: action.payload };
     case ERROR_AUTH:
-      return { ...state, status: ERROR };
+      return { ...state, status: ERROR, error: action.payload };
     default:
       return state;
   }
