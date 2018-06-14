@@ -19,6 +19,19 @@ export const getSingleCharacter = id => async dispatch => {
   }
 };
 
+export const editCharacter = async characterData => {
+  try {
+    dispatch(aCC(LOADING_CHARACTER));
+    const [, singleCharacter] = await Axios.put(
+      `/api/characters/${characterData.id}`,
+      { characterData, where: { id: characterData.id } }
+    );
+    dispatch(aCC(EDIT_CHARACTER, singleCharacter.data));
+  } catch (e) {
+    dispatch(aCC(ERROR_CHARACTER, e));
+  }
+};
+
 const initialState = { status: UNASKED, collection: {} };
 
 const singleCharacter = (state = initialState, action) => {
