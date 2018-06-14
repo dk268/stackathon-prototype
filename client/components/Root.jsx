@@ -35,6 +35,11 @@ class Root extends Component {
                 path="/checkpoints/:checkpointId"
                 component={SingleCheckpoint}
               />
+              <Route
+                exact
+                path="/characters/add"
+                render={() => <CreateForm formName="addCharacter" />}
+              />
             </Switch>
           </div>
         </Router>
@@ -43,7 +48,6 @@ class Root extends Component {
   }
 }
 
-// Route exact path="/characters/add" render={() => <CreateForm formName="addCharacter" />}
 // Route exact path="/characters/edit/:charId"
 // Route exact path="/checkpoints/add"
 // Route exact path="/checkpoints/edit/:checkpointId"
