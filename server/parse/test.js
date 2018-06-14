@@ -184,13 +184,6 @@ async function populateDatabase(raidName, attendance, itemsObjArr) {
     }
     allCharactersOfTheNight = new Set(allCharactersOfTheNight);
     allCharactersOfTheNight = [...allCharactersOfTheNight];
-    // const charSetButNotASet = await Character.findAll({
-    //   where: {
-    //     characterName: {
-    //       [Op.in]: allCharactersOfTheNight,
-    //     },
-    //   },
-    // });
 
     console.log(chalk.green("preparing to set up items"));
 
@@ -204,9 +197,27 @@ async function populateDatabase(raidName, attendance, itemsObjArr) {
         where: { characterName: itemsObjArr[i].characterName },
       });
       await char.spendDKP(item.itemDKPCost);
+      await char.update({ dkp: 45000 }); // remove this line
       await newRaid[0].addItem(item);
       await item.setCharacter(char);
     }
+    console.log(chalk.red.bold("enforcing DKP maxima"));
+    const allChars = await Character.findAll();
+    for (let i = 0; i < allChars.length; i++) {
+      if (allChars[i].isAlt && allChars[i].dkp > 120)
+        await allChars[i].update({
+          overflowDKP: allChars[i].dkp,
+          dkp: 120,
+        });
+      else if (allChars[i].isAlt && allChars[i].isAltUnapproved)
+        await allChars[i].update({ dkp: 0 });
+      else if (allChars[i].dkp > 800)
+        await allChars[i].update({
+          overflowDKP: allChars[i].dkp,
+          dkp: 800,
+        });
+    }
+
     console.log("all done?!");
   } catch (e) {
     console.log(e);
