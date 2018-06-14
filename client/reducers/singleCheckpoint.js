@@ -5,6 +5,9 @@ const DIRECT_OBJECT = "CHECKPOINT";
 const LOADING_CHECKPOINT = `LOADING_` + DIRECT_OBJECT;
 const LOADED_CHECKPOINT = `LOADED_` + DIRECT_OBJECT;
 const ERROR_CHECKPOINT = `ERROR_` + DIRECT_OBJECT;
+export const ADD_CHECKPOINT = `ADD_` + DIRECT_OBJECT;
+export const EDIT_CHECKPOINT = `EDIT_` + DIRECT_OBJECT;
+export const DELETE_CHECKPOINT = `DELETE_` + DIRECT_OBJECT;
 
 export const getSingleCheckpoint = id => async dispatch => {
   try {

@@ -5,32 +5,33 @@ const chalk = require("chalk");
 
 //on a trimmed line, slice 27 to get rid of the time/date/whatever header
 
-fs.readFile(
-  process.env.SHELL === "C:\\Program Files\\Git\\usr\\bin\\bash.exe"
-    ? "D:\\Users\\Public\\Daybreak Game Company\\Installed Games\\EverQuest\\Logs\\eqlog_Goliath_coirnav.txt"
-    : "./eqlog_Goliath_coirnav.txt",
-  "utf8",
-  (err, data) => {
-    try {
-      const processedArray = splitThenTrimThenSlice(data);
-      const [startIndex, endIndex, raidName] = findRaidStartAndEnd(
-        processedArray
-      );
-      const slicedArray = processedArray.slice(startIndex, endIndex);
-      let checkpointNames = findCheckpointNames(slicedArray);
-      const attendance = {};
-      checkpointNames.forEach(
-        name => (attendance[name] = renderAttendance(slicedArray, name))
-      );
-      let items = findItemDrops(slicedArray);
+const parseFile = async () => {
+  fs.readFile(
+    process.env.SHELL === "C:\\Program Files\\Git\\usr\\bin\\bash.exe"
+      ? "D:\\Users\\Public\\Daybreak Game Company\\Installed Games\\EverQuest\\Logs\\eqlog_Goliath_coirnav.txt"
+      : "./eqlog_Goliath_coirnav.txt",
+    "utf8",
+    (err, data) => {
+      try {
+        const processedArray = splitThenTrimThenSlice(data);
+        const [startIndex, endIndex, raidName] = findRaidStartAndEnd(
+          processedArray
+        );
+        const slicedArray = processedArray.slice(startIndex, endIndex);
+        let checkpointNames = findCheckpointNames(slicedArray);
+        const attendance = {};
+        checkpointNames.forEach(
+          name => (attendance[name] = renderAttendance(slicedArray, name))
+        );
+        let items = findItemDrops(slicedArray);
 
-      populateDatabase(raidName, attendance, items);
-      return 1;
-    } catch (e) {
-      console.log(err);
+        populateDatabase(raidName, attendance, items);
+      } catch (e) {
+        console.log(err);
+      }
     }
-  }
-);
+  );
+};
 
 function splitThenTrim(text) {
   return text
@@ -171,8 +172,9 @@ async function populateDatabase(raidName, attendance, itemsObjArr) {
 
       //For each checkpoint, add the associated users to the checkpoint.
       console.log(
-        "about to set",
-        checkpointsUpdatedWithRaids[i].checkpointName
+        "setting attendance for checkpoint ",
+        checkpointsUpdatedWithRaids[i].checkpointName,
+        "..."
       );
       await checkpointsUpdatedWithRaids[i].setCharacters(attendingChars);
       for (let j = 0; j < attendingChars.length; j++) {
@@ -180,12 +182,14 @@ async function populateDatabase(raidName, attendance, itemsObjArr) {
           checkpointsUpdatedWithRaids[i].checkpointDKP
         );
       }
-      console.log(`${attendingChars.length} characters ${chalk.bold(`set!`)}`);
+      console.log(
+        `${attendingChars.length} characters' attendance ${chalk.bold(`set!`)}`
+      );
     }
     allCharactersOfTheNight = new Set(allCharactersOfTheNight);
     allCharactersOfTheNight = [...allCharactersOfTheNight];
-
-    console.log(chalk.green("preparing to set up items"));
+    console.log("-----------------------------");
+    console.log(chalk.green("preparing to process items"));
 
     for (let i = 0; i < itemsObjArr.length; i++) {
       let item = await Item.create({
@@ -200,6 +204,8 @@ async function populateDatabase(raidName, attendance, itemsObjArr) {
       await newRaid[0].addItem(item);
       await item.setCharacter(char);
     }
+    console.log(`${itemsObjArr.length} items processed!`);
+    console.log("-----------------------------");
     console.log(chalk.red.bold("enforcing DKP maxima"));
     const allChars = await Character.findAll();
     for (let i = 0; i < allChars.length; i++) {
@@ -217,8 +223,11 @@ async function populateDatabase(raidName, attendance, itemsObjArr) {
         });
     }
 
-    console.log("all done?!");
+    console.log("all done!");
+    process.exit(0);
   } catch (e) {
     console.log(e);
   }
 }
+
+parseFile();
