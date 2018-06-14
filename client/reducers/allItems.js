@@ -17,6 +17,26 @@ export const getItems = () => async dispatch => {
   }
 };
 
+export const addItem = itemData => async dispatch => {
+  try {
+    dispatch(aCC(LOADING_ITEMS));
+    const newItem = await Axios.post(`/api/items`, itemData);
+    dispatch(aCC(ADD_ITEM, newItem.data));
+  } catch (e) {
+    dispatch(aCC(ERROR_ITEMS, e));
+  }
+};
+
+export const deleteItem = id => async dispatch => {
+  try {
+    dispatch(aCC(LOADING_ITEMS));
+    await Axios.delete(`/api/items/${id}`);
+    dispatch(aCC(DELETE_ITEM, id));
+  } catch (e) {
+    dispatch(aCC(ERROR_ITEMS, e));
+  }
+};
+
 const initialState = { status: UNASKED, collection: [] };
 
 const allItems = (state = initialState, action) => {

@@ -16,7 +16,25 @@ export const getRaids = () => async dispatch => {
     dispatch(aCC(ERROR_RAIDS, e));
   }
 };
+export const addRaid = raidData => async dispatch => {
+  try {
+    dispatch(aCC(LOADING_RAIDS));
+    const newRaid = await Axios.post(`/api/raids`, raidData);
+    dispatch(aCC(ADD_RAID, newRaid.data));
+  } catch (e) {
+    dispatch(aCC(ERROR_RAIDS, e));
+  }
+};
 
+export const deleteRaid = id => async dispatch => {
+  try {
+    dispatch(aCC(LOADING_RAIDS));
+    await Axios.delete(`/api/raids/${id}`);
+    dispatch(aCC(DELETE_RAID, id));
+  } catch (e) {
+    dispatch(aCC(ERROR_RAIDS, e));
+  }
+};
 const initialState = { status: UNASKED, collection: [] };
 
 const allRaids = (state = initialState, action) => {

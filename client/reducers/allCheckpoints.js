@@ -17,6 +17,26 @@ export const getCheckpoints = () => async dispatch => {
   }
 };
 
+export const addCheckpoint = checkpointData => async dispatch => {
+  try {
+    dispatch(aCC(LOADING_CHECKPOINTS));
+    const newCheckpoint = await Axios.post(`/api/checkpoints`, checkpointData);
+    dispatch(aCC(ADD_CHECKPOINT, newCheckpoint.data));
+  } catch (e) {
+    dispatch(aCC(ERROR_CHECKPOINTS, e));
+  }
+};
+
+export const deleteCheckpoint = id => async dispatch => {
+  try {
+    dispatch(aCC(LOADING_CHECKPOINTS));
+    await Axios.delete(`/api/checkpoints/${id}`);
+    dispatch(aCC(DELETE_CHECKPOINT, id));
+  } catch (e) {
+    dispatch(aCC(ERROR_CHECKPOINTS, e));
+  }
+};
+
 const initialState = { status: UNASKED, collection: [] };
 
 const allCheckpoints = (state = initialState, action) => {
