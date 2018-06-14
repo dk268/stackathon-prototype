@@ -6,7 +6,7 @@ const LOADING_CHARACTER = `LOADING_` + DIRECT_OBJECT;
 const LOADED_CHARACTER = `LOADED_` + DIRECT_OBJECT;
 const ERROR_CHARACTER = `ERROR_` + DIRECT_OBJECT;
 export const ADD_CHARACTER = `ADD_` + DIRECT_OBJECT;
-export const EDIT_CHARACTER = `EDIT_` + DIRECT_OBJECT;
+const EDIT_CHARACTER = `EDIT_` + DIRECT_OBJECT;
 export const DELETE_CHARACTER = `DELETE_` + DIRECT_OBJECT;
 
 export const getSingleCharacter = id => async dispatch => {

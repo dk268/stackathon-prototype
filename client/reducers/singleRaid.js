@@ -6,7 +6,7 @@ const LOADING_RAID = `LOADING_` + DIRECT_OBJECT;
 const LOADED_RAID = `LOADED_` + DIRECT_OBJECT;
 const ERROR_RAID = `ERROR_` + DIRECT_OBJECT;
 export const ADD_RAID = `ADD_` + DIRECT_OBJECT;
-export const EDIT_RAID = `EDIT_` + DIRECT_OBJECT;
+const EDIT_RAID = `EDIT_` + DIRECT_OBJECT;
 export const DELETE_RAID = `DELETE_` + DIRECT_OBJECT;
 
 export const getSingleRaid = id => async dispatch => {
