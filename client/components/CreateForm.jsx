@@ -6,6 +6,7 @@ import { getRaids } from "../reducers/allRaids";
 import { getCharacters } from "../reducers/allCharacters";
 import { getCheckpoints } from "../reducers/allCheckpoints";
 import { getItems } from "../reducers/allItems";
+import Fields from "./Fields";
 
 class CreateForm extends Component {
   constructor(props) {
@@ -36,6 +37,9 @@ class CreateForm extends Component {
     this.props.getCharacters();
     this.props.getCheckpoints();
     this.props.getItems();
+  };
+  render = () => {
+    return <Fields props={this.props} formName={this.props.formName} />;
   };
 }
 
