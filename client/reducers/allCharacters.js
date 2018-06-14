@@ -45,6 +45,20 @@ const allCharacters = (state = initialState, action) => {
       return { ...state, status: LOADING };
     case LOADED_CHARACTERS:
       return { ...state, status: LOADED, collection: action.payload };
+    case ADD_CHARACTER:
+      return {
+        ...state,
+        status: LOADED,
+        collection: [...state.collection, action.payload],
+      };
+    case DELETE_CHARACTER:
+      return {
+        ...state,
+        status: LOADED,
+        collection: state.collection.filter(
+          character => action.payload !== character.id
+        ),
+      };
     case ERROR_CHARACTERS:
       return { ...state, status: ERROR };
     default:
