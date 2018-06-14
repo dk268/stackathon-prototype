@@ -31,7 +31,7 @@ export const deleteItem = id => async dispatch => {
   try {
     dispatch(aCC(LOADING_ITEMS));
     const remainingItems = await Axios.delete(`/api/items/${id}`);
-    dispatch(aCC(DELETE_ITEM, id));
+    dispatch(aCC(DELETE_ITEM, remainingItems));
   } catch (e) {
     dispatch(aCC(ERROR_ITEMS, e));
   }

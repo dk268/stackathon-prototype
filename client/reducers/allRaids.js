@@ -30,7 +30,7 @@ export const deleteRaid = id => async dispatch => {
   try {
     dispatch(aCC(LOADING_RAIDS));
     const remainingRaids = await Axios.delete(`/api/raids/${id}`);
-    dispatch(aCC(DELETE_RAID, id));
+    dispatch(aCC(DELETE_RAID, remainingRaids));
   } catch (e) {
     dispatch(aCC(ERROR_RAIDS, e));
   }
