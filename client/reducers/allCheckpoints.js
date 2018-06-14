@@ -45,6 +45,20 @@ const allCheckpoints = (state = initialState, action) => {
       return { ...state, status: LOADING };
     case LOADED_CHECKPOINTS:
       return { ...state, status: LOADED, collection: action.payload };
+    case ADD_CHECKPOINT:
+      return {
+        ...state,
+        status: LOADED,
+        collection: [...state.collection, action.payload],
+      };
+    case DELETE_CHECKPOINT:
+      return {
+        ...state,
+        status: LOADED,
+        collection: state.collection.filter(
+          checkpoint => action.payload !== checkpoint.id
+        ),
+      };
     case ERROR_CHECKPOINTS:
       return { ...state, status: ERROR };
     default:

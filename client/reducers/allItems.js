@@ -45,6 +45,18 @@ const allItems = (state = initialState, action) => {
       return { ...state, status: LOADING };
     case LOADED_ITEMS:
       return { ...state, status: LOADED, collection: action.payload };
+    case ADD_ITEM:
+      return {
+        ...state,
+        status: LOADED,
+        collection: [...state.collection, action.payload],
+      };
+    case DELETE_ITEM:
+      return {
+        ...state,
+        status: LOADED,
+        collection: state.collection.filter(item => action.payload !== item.id),
+      };
     case ERROR_ITEMS:
       return { ...state, status: ERROR };
     default:

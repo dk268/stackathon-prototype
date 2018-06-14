@@ -43,6 +43,18 @@ const allRaids = (state = initialState, action) => {
       return { ...state, status: LOADING };
     case LOADED_RAIDS:
       return { ...state, status: LOADED, collection: action.payload };
+    case ADD_RAID:
+      return {
+        ...state,
+        status: LOADED,
+        collection: [...state.collection, action.payload],
+      };
+    case DELETE_RAID:
+      return {
+        ...state,
+        status: LOADED,
+        collection: state.collection.filter(raid => action.payload !== raid.id),
+      };
     case ERROR_RAIDS:
       return { ...state, status: ERROR };
     default:
