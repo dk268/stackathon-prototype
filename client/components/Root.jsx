@@ -15,7 +15,6 @@ class Root extends Component {
   render() {
     return (
       <div id="root-component-div">
-        <h2 id="hello-world">Hi there from redux!!</h2>
         <Router>
           <div id="body-root">
             <Navbar />
