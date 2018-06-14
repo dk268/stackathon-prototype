@@ -175,41 +175,24 @@ async function populateDatabase(raidName, attendance, itemsObjArr) {
         checkpointsUpdatedWithRaids[i].checkpointName
       );
       await checkpointsUpdatedWithRaids[i].setCharacters(attendingChars);
+      for (let j = 0; j < attendingChars.length; j++) {
+        await attendingChars[j].earnDKP(
+          checkpointsUpdatedWithRaids[i].checkpointDKP
+        );
+      }
       console.log(`${attendingChars.length} characters ${chalk.bold(`set!`)}`);
     }
     allCharactersOfTheNight = new Set(allCharactersOfTheNight);
     allCharactersOfTheNight = [...allCharactersOfTheNight];
-    const charSetButNotASet = await Character.findAll({
-      where: {
-        characterName: {
-          [Op.in]: allCharactersOfTheNight,
-        },
-      },
-    });
+    // const charSetButNotASet = await Character.findAll({
+    //   where: {
+    //     characterName: {
+    //       [Op.in]: allCharactersOfTheNight,
+    //     },
+    //   },
+    // });
 
     console.log(chalk.green("preparing to set up items"));
-    //Create each item. Not findOrCreate; we want separate instances of an item.
-    // const items = await Promise.all(
-    //   itemsObjArr.map(item =>
-    //     Item.create({ itemName: item.itemName, itemDKPCost: item.itemDKPCost })
-    //   )
-    // );
-    // console.log(itemsObjArr);
-    // console.log(chalk.blue(`${items.length} items created`));
-    // await Promise.all(
-    //   items.map(item => {
-    //     item.setRaidAcquired(newRaid[0]);
-    //   })
-    // );
-    // console.log(
-    //   chalk.blue(
-    //     `${items.length} items set to ${chalk.yellow(newRaid[0].raidName)}`
-    //   )
-    // );
-    // console.log(
-    //   charSetButNotASet.find(char => char.characterName === "Goliath")
-    // );
-    // console.log(items[0]);
 
     for (let i = 0; i < itemsObjArr.length; i++) {
       let item = await Item.create({

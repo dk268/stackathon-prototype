@@ -20,12 +20,12 @@ const Character = db.define("character", {
   },
 });
 
-Character.prototype.spendDKP = function(num) {
-  this.dkp = this.dkp - num;
+Character.prototype.spendDKP = async function(num) {
+  await this.update({ dkp: this.dkp - num });
 };
 
-Character.prototype.earnDKP = function(num) {
-  this.dkp = this.dkp + num;
+Character.prototype.earnDKP = async function(num) {
+  await this.update({ dkp: this.dkp + num });
 };
 
 module.exports = Character;
