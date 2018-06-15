@@ -1,22 +1,30 @@
 import React, { Component } from "react";
+import { getRaids, addRaid } from "../reducers/allRaids";
+import { getCharacters, addCharacter } from "../reducers/allCharacters";
+import { getCheckpoints, addCheckpoint } from "../reducers/allCheckpoints";
+import { getItems, addItem } from "../reducers/allItems";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { LOADING, LOADED } from "../reducers";
+import Loading from "./Loading";
 
 class Form extends Component {
   constructor(props) {
     super(props);
     switch (this.props.formName) {
-      case addCharacter: {
+      case `addCharacter`: {
         this.state = initialAddCharacterState;
         break;
       }
-      case addCheckpoint: {
+      case `addCheckpoint`: {
         this.state = initialAddCheckpointState;
         break;
       }
-      case addItem: {
+      case `addItem`: {
         this.state = initialAddItemState;
         break;
       }
-      case addRaid: {
+      case `addRaid`: {
         this.state = initialAddRaidState;
         break;
       }
@@ -25,12 +33,16 @@ class Form extends Component {
     }
   }
   handleChange = evt => {
+    console.dir(evt.target);
+    console.log(evt.target.value);
     this.setState({
       [evt.target.name]: evt.target.value,
     });
   };
 
   handleAddToCharacter = (e, payload) => {
+    console.log(payload);
+    console.dir(e.target);
     if (payload.raidName)
       this.setState({
         raids: [...this.state.raids, payload],
@@ -63,95 +75,115 @@ class Form extends Component {
       });
   };
 
-  render = () => <CharacterForm props={props} />;
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.addCharacter(this.state);
+  };
+
+  render = () => {
+    if (
+      this.props.allItems.status === LOADED &&
+      this.props.allCharacters.status === LOADED &&
+      this.props.allRaids.status === LOADED &&
+      this.props.allCheckpoints.status === LOADED
+    )
+      return (
+        <CharacterForm
+          props={this.props}
+          state={this.state}
+          handleChange={this.handleChange}
+          handleAddToCharacter={this.handleAddToCharacter}
+          handleRemoveFromCharacter={this.handleRemoveFromCharacter}
+          handleSubmit={this.handleSubmit}
+        />
+      );
+    else return <Loading name="Form" />;
+  };
 }
-const CharacterForm = props => {
+const CharacterForm = ownProps => {
+  // console.log(ownProps);
   return (
-    <form onSubmit={this.handleSubmit}>
+    <form onSubmit={ownProps.handleSubmit}>
       Character Name: <br />
       <input
         type="text"
         name="characterName"
-        onChange={props.handleChange}
-        value={props.state.characterName}
+        onChange={ownProps.handleChange}
+        value={ownProps.state.characterName}
       />
       <br />
       DKP: <br />
       <input
         type="number"
         name="dkp"
-        onChange={props.handleChange}
-        value={props.state.dkp}
+        onChange={ownProps.handleChange}
+        value={ownProps.state.dkp}
       />
       <br />
       Main or Alt?{" "}
       <fieldset id="is-alt">
         <input
           type="radio"
-          value={false}
-          name="is-alt"
-          onChange={props.handleChange}>
-          Main
-        </input>
-        <input
-          type="radio"
           value={true}
           name="is-alt"
-          onChange={props.handleChange}>
-          Alt
-        </input>
+          onChange={ownProps.handleChange}
+        />MAIN
+        <input
+          type="radio"
+          value={false}
+          name="is-alt"
+          onChange={ownProps.handleChange}
+        />ALT
       </fieldset>
       Unapproved alt?{" "}
-      <fieldset id="is-alt">
+      <fieldset id="is-alt-unapproved">
         <input
           type="radio"
-          value={false}
+          value={ownProps.state.isAltUnapproved}
           name="is-alt"
-          onChange={props.handleChange}>
-          Main or Approved Alt
-        </input>
+          onChange={ownProps.handleChange}
+        />MAIN OR APPROVED ALT
         <input
           type="radio"
           value={true}
           name="is-alt"
-          onChange={props.handleChange}>
-          Unapproved Alt
-        </input>
+          onChange={ownProps.handleChange}
+        />UNAPPROVED ALT
       </fieldset>
       Character Class: <br />
       <input
         type="text"
         name="class"
-        onChange={props.handleChange}
-        value={props.state.class}
+        onChange={ownProps.handleChange}
+        value={ownProps.state.class}
       />{" "}
       <br />
       totalDKPSpent: <br />
       <input
         type="text"
         name="totalDKPSpent"
-        onChange={props.handleChange}
-        value={props.state.totalDKPSpent}
+        onChange={ownProps.handleChange}
+        value={ownProps.state.totalDKPSpent}
       />{" "}
       <br />
       totalDKPEarned:<br />
       <input
         type="text"
         name="totalDKPEarned"
-        onChange={props.handleChange}
-        value={props.state.totalDKPEarned}
+        onChange={ownProps.handleChange}
+        value={ownProps.state.totalDKPEarned}
       />
       <br />
       <ul>
         {" "}
         Character belongs to the following raids:
-        {props.state.raids.map(raid => (
+        {ownProps.state.raids.map(raid => (
           <li key={raid.id} className="add-raid-to-character-belongs-to-div">
             <Link to={`/raids/${raid.id}`}>{raid.raidName}</Link>
             <button
               className="remove-from"
               type="button"
-              onClick={(e, raid) => props.handleRemoveFromCharacter(e, raid)}>
+              onClick={e => ownProps.handleRemoveFromCharacter(e, raid)}>
               Remove
             </button>
           </li>
@@ -160,116 +192,141 @@ const CharacterForm = props => {
       <br />
       <ul>
         Add raids to this character:
-        {props.raids
-          .filter(raid => !props.state.raids.includes(raid.id))
-          .map(raid => {
-            return (
-              <li key={raid.id} className="add-raid-to-character-li">
-                <Link
-                  className="add-raid-to-character-Link"
-                  to={`/raids/${raid.id}`}>
-                  {raid.raidName}
-                </Link>
-                <button
-                  type="button"
-                  className="add-to"
-                  onClick={(e, raid) => props.handleAddToCharacter(e, raid)}>
-                  Add
-                </button>
-              </li>
-            );
-          })}
-      </ul>{" "}
-      <br />
-      <ul>
-        Add items to this character:
-        {props.items
-          .filter(item => !item.character || !item.character.id)
-          .map(item => {
-            return (
-              <li key={item.id} className="add-item-to-character-li">
-                <Link
-                  className="add-item-to-character-Link"
-                  to={`/items/${item.id}`}>
-                  {item.itemName}
-                </Link>
-                <button
-                  type="button"
-                  className="add-to"
-                  onClick={(e, item) => props.handleAddToCharacter(e, item)}>
-                  Add
-                </button>
-              </li>
-            );
-          })}
+        {!ownProps.props.raids.filter(
+          raid => !ownProps.state.raids.map(raid => raid.id).includes(raid.id)
+        ).length
+          ? "\nNo raids to which this character does not belong!"
+          : ownProps.props.raids
+              .filter(
+                raid =>
+                  !ownProps.state.raids.map(raid => raid.id).includes(raid.id)
+              )
+              .map(raid => {
+                return (
+                  <li key={raid.id} className="add-raid-to-character-li">
+                    <Link
+                      className="add-raid-to-character-Link"
+                      to={`/raids/${raid.id}`}>
+                      {raid.raidName}
+                    </Link>
+                    <button
+                      type="button"
+                      className="add-to"
+                      onClick={e => ownProps.handleAddToCharacter(e, raid)}>
+                      Add
+                    </button>
+                  </li>
+                );
+              })}
       </ul>{" "}
       <br />
       <ul>
         {" "}
         Character has the following items:
-        {props.state.items.map(item => (
-          <li key={item.id} className="add-item-to-character-belongs-to-div">
-            <Link to={`/items/${item.id}`}>{item.itemName}</Link>
-            <button
-              className="remove-from"
-              type="button"
-              onClick={(e, item) => props.handleRemoveFromCharacter(e, item)}>
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>{" "}
-      <br />
-      <ul>
-        Add checkpoints to this character (does not update dkp):
-        {props.checkpoints
-          .filter(
-            checkpoint => !props.state.checkpoints.includes(checkpoint.id)
-          )
-          .map(item => {
-            return (
+        {!ownProps.state.items.length
+          ? "\nno items on this character"
+          : ownProps.state.items.map(item => (
               <li
-                key={checkpoint.id}
-                className="add-checkpoint-to-character-li">
-                <Link
-                  className="add-checkpoint-to-character-Link"
-                  to={`/checkpoints/${checkpoint.id}`}>
-                  {checkpoint.checkpointName}
-                </Link>
+                key={item.id}
+                className="add-item-to-character-belongs-to-div">
+                <Link to={`/items/${item.id}`}>{item.itemName}</Link>
                 <button
+                  className="remove-from"
                   type="button"
-                  className="add-to"
-                  onClick={(e, checkpoint) =>
-                    props.handleAddToCharacter(e, checkpoint)
-                  }>
-                  Add
+                  onClick={e => ownProps.handleRemoveFromCharacter(e, item)}>
+                  Remove
                 </button>
               </li>
-            );
-          })}
+            ))}
+      </ul>{" "}
+      <ul>
+        Add items to this character:
+        {!ownProps.props.items.filter(
+          item => !item.character || !item.character.id
+        ).length
+          ? "\nno unclaimed items"
+          : ownProps.props.items
+              .filter(item => !item.character || !item.character.id)
+              .map(item => {
+                return (
+                  <li key={item.id} className="add-item-to-character-li">
+                    <Link
+                      className="add-item-to-character-Link"
+                      to={`/items/${item.id}`}>
+                      {item.itemName}
+                    </Link>
+                    <button
+                      type="button"
+                      className="add-to"
+                      onClick={e => ownProps.handleAddToCharacter(e, item)}>
+                      Add
+                    </button>
+                  </li>
+                );
+              })}
       </ul>{" "}
       <br />
       <ul>
         {" "}
         Character has the following checkpoints:
-        {props.state.checkpoints.map(checkpoint => (
-          <li
-            key={checkpoint.id}
-            className="add-checkpoint-to-character-belongs-to-div">
-            <Link to={`/checkpoints/${checkpoint.id}`}>
-              {checkpoint.checkpointName}
-            </Link>
-            <button
-              className="remove-from"
-              type="button"
-              onClick={(e, checkpoint) =>
-                props.handleRemoveFromCharacter(e, checkpoint)
-              }>
-              Remove
-            </button>
-          </li>
-        ))}
+        {!ownProps.state.checkpoints.length
+          ? "\ncharacter belongs to no checkpoints"
+          : ownProps.state.checkpoints.map(checkpoint => (
+              <li
+                key={checkpoint.id}
+                className="add-checkpoint-to-character-belongs-to-div">
+                <Link to={`/checkpoints/${checkpoint.id}`}>
+                  {checkpoint.checkpointName}
+                </Link>
+                <button
+                  className="remove-from"
+                  type="button"
+                  onClick={e =>
+                    ownProps.handleRemoveFromCharacter(e, checkpoint)
+                  }>
+                  Remove
+                </button>
+              </li>
+            ))}
       </ul>{" "}
+      <br />
+      <ul>
+        Add checkpoints to this character (does not update dkp):
+        {!ownProps.props.checkpoints.filter(
+          checkpoint =>
+            !ownProps.state.checkpoints.map(cp => cp.id).includes(checkpoint.id)
+        )
+          ? " No checkpoints not on this character"
+          : ownProps.props.checkpoints
+              .filter(
+                checkpoint =>
+                  !ownProps.state.checkpoints
+                    .map(cp => cp.id)
+                    .includes(checkpoint.id)
+              )
+              .map(checkpoint => {
+                return (
+                  <li
+                    key={checkpoint.id}
+                    className="add-checkpoint-to-character-li">
+                    <Link
+                      className="add-checkpoint-to-character-Link"
+                      to={`/checkpoints/${checkpoint.id}`}>
+                      {checkpoint.checkpointName}
+                    </Link>
+                    <button
+                      type="button"
+                      className="add-to"
+                      onClick={e =>
+                        ownProps.handleAddToCharacter(e, checkpoint)
+                      }>
+                      Add
+                    </button>
+                  </li>
+                );
+              })}
+      </ul>{" "}
+      <br />
       <br />
       <br />
       <input type="submit" value="Submit" />
@@ -323,9 +380,13 @@ export const initialAddRaidState = {
 
 const mapStateToProps = state => ({
   raids: state.allRaids.collection,
+  allRaids: state.allRaids,
   characters: state.allCharacters.collection,
+  allCharacters: state.allCharacters,
   items: state.allItems.collection,
+  allItems: state.allItems,
   checkpoints: state.allCheckpoints.collection,
+  allCheckpoints: state.allCheckpoints,
 });
 
 const mapDispatchToProps = {
@@ -333,6 +394,10 @@ const mapDispatchToProps = {
   getCharacters,
   getCheckpoints,
   getItems,
+  addCharacter,
+  addItem,
+  addRaid,
+  addCheckpoint,
 };
 
 export default connect(

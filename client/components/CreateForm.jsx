@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { aCC } from "../reducers";
-import { stat } from "fs";
 import { getRaids } from "../reducers/allRaids";
 import { getCharacters } from "../reducers/allCharacters";
 import { getCheckpoints } from "../reducers/allCheckpoints";
@@ -12,19 +11,19 @@ class CreateForm extends Component {
   constructor(props) {
     super(props);
     switch (this.props.formName) {
-      case addCharacter: {
+      case `addCharacter`: {
         this.state = initialCharacterState;
         break;
       }
-      case addCheckpoint: {
+      case `addCheckpoint`: {
         this.state = initialCheckpointState;
         break;
       }
-      case addItem: {
+      case `addItem`: {
         this.state = initialItemState;
         break;
       }
-      case addRaid: {
+      case `addRaid`: {
         this.state = initialRaidState;
         break;
       }

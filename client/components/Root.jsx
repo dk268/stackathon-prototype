@@ -10,6 +10,7 @@ import AllCheckpoints from "./AllCheckpoints";
 import SingleItem from "./SingleItem";
 import SingleRaid from "./SingleRaid";
 import SingleCheckpoint from "./SingleCheckpoint";
+import CreateForm from "./CreateForm";
 
 class Root extends Component {
   render() {
@@ -37,7 +38,7 @@ class Root extends Component {
               />
               <Route
                 exact
-                path="/characters/add"
+                path="/charactersadd"
                 render={() => <CreateForm formName="addCharacter" />}
               />
             </Switch>

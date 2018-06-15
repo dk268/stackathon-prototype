@@ -59,6 +59,7 @@ const MainLinks = props => (
     <Link to="/checkpoints" className="navbar-link">
       All Checkpoints
     </Link>
+    <Link to="/charactersadd"> Add a character </Link>
   </div>
 );
 
