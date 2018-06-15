@@ -71,6 +71,7 @@ const MainLinks = props => (
     <Link to="/add/character"> Add a character </Link>
     <Link to="/add/checkpoint"> Add a checkpoint </Link>
     <Link to="/add/item"> Add an item </Link>
+    <Link to="/add/raid"> Add a raid </Link>
   </div>
 );
 
