@@ -97,6 +97,32 @@ class Form extends Component {
     }
   };
 
+  handleAddToItem = (e, payload) => {
+    if (payload.characterName) {
+      this.setState({
+        character: payload,
+      });
+    }
+    if (payload.raidName) {
+      this.setState({
+        RaidAcquired: payload,
+      });
+    }
+  };
+
+  handleRemoveFromItem = (e, payload) => {
+    if (payload.characterName) {
+      this.setState({
+        character: {},
+      });
+    }
+    if (payload.raidName) {
+      this.setState({ raid: {} });
+    }
+  };
+  handleAddToRaid = (e, payload) => {};
+  handleRemoveFromRaid = (e, payload) => {};
+
   handleSubmitCharacter = async e => {
     e.preventDefault();
     const newChar = await this.props.addCharacter(this.state);
