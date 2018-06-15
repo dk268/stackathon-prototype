@@ -4,7 +4,7 @@ import { getCharacters, addCharacter } from "../reducers/allCharacters";
 import { getCheckpoints, addCheckpoint } from "../reducers/allCheckpoints";
 import { getItems, addItem } from "../reducers/allItems";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { LOADING, LOADED } from "../reducers";
 import Loading from "./Loading";
 
@@ -75,9 +75,10 @@ class Form extends Component {
       });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
-    this.props.addCharacter(this.state);
+    const newChar = await this.props.addCharacter(this.state);
+    this.props.history.push(`/characters/${newChar.id}`);
   };
 
   render = () => {
@@ -400,7 +401,9 @@ const mapDispatchToProps = {
   addCheckpoint,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Form);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Form)
+);
