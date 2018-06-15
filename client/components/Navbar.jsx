@@ -68,6 +68,7 @@ const MainLinks = props => (
     <Link to="/checkpoints" className="navbar-link">
       All Checkpoints
     </Link>
+    <br />
     <Link to="/add/character"> Add a character </Link>
     <Link to="/add/checkpoint"> Add a checkpoint </Link>
     <Link to="/add/item"> Add an item </Link>
