@@ -38,7 +38,7 @@ class Root extends Component {
               />
               <Route
                 exact
-                path="/add/checkpoint"
+                path="/add/character"
                 render={() => <CreateForm formName="addCharacter" />}
               />
               <Route
