@@ -10,7 +10,8 @@ export const FormRaid = ownProps => {
         name="raidName"
         onChange={ownProps.handleChange}
         value={ownProps.state.raidName}
-      />
+      />{" "}
+      <br />
       Raid Date: <br />
       <input
         type="date"
@@ -18,8 +19,9 @@ export const FormRaid = ownProps => {
         onChange={ownProps.handleChange}
         value={ownProps.state.raidDate}
       />
-      Raid has the following items:
       <br />
+      <br />
+      Raid has the following items:
       <ul>
         {!ownProps.state.items.length
           ? ` no items found on this raid`
@@ -43,7 +45,10 @@ export const FormRaid = ownProps => {
         ).length
           ? ` no unclaimed items`
           : ownProps.props.items
-              .filter(item => !item.RaidAcquired || !item.RaidAcquired.id)
+              .filter(
+                item =>
+                  !ownProps.state.items.map(item => item.id).includes(item.id)
+              )
               .map(item => {
                 return (
                   <li key={item.id} className="add-item-to-raid-li">
@@ -110,9 +115,7 @@ export const FormRaid = ownProps => {
                     <button
                       type="button"
                       className="add-to"
-                      onClick={e =>
-                        ownProps.handleAddToCharacter(e, checkpoint)
-                      }>
+                      onClick={e => ownProps.handleAddToRaid(e, checkpoint)}>
                       Add
                     </button>
                   </li>
