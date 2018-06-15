@@ -20,7 +20,7 @@ export const getSingleItem = id => async dispatch => {
   }
 };
 
-export const editItem = async itemData => {
+export const editItem = itemData => async dispatch => {
   try {
     dispatch(aCC(LOADING_ITEM));
     const [, singleItem] = await Axios.put(`/api/items/${itemData.id}`, {

@@ -81,14 +81,33 @@ class EditForm extends Component {
         break;
       }
       default:
-        this.state = {};
+      this.state = {};
     }
+        if (this.props.allCharacters.status != LOADED) this.props.getCharacters();
+        if (this.props.allCheckpoints.status != LOADED) this.props.getCheckpoints();
+        if (this.props.allItems.status != LOADED) this.props.getItems();
+        if (this.props.allRaids.status != LOADED) this.props.getRaids();
   };
 
   handleChange = evt => {
     this.setState({
       [evt.target.name]: evt.target.value,
     });
+  };
+  handleAddToCharacter = (e, payload) => {
+    if (payload.raidName)
+      this.setState({
+        raids: [...this.state.raids, payload],
+      });
+    else if (payload.itemName)
+      this.setState({
+        items: [...this.state.items, payload],
+      });
+    else if (payload.checkpointName)
+      this.setState({
+        checkpoints: [...this.state.checkpoints, payload],
+      });
+    else console.log("something is wrong");
   };
 
   handleRemoveFromCharacter = (e, payload) => {

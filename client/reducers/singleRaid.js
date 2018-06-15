@@ -20,7 +20,7 @@ export const getSingleRaid = id => async dispatch => {
   }
 };
 
-export const editRaid = async raidData => {
+export const editRaid = raidData => async dispatch => {
   try {
     dispatch(aCC(LOADING_RAID));
     const [, singleRaid] = await Axios.put(`/api/raids/${raidData.id}`, {

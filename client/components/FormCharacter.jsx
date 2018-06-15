@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const FormCharacter = ownProps => {
+  console.log(ownProps);
   return (
     <form onSubmit={ownProps.handleSubmit}>
       Character Name: <br />
@@ -142,11 +143,19 @@ export const FormCharacter = ownProps => {
       <ul>
         Add items to this character:
         {!ownProps.props.items.filter(
-          item => !item.character || !item.character.id
+          item =>
+            !item.character &&
+            item.itemName &&
+            !ownProps.state.items.map(i => i.id).includes(item.id)
         ).length
-          ? "\nno unclaimed items"
+          ? " no unclaimed items"
           : ownProps.props.items
-              .filter(item => !item.character || !item.character.id)
+              .filter(
+                item =>
+                  !item.character &&
+                  item.itemName &&
+                  !ownProps.state.items.map(i => i.id).includes(item.id)
+              )
               .map(item => {
                 return (
                   <li key={item.id} className="add-item-to-character-li">

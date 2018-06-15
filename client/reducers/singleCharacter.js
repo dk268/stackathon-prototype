@@ -20,7 +20,7 @@ export const getSingleCharacter = id => async dispatch => {
   }
 };
 
-export const editCharacter = async characterData => {
+export const editCharacter = characterData => async dispatch => {
   try {
     dispatch(aCC(LOADING_CHARACTER));
     const singleCharacter = await Axios.put(
