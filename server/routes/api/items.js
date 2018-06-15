@@ -13,6 +13,7 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   const allItems = await Item.findAll({
     include: [Character, { model: Raid, as: "RaidAcquired" }],
+    order: [[Character, "characterName", "ASC"]],
   });
   res.json(allItems);
 });
@@ -20,6 +21,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:itemId", async (req, res, next) => {
   const oneItem = await Item.findById(req.params.itemId, {
     include: [Character, { model: Raid, as: "RaidAcquired" }],
+    order: [[Character, "characterName", "ASC"]],
   });
   res.json(oneItem);
 });

@@ -61,7 +61,7 @@ router.delete("/:checkpointId", async (req, res, next) => {
 module.exports = router;
 
 const setCheckpointToRaid = async (raid, checkpoint) => {
-  const foundRaid = await raid.findById(raid.id);
+  const foundRaid = await Raid.findById(raid.id);
   await checkpoint.setRaid(foundRaid);
 };
 const setCharactersToCheckpoint = async (characters, checkpoint) => {

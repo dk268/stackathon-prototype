@@ -22,6 +22,7 @@ export const addItem = itemData => async dispatch => {
     dispatch(aCC(LOADING_ITEMS));
     const newItem = await Axios.post(`/api/items`, itemData);
     dispatch(aCC(ADD_ITEM, newItem.data));
+    return newItem.data;
   } catch (e) {
     dispatch(aCC(ERROR_ITEMS, e));
   }

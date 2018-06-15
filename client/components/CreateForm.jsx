@@ -166,6 +166,12 @@ class Form extends Component {
     const newCheckpoint = await this.props.addCheckpoint(this.state);
     this.props.history.push(`/checkpoints/${newCheckpoint.data.id}`);
   };
+  handleSubmitItem = async e => {
+    e.preventDefault();
+    const newItem = await this.props.addItem(this.state);
+    this.props.history.push(`/items/${newItem.id}`);
+  };
+
   render = () => {
     console.log("hit this point...", this.props);
     if (

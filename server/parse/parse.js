@@ -206,8 +206,14 @@ async function populateDatabase(raidName, attendance, itemsObjArr) {
     }
     console.log(`${itemsObjArr.length} items processed!`);
     console.log("-----------------------------");
-    console.log(chalk.red.bold("enforcing DKP maxima"));
     const allChars = await Character.findAll();
+    console.log(
+      chalk.yellow(`Adding ${allChars.length} characters to raid...`)
+    );
+    for (let i = 0; i < allChars.length; i++) {
+      await newRaid[0].addCharacter(allChars[i]);
+    }
+    console.log(chalk.red.bold("enforcing DKP maxima"));
     for (let i = 0; i < allChars.length; i++) {
       if (allChars[i].isAlt && allChars[i].dkp > 120)
         await allChars[i].update({

@@ -14,6 +14,7 @@ router.get("/", async (req, res, next) => {
   try {
     const allCharacters = await Character.findAll({
       include: [Item, Raid, User, Checkpoint],
+      order: [["characterName", "ASC"]],
     });
     res.json(allCharacters);
   } catch (e) {

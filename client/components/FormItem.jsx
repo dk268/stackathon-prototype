@@ -93,19 +93,25 @@ export const FormItem = ownProps => {
       <ul>
         {" "}
         Item acquired at raid:
-        {!ownProps.state.RaidAcquired.id
-          ? "\nItem not yet set a raid acquired"
-          : ownProps.state.raids.map(raid => (
-              <li key={raid.id} className="add-raid-to-item-belongs-to-div">
-                <Link to={`/raids/${raid.id}`}>{raid.raidName}</Link>
-                <button
-                  className="remove-from"
-                  type="button"
-                  onClick={e => ownProps.handleRemoveFromItem(e, raid)}>
-                  Remove
-                </button>
-              </li>
-            ))}
+        {!ownProps.state.RaidAcquired.id ? (
+          "\nItem not yet set a raid acquired"
+        ) : (
+          <li
+            key={ownProps.state.RaidAcquired.id}
+            className="add-raid-to-item-belongs-to-div">
+            <Link to={`/raids/${ownProps.state.RaidAcquired.id}`}>
+              {ownProps.state.RaidAcquired.raidName}
+            </Link>
+            <button
+              className="remove-from"
+              type="button"
+              onClick={e =>
+                ownProps.handleRemoveFromItem(e, ownProps.state.RaidAcquired)
+              }>
+              Remove
+            </button>
+          </li>
+        )}
       </ul>{" "}
       <ul>
         Set raid acquired for this item:

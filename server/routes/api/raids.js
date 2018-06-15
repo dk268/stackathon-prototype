@@ -13,6 +13,7 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   const allRaids = await Raid.findAll({
     include: [Item, Character, Checkpoint],
+    order: [[Character, "characterName", "ASC"]],
   });
   res.json(allRaids);
 });

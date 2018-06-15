@@ -21,6 +21,7 @@ export const addRaid = raidData => async dispatch => {
     dispatch(aCC(LOADING_RAIDS));
     const newRaid = await Axios.post(`/api/raids`, raidData);
     dispatch(aCC(ADD_RAID, newRaid.data));
+    return newRaid.data;
   } catch (e) {
     dispatch(aCC(ERROR_RAIDS, e));
   }

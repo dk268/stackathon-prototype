@@ -56,7 +56,7 @@ export const FormCheckpoint = ownProps => {
                     <button
                       type="button"
                       className="add-to"
-                      onClick={e => ownProps.handleAddToCharacter(e, raid)}>
+                      onClick={e => ownProps.handleAddToCheckpoint(e, raid)}>
                       Add
                     </button>
                   </li>
