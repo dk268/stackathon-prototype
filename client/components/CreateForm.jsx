@@ -116,6 +116,7 @@ class Form extends Component {
       });
     }
   };
+
   handleRemoveFromCheckpoint = (e, payload) => {
     if (payload.raidName) {
       this.setState({
@@ -192,6 +193,11 @@ class Form extends Component {
     const newItem = await this.props.addItem(this.state);
     this.props.history.push(`/items/${newItem.id}`);
   };
+  handleSubmitRaid = async e => {
+    e.preventDefault();
+    const newRaid = await this.props.addRaid(this.state);
+    this.props.history.push(`/raids/${newRaid.id}`)
+  }
 
   render = () => {
     if (
@@ -242,7 +248,7 @@ class Form extends Component {
               handleChange={this.handleChange}
               handleAddToRaid={this.handleAddToRaid}
               handleRemoveFromRaid={this.handleRemoveFromRaid}
-              handleSubmit={this.handleSubmitItem}
+              handleSubmit={this.handleSubmitRaid}
             />
           );
         default:
