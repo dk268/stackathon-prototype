@@ -196,8 +196,8 @@ class Form extends Component {
   handleSubmitRaid = async e => {
     e.preventDefault();
     const newRaid = await this.props.addRaid(this.state);
-    this.props.history.push(`/raids/${newRaid.id}`)
-  }
+    this.props.history.push(`/raids/${newRaid.id}`);
+  };
 
   render = () => {
     if (
@@ -257,8 +257,6 @@ class Form extends Component {
     else return <Loading name="Form" />;
   };
 }
-
-const RaidForm = ownProps => {};
 
 const mapStateToProps = state => ({
   raids: state.allRaids.collection,
