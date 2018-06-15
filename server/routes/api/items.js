@@ -27,6 +27,9 @@ router.get("/:itemId", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const newItem = await Item.create(req.body);
+    if (req.body.character.id)
+      await setCharacterToItem(req.body.character, newItem);
+    if (req.body.raid.id) await setRaidToItem(req.body.raid, newItem);
     res.json(newItem);
   } catch (e) {
     next(e);
@@ -59,3 +62,13 @@ router.delete("/:itemId", async (req, res, next) => {
 });
 
 module.exports = router;
+
+const setCharacterToItem = async (character, item) => {
+  const char = await Character.findById(character.id);
+  await item.setCharacter(char);
+};
+
+const setRaidToItem = async (raid, item) => {
+  const foundRaid = Raid.findById(raid.id);
+  await item.setRaidAcquired(foundRaid);
+};
