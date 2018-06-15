@@ -31,6 +31,15 @@ router.get("/:charId", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const newCharacter = await Character.create(req.body);
+    if (req.body.raids.length)
+      await setRaidsToCharacter(req.body.raids, newCharacter);
+    console.log("Set raids successful");
+    if (req.body.items.length)
+      await setItemsToCharacter(req.body.items, newCharacter);
+    console.log("Set items successful");
+    if (req.body.checkpoints.length)
+      await setCheckpointsToCharacter(req.body.checkpoints, newCharacter);
+    console.log("set checkpoints successful");
     res.json(newCharacter);
   } catch (e) {
     next(e);
@@ -63,3 +72,25 @@ router.delete("/:charId", async (req, res, next) => {
 });
 
 module.exports = router;
+
+const setRaidsToCharacter = async (raids, character) => {
+  for (let i = 0; i < raids.length; i++) {
+    const raid = await Raid.findById(raids[i].id);
+    await raid.addCharacter(character);
+  }
+  return 1;
+};
+
+const setItemsToCharacter = async (items, character) => {
+  for (let i = 0; i < items.length; i++) {
+    const item = await Item.findById(items[i].id);
+    await item.setCharacter(character);
+  }
+};
+
+const setCheckpointsToCharacter = async (checkpoints, character) => {
+  for (let i = 0; i < checkpoints.length; i++) {
+    const checkpoint = await Checkpoint.findById(checkpoints[i].id);
+    await checkpoint.addCharacter(character);
+  }
+};

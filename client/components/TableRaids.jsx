@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getRaids } from "../reducers/allRaids";
 import { connect } from "react-redux";
 import { UNASKED, LOADING, LOADED, ERROR } from "../reducers";
+import { Link } from "react-router-dom";
 import Unasked from "./Unasked";
 import Loading from "./Loading";
 import Error from "./Error";
@@ -34,11 +35,15 @@ class TableRaids extends Component {
             </p>
             {filteredRaids.map(raid => {
               return (
-                <TableCheckpoints
-                  key={raid.id}
-                  raid={raid}
-                  character={this.props.character}
-                />
+                <div key={raid.id} id="filtered-raids-map-div">
+                  <h4>
+                    <Link to={`/raids/${raid.id}`}>{raid.raidName}</Link>
+                  </h4>
+                  <TableCheckpoints
+                    raid={raid}
+                    character={this.props.character}
+                  />
+                </div>
               );
             })}
           </div>

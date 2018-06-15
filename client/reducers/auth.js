@@ -13,7 +13,6 @@ export const login = (userInfo, route) => async dispatch => {
   try {
     dispatch(aCC(LOADING_AUTH));
     const currentUser = await Axios.post(`/users/${route}`, userInfo);
-    console.log(currentUser.data);
     switch (currentUser.data.isAdmin) {
       case true:
         dispatch(aCC(ADMIN_AUTH), currentUser.data);

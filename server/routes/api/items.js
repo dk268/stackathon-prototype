@@ -11,7 +11,6 @@ const router = express.Router();
 // /api/items/
 
 router.get("/", async (req, res, next) => {
-  console.log("hlloooo!!");
   const allItems = await Item.findAll({
     include: [Character, { model: Raid, as: "RaidAcquired" }],
   });

@@ -50,7 +50,6 @@ router.post("/signup", async (req, res, next) => {
 router.post("/logout", (req, res, next) => {
   req.logout();
   req.session.destroy();
-  console.log(req.user);
   res.sendStatus(200);
 });
 

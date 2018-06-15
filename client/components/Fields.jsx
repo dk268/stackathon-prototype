@@ -140,13 +140,13 @@ const CharacterForm = ownProps => {
         <input
           type="radio"
           value={ownProps.state.isAltUnapproved}
-          name="is-alt"
+          name="is-alt-unapproved"
           onChange={ownProps.handleChange}
         />MAIN OR APPROVED ALT
         <input
           type="radio"
           value={true}
-          name="is-alt"
+          name="is-alt-unapproved"
           onChange={ownProps.handleChange}
         />UNAPPROVED ALT
       </fieldset>
