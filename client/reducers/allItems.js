@@ -3,7 +3,7 @@ import { LOADING, LOADED, ERROR, UNASKED, aCC } from ".";
 import { ADD_ITEM, DELETE_ITEM } from "./singleItem";
 
 const DIRECT_OBJECT = "ITEMS";
-const LOADING_ITEMS = `LOADING_` + DIRECT_OBJECT;
+export const LOADING_ITEMS = `LOADING_` + DIRECT_OBJECT;
 const LOADED_ITEMS = `LOADED_` + DIRECT_OBJECT;
 const ERROR_ITEMS = `ERROR_` + DIRECT_OBJECT;
 

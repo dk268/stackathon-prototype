@@ -3,7 +3,7 @@ import { LOADING, LOADED, ERROR, UNASKED, aCC } from ".";
 import { ADD_RAID, DELETE_RAID } from "./singleRaid";
 
 const DIRECT_OBJECT = "RAIDS";
-const LOADING_RAIDS = `LOADING_` + DIRECT_OBJECT;
+export const LOADING_RAIDS = `LOADING_` + DIRECT_OBJECT;
 const LOADED_RAIDS = `LOADED_` + DIRECT_OBJECT;
 const ERROR_RAIDS = `ERROR_` + DIRECT_OBJECT;
 

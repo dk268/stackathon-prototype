@@ -66,7 +66,7 @@ export const FormItem = ownProps => {
       <br />
       <ul>
         Set the character for this item:
-        {!ownprops.state.character.id
+        {!ownProps.state.character.id
           ? " Item already assigned!"
           : ownProps.props.characters.map(character => {
               return (
@@ -106,7 +106,7 @@ export const FormItem = ownProps => {
       </ul>{" "}
       <ul>
         Set raid acquired for this item:
-        {ownProps.props.raid.id
+        {ownProps.state.RaidAcquired.id
           ? "\nItem already belongs to a raid!"
           : ownProps.props.raids.map(raid => {
               return (

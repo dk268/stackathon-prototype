@@ -1,11 +1,19 @@
 import React, { Component } from "react";
-import { getRaids, addRaid } from "../reducers/allRaids";
-import { getCharacters, addCharacter } from "../reducers/allCharacters";
-import { getCheckpoints, addCheckpoint } from "../reducers/allCheckpoints";
-import { getItems, addItem } from "../reducers/allItems";
+import { getRaids, addRaid, LOADING_RAIDS } from "../reducers/allRaids";
+import {
+  getCharacters,
+  addCharacter,
+  LOADING_CHARACTERS,
+} from "../reducers/allCharacters";
+import {
+  getCheckpoints,
+  addCheckpoint,
+  LOADING_CHECKPOINTS,
+} from "../reducers/allCheckpoints";
+import { getItems, addItem, LOADING_ITEMS } from "../reducers/allItems";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import { LOADING, LOADED } from "../reducers";
+import { LOADING, LOADED, aCC } from "../reducers";
 import Loading from "./Loading";
 import Error from "./Error";
 import { FormCharacter } from "./FormCharacter";
@@ -21,6 +29,7 @@ import { FormItem } from "./FormItem";
 class Form extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
     switch (this.props.formName) {
       case `addCharacter`: {
         this.state = initialAddCharacterState;
@@ -43,10 +52,38 @@ class Form extends Component {
     }
   }
   componentDidMount = () => {
-    this.props.getRaids();
-    this.props.getCharacters();
-    this.props.getCheckpoints();
-    this.props.getItems();
+    // switch (this.props.formName) {
+    //   case `addCharacter`: {
+    //     this.setState({ initialAddCharacterState });
+    //     break;
+    //   }
+    //   case `addCheckpoint`: {
+    //     this.setState({ initialAddCheckpointState });
+    //     break;
+    //   }
+    //   case `addItem`: {
+    //     this.setState({ initialAddItemState });
+    //     break;
+    //   }
+    //   case `addRaid`: {
+    //     this.setState({ initialAddRaidState });
+    //     break;
+    //   }
+    //   default:
+    //     this.setState(this.state);
+    // }
+    this.setState({
+      ...initialAddCharacterState,
+      ...initialAddCheckpointState,
+      ...initialAddItemState,
+      ...initialAddRaidState,
+    });
+
+    console.log("Component did mounting!");
+    if (this.props.allCharacters.status != LOADED) this.props.getCharacters();
+    if (this.props.allCheckpoints.status != LOADED) this.props.getCheckpoints();
+    if (this.props.allItems.status != LOADED) this.props.getItems();
+    if (this.props.allRaids.status != LOADED) this.props.getRaids();
   };
 
   handleChange = evt => {
@@ -150,6 +187,7 @@ class Form extends Component {
     this.props.history.push(`/checkpoints/${newCheckpoint.data.id}`);
   };
   render = () => {
+    console.log("hit this point...", this.props);
     if (
       this.props.allItems.status === LOADED &&
       this.props.allCharacters.status === LOADED &&
@@ -185,9 +223,9 @@ class Form extends Component {
               props={this.props}
               state={this.state}
               handleChange={this.handleChange}
-              handleAddToCheckpoint={this.handleAddToCheckpoint}
-              handleRemoveFromCheckpoint={this.handleRemoveFromCheckpoint}
-              handleSubmit={this.handleSubmitCheckpoint}
+              handleAddToItem={this.handleAddToItem}
+              handleRemoveFromItem={this.handleRemoveFromItem}
+              handleSubmit={this.handleSubmitItem}
             />
           );
         default:
@@ -210,6 +248,18 @@ const mapStateToProps = state => ({
   allCheckpoints: state.allCheckpoints,
 });
 
+const stateCleanup = () => dispatch => {
+  console.log("stateCleanup called");
+  try {
+    dispatch(aCC(LOADING_CHARACTERS));
+    dispatch(aCC(LOADING_CHECKPOINTS));
+    dispatch(aCC(LOADING_ITEMS));
+    dispatch(aCC(LOADING_RAIDS));
+  } catch (e) {
+    dispatch(aCC(ERROR, e));
+  }
+};
+
 const mapDispatchToProps = {
   getRaids,
   getCharacters,
@@ -219,6 +269,7 @@ const mapDispatchToProps = {
   addItem,
   addRaid,
   addCheckpoint,
+  stateCleanup,
 };
 
 export default withRouter(
