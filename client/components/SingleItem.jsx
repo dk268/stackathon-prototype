@@ -14,7 +14,6 @@ class SingleItem extends Component {
   };
 
   render = () => {
-    console.log(this.props.status);
     switch (this.props.status) {
       case UNASKED:
         return <Unasked />;
@@ -34,10 +33,14 @@ class SingleItem extends Component {
               </Link>
             </h6>
             <h6>
-              Raid Found:{" "}
-              <Link to={`/characters/${this.props.singleItem.RaidAcquired.id}`}>
-                {this.props.singleItem.RaidAcquired.raidName}
-              </Link>
+              Raid Found:{!this.props.singleItem.RaidAcquired ? (
+                ` no raid acquisition specified`
+              ) : (
+                <Link
+                  to={`/characters/${this.props.singleItem.RaidAcquired.id}`}>
+                  {this.props.singleItem.RaidAcquired.raidName}
+                </Link>
+              )}
             </h6>
             <h5>Characters in Possession: </h5>
             <ul>
