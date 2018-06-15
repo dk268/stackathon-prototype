@@ -1,19 +1,11 @@
 import React, { Component } from "react";
 import { getRaids, addRaid, LOADING_RAIDS } from "../reducers/allRaids";
-import {
-  getCharacters,
-  addCharacter,
-  LOADING_CHARACTERS,
-} from "../reducers/allCharacters";
-import {
-  getCheckpoints,
-  addCheckpoint,
-  LOADING_CHECKPOINTS,
-} from "../reducers/allCheckpoints";
-import { getItems, addItem, LOADING_ITEMS } from "../reducers/allItems";
+import { getCharacters, addCharacter } from "../reducers/allCharacters";
+import { getCheckpoints, addCheckpoint } from "../reducers/allCheckpoints";
+import { getItems, addItem } from "../reducers/allItems";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import { LOADING, LOADED, aCC } from "../reducers";
+import { LOADED, aCC } from "../reducers";
 import Loading from "./Loading";
 import Error from "./Error";
 import { FormCharacter } from "./FormCharacter";
@@ -181,21 +173,25 @@ class Form extends Component {
   handleSubmitCharacter = async e => {
     e.preventDefault();
     const newChar = await this.props.addCharacter(this.state);
+    this.props.getCharacters();
     this.props.history.push(`/characters/${newChar.id}`);
   };
   handleSubmitCheckpoint = async e => {
     e.preventDefault();
     const newCheckpoint = await this.props.addCheckpoint(this.state);
+    this.props.getCheckpoints();
     this.props.history.push(`/checkpoints/${newCheckpoint.id}`);
   };
   handleSubmitItem = async e => {
     e.preventDefault();
     const newItem = await this.props.addItem(this.state);
+    this.props.getItems();
     this.props.history.push(`/items/${newItem.id}`);
   };
   handleSubmitRaid = async e => {
     e.preventDefault();
     const newRaid = await this.props.addRaid(this.state);
+    this.props.getRaids();
     this.props.history.push(`/raids/${newRaid.id}`);
   };
 
