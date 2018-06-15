@@ -510,227 +510,127 @@ const CheckpointForm = ownProps => {
 const ItemForm = ownProps => {
   return (
     <form onSubmit={ownProps.handleSubmit}>
-      Character Name: <br />
+      Item Name: <br />
       <input
         type="text"
-        name="characterName"
+        name="itemName"
         onChange={ownProps.handleChange}
-        value={ownProps.state.characterName}
+        value={ownProps.state.itemName}
       />
       <br />
-      DKP: <br />
+      itemDKPCost: <br />
       <input
         type="number"
-        name="dkp"
+        name="itemDKPCost"
         onChange={ownProps.handleChange}
-        value={ownProps.state.dkp}
+        value={ownProps.state.itemDKPCost}
       />
       <br />
-      Main or Alt?{" "}
-      <fieldset id="is-alt">
-        <input
-          type="radio"
-          value={true}
-          name="is-alt"
-          onChange={ownProps.handleChange}
-        />MAIN
-        <input
-          type="radio"
-          value={false}
-          name="is-alt"
-          onChange={ownProps.handleChange}
-        />ALT
-      </fieldset>
-      Unapproved alt?{" "}
-      <fieldset id="is-alt-unapproved">
-        <input
-          type="radio"
-          value={ownProps.state.isAltUnapproved}
-          name="is-alt-unapproved"
-          onChange={ownProps.handleChange}
-        />MAIN OR APPROVED ALT
-        <input
-          type="radio"
-          value={true}
-          name="is-alt-unapproved"
-          onChange={ownProps.handleChange}
-        />UNAPPROVED ALT
-      </fieldset>
-      Character Class: <br />
+      Item Link URL: <br />
       <input
         type="text"
-        name="class"
+        name="itemLinkUrl"
         onChange={ownProps.handleChange}
-        value={ownProps.state.class}
+        value={ownProps.state.itemLinkUrl}
       />{" "}
       <br />
-      totalDKPSpent: <br />
+      Item tooltip URL: <br />
       <input
         type="text"
-        name="totalDKPSpent"
+        name="itemSmallImageUrl"
         onChange={ownProps.handleChange}
-        value={ownProps.state.totalDKPSpent}
+        value={ownProps.state.itemSmallImageUrl}
       />{" "}
       <br />
-      totalDKPEarned:<br />
+      Item stat block URL:<br />
       <input
         type="text"
-        name="totalDKPEarned"
+        name="itemStateBlockUrl"
         onChange={ownProps.handleChange}
-        value={ownProps.state.totalDKPEarned}
+        value={ownProps.state.itemStateBlockUrl}
       />
       <br />
       <ul>
         {" "}
-        Character belongs to the following raids:
-        {ownProps.state.raids.map(raid => (
-          <li key={raid.id} className="add-raid-to-character-belongs-to-div">
-            <Link to={`/raids/${raid.id}`}>{raid.raidName}</Link>
+        Item belongs to the following character:
+        {!ownProps.state.character.id ? (
+          "Item belongs to no character, yet"
+        ) : (
+          <li className="add-item-to-character-div">
+            <Link to={`/characters/${character.id}`}>
+              {character.characterName}
+            </Link>
             <button
               className="remove-from"
               type="button"
-              onClick={e => ownProps.handleRemoveFromCharacter(e, raid)}>
+              onClick={e => ownProps.handleRemoveFromItem(e, item)}>
               Remove
             </button>
           </li>
-        ))}
+        )}
       </ul>{" "}
       <br />
       <ul>
-        Add raids to this character:
-        {!ownProps.props.raids.filter(
-          raid => !ownProps.state.raids.map(raid => raid.id).includes(raid.id)
-        ).length
-          ? "\nNo raids to which this character does not belong!"
-          : ownProps.props.raids
-              .filter(
-                raid =>
-                  !ownProps.state.raids.map(raid => raid.id).includes(raid.id)
-              )
-              .map(raid => {
-                return (
-                  <li key={raid.id} className="add-raid-to-character-li">
-                    <Link
-                      className="add-raid-to-character-Link"
-                      to={`/raids/${raid.id}`}>
-                      {raid.raidName}
-                    </Link>
-                    <button
-                      type="button"
-                      className="add-to"
-                      onClick={e => ownProps.handleAddToCharacter(e, raid)}>
-                      Add
-                    </button>
-                  </li>
-                );
-              })}
+        Set the character for this item:
+        {!ownprops.state.character.id
+          ? " Item already assigned!"
+          : ownProps.props.characters.map(character => {
+              return (
+                <li key={character.id} className="add-character-to-item-li">
+                  <Link
+                    className="add-character-to-item-Link"
+                    to={`/characters/${character.id}`}>
+                    {character.characterName}
+                  </Link>
+                  <button
+                    type="button"
+                    className="add-to"
+                    onClick={e => ownProps.handleAddToItem(e, raid)}>
+                    Add
+                  </button>
+                </li>
+              );
+            })}
       </ul>{" "}
       <br />
       <ul>
         {" "}
-        Character has the following items:
-        {!ownProps.state.items.length
-          ? "\nno items on this character"
-          : ownProps.state.items.map(item => (
-              <li
-                key={item.id}
-                className="add-item-to-character-belongs-to-div">
-                <Link to={`/items/${item.id}`}>{item.itemName}</Link>
+        Item acquired at raid:
+        {!ownProps.state.RaidAcquired.id
+          ? "\nItem not yet set a raid acquired"
+          : ownProps.state.raids.map(raid => (
+              <li key={raid.id} className="add-raid-to-item-belongs-to-div">
+                <Link to={`/raids/${raid.id}`}>{raid.raidName}</Link>
                 <button
                   className="remove-from"
                   type="button"
-                  onClick={e => ownProps.handleRemoveFromCharacter(e, item)}>
+                  onClick={e => ownProps.handleRemoveFromItem(e, raid)}>
                   Remove
                 </button>
               </li>
             ))}
       </ul>{" "}
       <ul>
-        Add items to this character:
-        {!ownProps.props.items.filter(
-          item => !item.character || !item.character.id
-        ).length
-          ? "\nno unclaimed items"
-          : ownProps.props.items
-              .filter(item => !item.character || !item.character.id)
-              .map(item => {
-                return (
-                  <li key={item.id} className="add-item-to-character-li">
-                    <Link
-                      className="add-item-to-character-Link"
-                      to={`/items/${item.id}`}>
-                      {item.itemName}
-                    </Link>
-                    <button
-                      type="button"
-                      className="add-to"
-                      onClick={e => ownProps.handleAddToCharacter(e, item)}>
-                      Add
-                    </button>
-                  </li>
-                );
-              })}
-      </ul>{" "}
-      <br />
-      <ul>
-        {" "}
-        Character has the following checkpoints:
-        {!ownProps.state.checkpoints.length
-          ? "\ncharacter belongs to no checkpoints"
-          : ownProps.state.checkpoints.map(checkpoint => (
-              <li
-                key={checkpoint.id}
-                className="add-checkpoint-to-character-belongs-to-div">
-                <Link to={`/checkpoints/${checkpoint.id}`}>
-                  {checkpoint.checkpointName}
-                </Link>
-                <button
-                  className="remove-from"
-                  type="button"
-                  onClick={e =>
-                    ownProps.handleRemoveFromCharacter(e, checkpoint)
-                  }>
-                  Remove
-                </button>
-              </li>
-            ))}
-      </ul>{" "}
-      <br />
-      <ul>
-        Add checkpoints to this character (does not update dkp):
-        {!ownProps.props.checkpoints.filter(
-          checkpoint =>
-            !ownProps.state.checkpoints.map(cp => cp.id).includes(checkpoint.id)
-        )
-          ? " No checkpoints not on this character"
-          : ownProps.props.checkpoints
-              .filter(
-                checkpoint =>
-                  !ownProps.state.checkpoints
-                    .map(cp => cp.id)
-                    .includes(checkpoint.id)
-              )
-              .map(checkpoint => {
-                return (
-                  <li
-                    key={checkpoint.id}
-                    className="add-checkpoint-to-character-li">
-                    <Link
-                      className="add-checkpoint-to-character-Link"
-                      to={`/checkpoints/${checkpoint.id}`}>
-                      {checkpoint.checkpointName}
-                    </Link>
-                    <button
-                      type="button"
-                      className="add-to"
-                      onClick={e =>
-                        ownProps.handleAddToCharacter(e, checkpoint)
-                      }>
-                      Add
-                    </button>
-                  </li>
-                );
-              })}
+        Set raid acquired for this item:
+        {ownProps.props.raid.id
+          ? "\nItem already belongs to a raid!"
+          : ownProps.props.raids.map(raid => {
+              return (
+                <li key={raid.id} className="add-raid-to-item-li">
+                  <Link
+                    className="add-raid-to-item-Link"
+                    to={`/raids/${raid.id}`}>
+                    {raid.raidName}
+                  </Link>
+                  <button
+                    type="button"
+                    className="add-to"
+                    onClick={e => ownProps.handleAddToItem(e, raid)}>
+                    Add
+                  </button>
+                </li>
+              );
+            })}
       </ul>{" "}
       <br />
       <br />
@@ -769,7 +669,6 @@ export const initialAddItemState = {
   itemSmallImageUrl: "",
   itemStatBlockUrl: "",
   character: {},
-  raids: [],
   RaidAcquired: {},
 };
 
