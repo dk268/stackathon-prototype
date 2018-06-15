@@ -38,8 +38,13 @@ class Root extends Component {
               />
               <Route
                 exact
-                path="/charactersadd"
+                path="/add/checkpoint"
                 render={() => <CreateForm formName="addCharacter" />}
+              />
+              <Route
+                exact
+                path="/add/checkpoint"
+                render={() => <CreateForm formName="addCheckpoint" />}
               />
             </Switch>
           </div>
