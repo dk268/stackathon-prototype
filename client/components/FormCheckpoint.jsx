@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const CheckpointForm = ownProps => {
+export const FormCheckpoint = ownProps => {
   return (
     <form onSubmit={ownProps.handleSubmit}>
       Checkpoint Name: <br />

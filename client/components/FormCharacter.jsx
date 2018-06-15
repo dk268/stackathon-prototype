@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const CharacterForm = ownProps => {
+export const FormCharacter = ownProps => {
   return (
     <form onSubmit={ownProps.handleSubmit}>
       Character Name: <br />
