@@ -195,7 +195,7 @@ export const FormCharacter = ownProps => {
         {!ownProps.props.checkpoints.filter(
           checkpoint =>
             !ownProps.state.checkpoints.map(cp => cp.id).includes(checkpoint.id)
-        )
+        ).length
           ? " No checkpoints not on this character"
           : ownProps.props.checkpoints
               .filter(
