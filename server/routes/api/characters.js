@@ -78,7 +78,6 @@ const setRaidsToCharacter = async (raids, character) => {
     const raid = await Raid.findById(raids[i].id);
     await raid.addCharacter(character);
   }
-  return 1;
 };
 
 const setItemsToCharacter = async (items, character) => {
