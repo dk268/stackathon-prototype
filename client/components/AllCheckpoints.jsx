@@ -10,7 +10,7 @@ import RowCheckpoint from "./RowCheckpoint";
 
 class AllCheckpoints extends Component {
   componentDidMount = () => {
-    this.props.getCheckpoints();
+    if (this.props.status != LOADED) this.props.getCheckpoints();
   };
 
   render = () => {

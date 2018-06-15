@@ -16,7 +16,6 @@ class SingleCharacter extends Component {
   };
 
   render = () => {
-    console.log(this.props.status);
     switch (this.props.status) {
       case UNASKED:
         return <Unasked />;

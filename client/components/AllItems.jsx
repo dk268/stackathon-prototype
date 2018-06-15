@@ -9,9 +9,7 @@ import Error from "./Error";
 
 class AllItems extends Component {
   componentDidMount = () => {
-    console.log(this.props);
-    this.props.getItems();
-    console.log(this.props);
+    if (this.props.status != LOADED) this.props.getItems();
   };
 
   render = () => {
@@ -42,10 +40,13 @@ class AllItems extends Component {
                     </li>
                   </Link>
                   <li className="item-details-raid-acquired">
-                    Acquired at Raid:{" "}
-                    <Link to={`/raids/${item.RaidAcquired.id}`}>
-                      {item.RaidAcquired.raidName}
-                    </Link>
+                    Acquired at Raid:{!item.RaidAcquired ? (
+                      ` Raid acquired not set`
+                    ) : (
+                      <Link to={`/raids/${item.RaidAcquired.id}`}>
+                        {item.RaidAcquired.raidName}
+                      </Link>
+                    )}
                   </li>
                 </ul>
               </div>
