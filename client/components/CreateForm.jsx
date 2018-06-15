@@ -228,18 +228,6 @@ const mapStateToProps = state => ({
   allCheckpoints: state.allCheckpoints,
 });
 
-const stateCleanup = () => dispatch => {
-  console.log("stateCleanup called");
-  try {
-    dispatch(aCC(LOADING_CHARACTERS));
-    dispatch(aCC(LOADING_CHECKPOINTS));
-    dispatch(aCC(LOADING_ITEMS));
-    dispatch(aCC(LOADING_RAIDS));
-  } catch (e) {
-    dispatch(aCC(ERROR, e));
-  }
-};
-
 const mapDispatchToProps = {
   getRaids,
   getCharacters,
@@ -249,7 +237,6 @@ const mapDispatchToProps = {
   addItem,
   addRaid,
   addCheckpoint,
-  stateCleanup,
 };
 
 export default withRouter(

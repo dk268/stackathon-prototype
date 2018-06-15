@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const FormItem = ownProps => {
+  console.log(ownProps);
   return (
     <form onSubmit={ownProps.handleSubmit}>
       Item Name: <br />
@@ -39,9 +40,9 @@ export const FormItem = ownProps => {
       Item stat block URL:<br />
       <input
         type="text"
-        name="itemStateBlockUrl"
+        name="itemStatBlockUrl"
         onChange={ownProps.handleChange}
-        value={ownProps.state.itemStateBlockUrl}
+        value={ownProps.state.itemStatBlockUrl}
       />
       <br />
       <ul>
@@ -51,13 +52,15 @@ export const FormItem = ownProps => {
           "Item belongs to no character, yet"
         ) : (
           <li className="add-item-to-character-div">
-            <Link to={`/characters/${character.id}`}>
-              {character.characterName}
+            <Link to={`/characters/${ownProps.state.character.id}`}>
+              {ownProps.state.character.characterName}
             </Link>
             <button
               className="remove-from"
               type="button"
-              onClick={e => ownProps.handleRemoveFromItem(e, item)}>
+              onClick={e =>
+                ownProps.handleRemoveFromItem(e, ownProps.state.character)
+              }>
               Remove
             </button>
           </li>
@@ -66,7 +69,7 @@ export const FormItem = ownProps => {
       <br />
       <ul>
         Set the character for this item:
-        {!ownProps.state.character.id
+        {ownProps.state.character.id
           ? " Item already assigned!"
           : ownProps.props.characters.map(character => {
               return (
@@ -79,7 +82,7 @@ export const FormItem = ownProps => {
                   <button
                     type="button"
                     className="add-to"
-                    onClick={e => ownProps.handleAddToItem(e, raid)}>
+                    onClick={e => ownProps.handleAddToItem(e, character)}>
                     Add
                   </button>
                 </li>
