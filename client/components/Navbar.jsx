@@ -10,11 +10,13 @@ import {
   LOGGED_IN_AUTH,
   ADMIN_AUTH,
   logout,
+  ERROR_AUTH,
 } from "../reducers/auth";
 import Loading from "./Loading";
 
 const Navbar = props => {
   let { isLogin, swapType } = props;
+  console.log(props.loginStatus);
   switch (props.loginStatus) {
     case LOADING_AUTH:
       return (
@@ -41,6 +43,13 @@ const Navbar = props => {
       );
     case ADMIN_AUTH:
       return <p>You're an admin!</p>;
+    case ERROR_AUTH:
+      return (
+        <div id={`${props.loginStatus}-switch-div`}>
+          <MainLinks props={props} />
+          <LoginPane props={props} isLogin={isLogin} swapType={swapType} />
+        </div>
+      );
     default:
       return <MainLinks props={props} />;
   }

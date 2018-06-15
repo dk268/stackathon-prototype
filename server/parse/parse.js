@@ -9,7 +9,7 @@ const parseFile = async () => {
   fs.readFile(
     process.env.SHELL === "C:\\Program Files\\Git\\usr\\bin\\bash.exe"
       ? "D:\\Users\\Public\\Daybreak Game Company\\Installed Games\\EverQuest\\Logs\\eqlog_Goliath_coirnav.txt"
-      : "./eqlog_Goliath_coirnav.txt",
+      : "./server/parse/eqlog_Goliath_coirnav.txt",
     "utf8",
     (err, data) => {
       try {

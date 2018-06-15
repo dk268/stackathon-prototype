@@ -57,7 +57,7 @@ const auth = (state = initialState, action) => {
         error: {},
       };
     case ERROR_AUTH:
-      return { ...state, status: ERROR, error: action.payload };
+      return { ...state, status: ERROR_AUTH, error: action.payload };
     default:
       return state;
   }

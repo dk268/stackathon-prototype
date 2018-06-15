@@ -34,7 +34,7 @@ class AllCheckpoints extends Component {
                     </Link>
                   </li>
                   <li className="checkpoint-details-checkpoint-dkp">
-                    Checkpoints: <RowCheckpoint checkpoint={checkpoint} />
+                    <RowCheckpoint checkpoint={checkpoint} />
                   </li>
                 </ul>
               </div>
