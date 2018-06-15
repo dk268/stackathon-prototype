@@ -12,6 +12,7 @@ import SingleRaid from "./SingleRaid";
 import SingleCheckpoint from "./SingleCheckpoint";
 import CreateForm from "./CreateForm";
 import EditForm from "./EditForm";
+import EditLinks from "./EditLinks";
 
 class Root extends Component {
   render() {
@@ -57,24 +58,25 @@ class Root extends Component {
                 path="/add/raid"
                 render={() => <CreateForm formName="addRaid" />}
               />
+              <Route exact path="/edit" component={EditLinks} />
               <Route
                 exact
-                path="/characters/edit/character/:charId"
+                path="/characters/edit/:charId"
                 render={() => <EditForm formName="editCharacter" />}
               />
               <Route
                 exact
-                path="/checkpoints/edit/checkpoint/:checkpointId"
+                path="/checkpoints/edit/:checkpointId"
                 render={() => <EditForm formName="editCheckpoint" />}
               />
               <Route
                 exact
-                path="/items/edit/item/:itemId"
+                path="/items/edit/:itemId"
                 render={() => <EditForm formName="editItem" />}
               />
               <Route
                 exact
-                path="/raids/edit/raid/:raidId"
+                path="/raids/edit/:raidId"
                 render={() => <EditForm formName="editRaid" />}
               />
             </Switch>

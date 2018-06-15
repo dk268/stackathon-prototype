@@ -52,32 +52,32 @@ class EditForm extends Component {
     }
   }
 
-  componentDidMount = () => {
-    this.setState({
-      ...initialAddCharacterState,
-      ...initialAddCheckpointState,
-      ...initialAddItemState,
-      ...initialAddRaidState,
-    });
+  componentDidMount = async () => {
     switch (this.props.formName) {
       case `editCharacter`: {
-        this.props.getSingleCharacter(this.props.params.match.charId);
-        this.setState(this.props.singleCharacter.collection);
+        this.setState(
+          await this.props.getSingleCharacter(this.props.match.params.charId)
+        );
         break;
       }
       case `editCheckpoint`: {
-        this.props.getSingleCheckpoint(this.props.params.match.checkpointId);
-        this.setState(this.props.singleCheckpoint.collection);
+        this.setState(
+          await this.props.getSingleCheckpoint(
+            this.props.match.params.checkpointId
+          )
+        );
         break;
       }
       case `editItem`: {
-        this.props.getSingleItem(this.props.params.match.itemId);
-        this.setState(this.props.singleItem.collection);
+        this.setState(
+          await this.props.getSingleItem(this.props.match.params.itemId)
+        );
         break;
       }
       case `editRaid`: {
-        this.props.getSingleRaid(this.props.params.match.raidId);
-        this.setState(this.props.singleRaid.collection);
+        this.setState(
+          await this.props.getSingleRaid(this.props.match.params.raidId)
+        );
         break;
       }
       default:
@@ -260,12 +260,16 @@ class EditForm extends Component {
 const mapStateToProps = state => ({
   raids: state.allRaids.collection,
   allRaids: state.allRaids,
+  singleRaid: state.singleRaid,
   characters: state.allCharacters.collection,
   allCharacters: state.allCharacters,
+  singleCharacter: state.singleCharacter,
   items: state.allItems.collection,
   allItems: state.allItems,
+  singleItem: state.singleItem,
   checkpoints: state.allCheckpoints.collection,
   allCheckpoints: state.allCheckpoints,
+  singleCheckpoint: state.singleCheckpoint,
 });
 
 const mapDispatchToProps = {
@@ -277,7 +281,12 @@ const mapDispatchToProps = {
   getSingleCheckpoint,
   getSingleItem,
   getSingleRaid,
+  editCharacter,
+  editCheckpoint,
+  editItem,
+  editRaid,
 };
+
 export default withRouter(
   connect(
     mapStateToProps,

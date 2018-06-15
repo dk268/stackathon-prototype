@@ -14,6 +14,7 @@ export const getSingleCharacter = id => async dispatch => {
     dispatch(aCC(LOADING_CHARACTER));
     const singleCharacter = await Axios.get(`/api/characters/${id}`);
     dispatch(aCC(LOADED_CHARACTER, singleCharacter.data));
+    return singleCharacter.data;
   } catch (e) {
     dispatch(aCC(ERROR_CHARACTER, e));
   }

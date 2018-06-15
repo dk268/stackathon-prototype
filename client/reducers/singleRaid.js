@@ -14,6 +14,7 @@ export const getSingleRaid = id => async dispatch => {
     dispatch(aCC(LOADING_RAID));
     const singleRaid = await Axios.get(`/api/raids/${id}`);
     dispatch(aCC(LOADED_RAID, singleRaid.data));
+    return singleRaid.data;
   } catch (e) {
     dispatch(aCC(ERROR_RAID, e));
   }
