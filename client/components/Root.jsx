@@ -11,6 +11,7 @@ import SingleItem from "./SingleItem";
 import SingleRaid from "./SingleRaid";
 import SingleCheckpoint from "./SingleCheckpoint";
 import CreateForm from "./CreateForm";
+import EditForm from "./EditForm";
 
 class Root extends Component {
   render() {
@@ -56,6 +57,26 @@ class Root extends Component {
                 path="/add/raid"
                 render={() => <CreateForm formName="addRaid" />}
               />
+              <Route
+                exact
+                path="/characters/edit/character/:charId"
+                render={() => <EditForm formName="editCharacter" />}
+              />
+              <Route
+                exact
+                path="/checkpoints/edit/checkpoint/:checkpointId"
+                render={() => <EditForm formName="editCheckpoint" />}
+              />
+              <Route
+                exact
+                path="/items/edit/item/:itemId"
+                render={() => <EditForm formName="editItem" />}
+              />
+              <Route
+                exact
+                path="/raids/edit/raid/:raidId"
+                render={() => <EditForm formName="editRaid" />}
+              />
             </Switch>
           </div>
         </Router>
@@ -63,14 +84,6 @@ class Root extends Component {
     );
   }
 }
-
-// Route exact path="/characters/edit/:charId"
-
-// Route exact path="/checkpoints/edit/:checkpointId"
-
-// Route exact path="/items/edit/:itemId"
-
-// Route exact path="/raids/edit/:raidId"
 
 export default connect(
   null,

@@ -31,7 +31,7 @@ router.post("/", async (req, res, next) => {
     const newItem = await Item.create(req.body);
     if (req.body.character.id)
       await setCharacterToItem(req.body.character, newItem);
-    if (req.body.RaidAcquired.id)
+    if (req.body.RaidAcquired)
       await setRaidToItem(req.body.RaidAcquired, newItem);
     res.json(newItem);
   } catch (e) {
@@ -48,6 +48,10 @@ router.put("/:itemId", async (req, res, next) => {
       returning: true,
       plain: true,
     });
+    if (req.body.character.id)
+      await setCharacterToItem(req.body.character, updatedItem);
+    if (req.body.RaidAcquired)
+      await setRaidToItem(req.body.RaidAcquired, updatedItem);
     res.json(updatedItem);
   } catch (e) {
     next(e);
@@ -67,8 +71,8 @@ router.delete("/:itemId", async (req, res, next) => {
 module.exports = router;
 
 const setCharacterToItem = async (character, item) => {
-  const char = await Character.findById(character.id);
-  await item.setCharacter(char);
+  const foundChar = await Character.findById(character.id);
+  await item.setCharacter(foundChar);
 };
 
 const setRaidToItem = async (raid, item) => {

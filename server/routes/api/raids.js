@@ -46,6 +46,10 @@ router.put("/:raidId", async (req, res, next) => {
       returning: true,
       plain: true,
     });
+    if (req.body.checkpoints.length)
+      await setCheckpointsToRaid(req.body.checkpoints, updatedRaid);
+    if (req.body.items.length)
+      await setItemsToRaid(req.body.items, updatedRaid);
     res.json(updatedRaid);
   } catch (e) {
     next(e);

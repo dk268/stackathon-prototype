@@ -31,19 +31,19 @@ class EditForm extends Component {
     super(props);
     this.state = {};
     switch (this.props.formName) {
-      case `addCharacter`: {
+      case `editCharacter`: {
         this.state = initialAddCharacterState;
         break;
       }
-      case `addCheckpoint`: {
+      case `editCheckpoint`: {
         this.state = initialAddCheckpointState;
         break;
       }
-      case `addItem`: {
+      case `editItem`: {
         this.state = initialAddItemState;
         break;
       }
-      case `addRaid`: {
+      case `editRaid`: {
         this.state = initialAddRaidState;
         break;
       }

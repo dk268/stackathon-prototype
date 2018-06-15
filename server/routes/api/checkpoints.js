@@ -23,10 +23,8 @@ router.post("/", async (req, res, next) => {
     const newCheckpoint = await Checkpoint.create(req.body);
     if (req.body.raid && req.body.raid.id)
       await setCheckpointToRaid(req.body.raid, newCheckpoint);
-    console.log("Set raid successful");
     if (req.body.characters.length)
       await setCharactersToCheckpoint(req.body.checkpoints, newCheckpoint);
-    console.log("set checkpoints successful");
     res.json(newCheckpoint);
   } catch (e) {
     next(e);
@@ -42,6 +40,10 @@ router.put("/:checkpointId", async (req, res, next) => {
       returning: true,
       plain: true,
     });
+    if (req.body.raid && req.body.raid.id)
+      await setCheckpointToRaid(req.body.raid, updatedCheckpoint);
+    if (req.body.characters.length)
+      await setCharactersToCheckpoint(req.body.checkpoints, updatedCheckpoint);
     res.json(updatedCheckpoint);
   } catch (e) {
     next(e);
