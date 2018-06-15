@@ -33,8 +33,6 @@ class Form extends Component {
     }
   }
   handleChange = evt => {
-    console.dir(evt.target);
-    console.log(evt.target.value);
     this.setState({
       [evt.target.name]: evt.target.value,
     });
@@ -100,7 +98,6 @@ class Form extends Component {
   };
 }
 const CharacterForm = ownProps => {
-  // console.log(ownProps);
   return (
     <form onSubmit={ownProps.handleSubmit}>
       Character Name: <br />
@@ -329,7 +326,6 @@ const CharacterForm = ownProps => {
       <br />
       <br />
       <input type="submit" value="Submit" />
-      <input type="reset" />
     </form>
   );
 };
