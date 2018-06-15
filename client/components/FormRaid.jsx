@@ -101,7 +101,7 @@ export const FormRaid = ownProps => {
             !checkpoint.raid &&
             !checkpoint.raid.id
         ).length
-          ? " No checkpoints not on this raid"
+          ? " No unclaimed checkpoints"
           : ownProps.props.checkpoints
               .filter(
                 checkpoint =>
