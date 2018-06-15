@@ -41,8 +41,6 @@ class Form extends Component {
   };
 
   handleAddToCharacter = (e, payload) => {
-    console.log(payload);
-    console.dir(e.target);
     if (payload.raidName)
       this.setState({
         raids: [...this.state.raids, payload],
@@ -78,7 +76,7 @@ class Form extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     const newChar = await this.props.addCharacter(this.state);
-    this.props.history.push(`/characters/${newChar.id}`);
+    this.props.history.push(`/characters/${newChar.data.id}`);
   };
 
   render = () => {
