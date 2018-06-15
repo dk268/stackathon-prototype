@@ -25,6 +25,7 @@ import {
   initialAddRaidState,
 } from "./aux/initialStates";
 import { FormItem } from "./FormItem";
+import { FormRaid } from "./FormRaid";
 
 class Form extends Component {
   constructor(props) {
@@ -211,6 +212,17 @@ class Form extends Component {
               handleChange={this.handleChange}
               handleAddToItem={this.handleAddToItem}
               handleRemoveFromItem={this.handleRemoveFromItem}
+              handleSubmit={this.handleSubmitItem}
+            />
+          );
+        case "addRaid":
+          return (
+            <FormRaid
+              props={this.props}
+              state={this.state}
+              handleChange={this.handleChange}
+              handleAddToRaid={this.handleAddToRaid}
+              handleRemoveFromRaid={this.handleRemoveFromRaid}
               handleSubmit={this.handleSubmitItem}
             />
           );
