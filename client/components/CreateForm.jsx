@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getRaids, addRaid, LOADING_RAIDS } from "../reducers/allRaids";
+import { getRaids, addRaid } from "../reducers/allRaids";
 import { getCharacters, addCharacter } from "../reducers/allCharacters";
 import { getCheckpoints, addCheckpoint } from "../reducers/allCheckpoints";
 import { getItems, addItem } from "../reducers/allItems";
