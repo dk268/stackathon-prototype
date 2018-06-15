@@ -47,7 +47,10 @@ export const FormRaid = ownProps => {
           : ownProps.props.items
               .filter(
                 item =>
-                  !ownProps.state.items.map(item => item.id).includes(item.id)
+                  !ownProps.state.items
+                    .map(item => item.id)
+                    .includes(item.id) &&
+                  !(item.RaidAcquired && item.RaidAcquired.id)
               )
               .map(item => {
                 return (
@@ -92,7 +95,11 @@ export const FormRaid = ownProps => {
         Add checkpoints to this raid (does not update dkp):
         {!ownProps.props.checkpoints.filter(
           checkpoint =>
-            !ownProps.state.checkpoints.map(cp => cp.id).includes(checkpoint.id)
+            !ownProps.state.checkpoints
+              .map(cp => cp.id)
+              .includes(checkpoint.id) &&
+            !checkpoint.raid &&
+            !checkpoint.raid.id
         ).length
           ? " No checkpoints not on this raid"
           : ownProps.props.checkpoints
