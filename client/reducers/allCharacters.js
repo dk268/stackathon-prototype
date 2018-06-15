@@ -12,7 +12,7 @@ export const addCharacter = characterData => async dispatch => {
     dispatch(aCC(LOADING_CHARACTERS));
     const newCharacter = await Axios.post(`/api/characters`, characterData);
     dispatch(aCC(ADD_CHARACTER, newCharacter.data));
-    return newCharacter;
+    return newCharacter.data;
   } catch (e) {
     dispatch(aCC(ERROR_CHARACTERS, e));
   }

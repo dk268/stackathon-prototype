@@ -21,6 +21,12 @@ router.get("/:checkpointId", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const newCheckpoint = await Checkpoint.create(req.body);
+    if (req.body.raid && req.body.raid.id)
+      await setCheckpointToRaid(req.body.raid, newCheckpoint);
+    console.log("Set raid successful");
+    if (req.body.characters.length)
+      await setCharactersToCheckpoint(req.body.checkpoints, newCheckpoint);
+    console.log("set checkpoints successful");
     res.json(newCheckpoint);
   } catch (e) {
     next(e);
@@ -53,3 +59,6 @@ router.delete("/:checkpointId", async (req, res, next) => {
 });
 
 module.exports = router;
+
+const setCheckpointToRaid = async (raid, checkpoint) => {};
+const setCharactersToCheckpoint = async (characters, checkpoint) => {};

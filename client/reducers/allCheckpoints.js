@@ -22,6 +22,7 @@ export const addCheckpoint = checkpointData => async dispatch => {
     dispatch(aCC(LOADING_CHECKPOINTS));
     const newCheckpoint = await Axios.post(`/api/checkpoints`, checkpointData);
     dispatch(aCC(ADD_CHECKPOINT, newCheckpoint.data));
+    return newCheckpoint.data;
   } catch (e) {
     dispatch(aCC(ERROR_CHECKPOINTS, e));
   }
