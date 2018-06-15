@@ -119,6 +119,8 @@ export const FormRaid = ownProps => {
                 );
               })}
       </ul>{" "}
+      Note: associated characters will be derived from the checkpoints
+      <input type="submit" value="Submit" />
     </form>
   );
 };
