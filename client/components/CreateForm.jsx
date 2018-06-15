@@ -59,8 +59,6 @@ class Form extends Component {
       ...initialAddItemState,
       ...initialAddRaidState,
     });
-
-    console.log("Component did mounting!");
     if (this.props.allCharacters.status != LOADED) this.props.getCharacters();
     if (this.props.allCheckpoints.status != LOADED) this.props.getCheckpoints();
     if (this.props.allItems.status != LOADED) this.props.getItems();
@@ -154,8 +152,30 @@ class Form extends Component {
       this.setState({ raid: {} });
     }
   };
-  handleAddToRaid = (e, payload) => {};
-  handleRemoveFromRaid = (e, payload) => {};
+  handleAddToRaid = (e, payload) => {
+    if (payload.itemName) {
+      this.setState({
+        items: [...this.state.items, payload],
+      });
+    }
+    if (payload.checkpointName) {
+      this.setState({
+        checkpoints: [...this.state.checkpoints, payload],
+      });
+    }
+  };
+  handleRemoveFromRaid = (e, payload) => {
+    if (payload.itemName)
+      this.setState({
+        items: this.state.items.filter(item => item.id !== payload.id),
+      });
+    if (payload.checkpointName)
+      this.setState({
+        checkpoints: this.state.checkpoints.filter(
+          checkpoint => checkpoint.id !== payload.id
+        ),
+      });
+  };
 
   handleSubmitCharacter = async e => {
     e.preventDefault();
@@ -174,7 +194,6 @@ class Form extends Component {
   };
 
   render = () => {
-    console.log("hit this point...", this.props);
     if (
       this.props.allItems.status === LOADED &&
       this.props.allCharacters.status === LOADED &&
