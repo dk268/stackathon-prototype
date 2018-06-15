@@ -95,7 +95,7 @@ export const FormCharacter = ownProps => {
         {!ownProps.props.raids.filter(
           raid => !ownProps.state.raids.map(raid => raid.id).includes(raid.id)
         ).length
-          ? "\nNo raids to which this character does not belong!"
+          ? " No raids to which this character does not belong!"
           : ownProps.props.raids
               .filter(
                 raid =>

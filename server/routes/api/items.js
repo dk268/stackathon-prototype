@@ -31,7 +31,8 @@ router.post("/", async (req, res, next) => {
     const newItem = await Item.create(req.body);
     if (req.body.character.id)
       await setCharacterToItem(req.body.character, newItem);
-    if (req.body.raid.id) await setRaidToItem(req.body.raid, newItem);
+    if (req.body.RaidAcquired.id)
+      await setRaidToItem(req.body.RaidAcquired, newItem);
     res.json(newItem);
   } catch (e) {
     next(e);
@@ -71,6 +72,6 @@ const setCharacterToItem = async (character, item) => {
 };
 
 const setRaidToItem = async (raid, item) => {
-  const foundRaid = Raid.findById(raid.id);
+  const foundRaid = await Raid.findById(raid.id);
   await item.setRaidAcquired(foundRaid);
 };

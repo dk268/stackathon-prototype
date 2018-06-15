@@ -186,7 +186,7 @@ class Form extends Component {
   handleSubmitCheckpoint = async e => {
     e.preventDefault();
     const newCheckpoint = await this.props.addCheckpoint(this.state);
-    this.props.history.push(`/checkpoints/${newCheckpoint.data.id}`);
+    this.props.history.push(`/checkpoints/${newCheckpoint.id}`);
   };
   handleSubmitItem = async e => {
     e.preventDefault();

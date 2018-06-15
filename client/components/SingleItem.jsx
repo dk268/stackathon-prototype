@@ -27,10 +27,13 @@ class SingleItem extends Component {
             <h2>{this.props.singleItem.itemName}</h2>
             <h6>DKP cost: {this.props.singleItem.itemDKPCost}</h6>
             <h6>
-              Buyer:{" "}
-              <Link to={`/characters/${this.props.singleItem.character.id}`}>
-                {this.props.singleItem.character.characterName}
-              </Link>
+              Buyer:{!this.props.singleItem.character ? (
+                ` Item not yet assigned a character`
+              ) : (
+                <Link to={`/characters/${this.props.singleItem.character.id}`}>
+                  {this.props.singleItem.character.characterName}
+                </Link>
+              )}
             </h6>
             <h6>
               Raid Found:{!this.props.singleItem.RaidAcquired ? (

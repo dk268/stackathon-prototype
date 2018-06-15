@@ -34,11 +34,15 @@ class AllItems extends Component {
                   <li className="item-details-item-dkp">
                     DKP cost: {item.itemDKPCost}
                   </li>
-                  <Link to={`/characters/${item.character.id}`}>
-                    <li className="item-details-buyer-name">
-                      Buyer Name: {item.character.characterName}
-                    </li>
-                  </Link>
+                  {!item.character ? (
+                    ` Item not assigned a buyer`
+                  ) : (
+                    <Link to={`/characters/${item.character.id}`}>
+                      <li className="item-details-buyer-name">
+                        Buyer Name: {item.character.characterName}
+                      </li>
+                    </Link>
+                  )}
                   <li className="item-details-raid-acquired">
                     Acquired at Raid:{!item.RaidAcquired ? (
                       ` Raid acquired not set`

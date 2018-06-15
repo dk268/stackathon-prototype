@@ -8,7 +8,7 @@ const {
 const express = require("express");
 const router = express.Router();
 
-// /api/raids/
+// /api/checkpoints/
 
 router.get("/", async (req, res, next) => {
   const allRaids = await Raid.findAll({
@@ -28,6 +28,9 @@ router.get("/:raidId", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const newRaid = await Raid.create(req.body);
+    if (req.body.checkpoints.length)
+      await setCheckpointsToRaid(req.body.checkpoints, newRaid);
+    if (req.body.items.length) await setItemsToRaid(req.body.items, newRaid);
     res.json(newRaid);
   } catch (e) {
     next(e);
@@ -60,3 +63,17 @@ router.delete("/:raidId", async (req, res, next) => {
 });
 
 module.exports = router;
+
+const setCheckpointsToRaid = async (checkpoints, raid) => {
+  for (let i = 0; i < checkpoints.length; i++) {
+    const foundCheckpoint = await Checkpoint.findById(checkpoints[i].id);
+    await foundCheckpoint.setRaid(raid);
+  }
+};
+
+const setItemsToRaid = async (items, raid) => {
+  for (let i = 0; i < items.length; i++) {
+    const item = await Item.findById(items[i].id);
+    await item.setRaid(raid);
+  }
+};

@@ -30,9 +30,13 @@ class SingleCheckpoint extends Component {
             <h6>DKP: {this.props.singleCheckpoint.checkpointDKP}</h6>
             <h3>
               Raid:{" "}
-              <Link to={`/raids/${this.props.singleCheckpoint.raid.id}`}>
-                {this.props.singleCheckpoint.raid.raidName}
-              </Link>{" "}
+              {!this.props.singleCheckpoint.raid ? (
+                `Checkpoint not yet associated with a raid`
+              ) : (
+                <Link to={`/raids/${this.props.singleCheckpoint.raid.id}`}>
+                  {this.props.singleCheckpoint.raid.raidName}
+                </Link>
+              )}
             </h3>
             <h4>Characters in attendance:</h4>
             <ul id="single-checkpoint-characters-ul">

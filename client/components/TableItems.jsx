@@ -17,7 +17,7 @@ class TableItems extends Component {
   TableItemsCharacter = props => {
     {
       const filteredItems = props.allItems.filter(
-        item => item.character.id === props.character.id
+        item => item.character && item.character.id === props.character.id
       );
       return (
         <div id="table-raids-div">

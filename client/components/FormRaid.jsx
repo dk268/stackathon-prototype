@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const FormRaid = ownProps => {
+  {
+    console.log(ownProps);
+  }
   return (
     <form onSubmit={ownProps.handleSubmit}>
       Raid Name: <br />
@@ -92,22 +95,16 @@ export const FormRaid = ownProps => {
             ))}
       </ul>{" "}
       <ul>
-        Add checkpoints to this raid (does not update dkp):
-        {!ownProps.props.checkpoints.filter(
-          checkpoint =>
-            !ownProps.state.checkpoints
-              .map(cp => cp.id)
-              .includes(checkpoint.id) &&
-            !checkpoint.raid &&
-            !checkpoint.raid.id
-        ).length
+        Add checkpoints to this raid:
+        {!ownProps.props.checkpoints.filter(checkpoint => !checkpoint.raid)
+          .length
           ? " No unclaimed checkpoints"
           : ownProps.props.checkpoints
               .filter(
                 checkpoint =>
                   !ownProps.state.checkpoints
                     .map(cp => cp.id)
-                    .includes(checkpoint.id)
+                    .includes(checkpoint.id) && !checkpoint.raid
               )
               .map(checkpoint => {
                 return (
