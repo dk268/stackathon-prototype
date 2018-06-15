@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { getRaids, addRaid } from "../reducers/allRaids";
-import { getCharacters, addCharacter } from "../reducers/allCharacters";
-import { getCheckpoints, addCheckpoint } from "../reducers/allCheckpoints";
-import { getItems, addItem } from "../reducers/allItems";
+import { getRaids } from "../reducers/allRaids";
+import { getCharacters } from "../reducers/allCharacters";
+import { getCheckpoints } from "../reducers/allCheckpoints";
+import { getItems } from "../reducers/allItems";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { LOADED, aCC } from "../reducers";
@@ -18,10 +18,13 @@ import {
 } from "./aux/initialStates";
 import { FormItem } from "./FormItem";
 import { FormRaid } from "./FormRaid";
-import singleCharacter from "../reducers/singleCharacter";
-import { getSingleCheckpoint } from "../reducers/singleCheckpoint";
-import { getSingleItem } from "../reducers/singleItem";
-import { getSingleRaid } from "../reducers/singleRaid";
+import {
+  getSingleCheckpoint,
+  editCheckpoint,
+} from "../reducers/singleCheckpoint";
+import { getSingleItem, editItem } from "../reducers/singleItem";
+import { getSingleRaid, editRaid } from "../reducers/singleRaid";
+import { getSingleCharacter, editCharacter } from "../reducers/singleCharacter";
 
 class EditForm extends Component {
   constructor(props) {
@@ -178,27 +181,28 @@ class EditForm extends Component {
         ),
       });
   };
+
   handleSubmitCharacter = async e => {
     e.preventDefault();
-    const editedChar = await this.props.addCharacter(this.state);
+    const editedChar = await this.props.editCharacter(this.state);
     this.props.getSingleCharacter(this.props.match.params.charId);
     this.props.history.push(`/characters/${editedChar.id}`);
   };
   handleSubmitCheckpoint = async e => {
     e.preventDefault();
-    const editedCheckpoint = await this.props.addCheckpoint(this.state);
+    const editedCheckpoint = await this.props.editCheckpoint(this.state);
     this.props.getSingleCheckpoint(this.props.match.params.checkpointId);
     this.props.history.push(`/checkpoints/${editedCheckpoint.id}`);
   };
   handleSubmitItem = async e => {
     e.preventDefault();
-    const editedItem = await this.props.addItem(this.state);
+    const editedItem = await this.props.editItem(this.state);
     this.props.getSingleItem(this.props.match.params.itemId);
     this.props.history.push(`/items/${editedItem.id}`);
   };
   handleSubmitRaid = async e => {
     e.preventDefault();
-    const editedRaid = await this.props.addRaid(this.state);
+    const editedRaid = await this.props.editRaid(this.state);
     this.props.getSingleRaid(this.props.match.params.raidId);
     this.props.history.push(`/raids/${editedRaid.id}`);
   };

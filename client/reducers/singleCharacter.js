@@ -27,6 +27,7 @@ export const editCharacter = async characterData => {
       { characterData, where: { id: characterData.id } }
     );
     dispatch(aCC(EDIT_CHARACTER, singleCharacter.data));
+    return singleCharacter.data;
   } catch (e) {
     dispatch(aCC(ERROR_CHARACTER, e));
   }

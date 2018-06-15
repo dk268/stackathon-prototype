@@ -27,6 +27,7 @@ export const editRaid = async raidData => {
       where: { id: raidData.id },
     });
     dispatch(aCC(EDIT_RAID, singleRaid.data));
+    return singleRaid.data;
   } catch (e) {
     dispatch(aCC(ERROR_RAID, e));
   }

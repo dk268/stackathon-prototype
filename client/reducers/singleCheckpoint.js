@@ -27,6 +27,7 @@ export const editCheckpoint = async checkpointData => {
       { checkpointData, where: { id: checkpointData.id } }
     );
     dispatch(aCC(EDIT_CHECKPOINT, singleCheckpoint.data));
+    return singleCheckpoint.data;
   } catch (e) {
     dispatch(aCC(ERROR_CHECKPOINT, e));
   }

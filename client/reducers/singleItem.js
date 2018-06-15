@@ -27,6 +27,7 @@ export const editItem = async itemData => {
       where: { id: itemData.id },
     });
     dispatch(aCC(EDIT_ITEM, singleItem.data));
+    return singleItem.data;
   } catch (e) {
     dispatch(aCC(ERROR_ITEM, e));
   }
