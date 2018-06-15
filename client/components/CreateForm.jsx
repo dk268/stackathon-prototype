@@ -52,26 +52,6 @@ class Form extends Component {
     }
   }
   componentDidMount = () => {
-    // switch (this.props.formName) {
-    //   case `addCharacter`: {
-    //     this.setState({ initialAddCharacterState });
-    //     break;
-    //   }
-    //   case `addCheckpoint`: {
-    //     this.setState({ initialAddCheckpointState });
-    //     break;
-    //   }
-    //   case `addItem`: {
-    //     this.setState({ initialAddItemState });
-    //     break;
-    //   }
-    //   case `addRaid`: {
-    //     this.setState({ initialAddRaidState });
-    //     break;
-    //   }
-    //   default:
-    //     this.setState(this.state);
-    // }
     this.setState({
       ...initialAddCharacterState,
       ...initialAddCheckpointState,
