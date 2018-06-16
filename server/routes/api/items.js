@@ -48,7 +48,7 @@ router.put("/:itemId", async (req, res, next) => {
       returning: true,
       plain: true,
     });
-    if (req.body.character.id)
+    if (req.body.character)
       await setCharacterToItem(req.body.character, updatedItem);
     if (req.body.RaidAcquired)
       await setRaidToItem(req.body.RaidAcquired, updatedItem);
