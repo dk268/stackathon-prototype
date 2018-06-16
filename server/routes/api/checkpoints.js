@@ -41,10 +41,8 @@ router.put("/:checkpointId", async (req, res, next) => {
       returning: true,
       plain: true,
     });
-    if (req.body.raid && req.body.raid.id)
-      await setCheckpointToRaid(req.body.raid, updatedCheckpoint);
-    if (req.body.characters.length)
-      await setCharactersToCheckpoint(req.body.characters, updatedCheckpoint);
+    await setCheckpointToRaid(req.body.raid, updatedCheckpoint);
+    await setCharactersToCheckpoint(req.body.characters, updatedCheckpoint);
     res.json(updatedCheckpoint);
   } catch (e) {
     next(e);
@@ -64,8 +62,10 @@ router.delete("/:checkpointId", async (req, res, next) => {
 module.exports = router;
 
 const setCheckpointToRaid = async (raid, checkpoint) => {
-  const foundRaid = await Raid.findById(raid.id);
-  await checkpoint.setRaid(foundRaid);
+  if (raid && raid.id) {
+    const foundRaid = await Raid.findById(raid.id);
+    await checkpoint.setRaid(foundRaid);
+  } else await checkpoint.setRaid(null);
 };
 const setCharactersToCheckpoint = async (characters, checkpoint) => {
   const foundCharacters = await Character.findAll({
