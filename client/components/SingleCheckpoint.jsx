@@ -48,6 +48,18 @@ class SingleCheckpoint extends Component {
                 </li>
               ))}
             </ul>
+            {isAdmin ? (
+              <Link
+                to={`/checkpoints/edit/${
+                  this.props.match.params.checkpointId
+                }`}>
+                <button type="button" id="checkpoint-edit-admin-button-link">
+                  EDIT ME!
+                </button>
+              </Link>
+            ) : (
+              ""
+            )}
           </div>
         );
       default:

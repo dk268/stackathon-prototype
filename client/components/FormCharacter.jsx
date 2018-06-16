@@ -22,17 +22,17 @@ export const FormCharacter = ownProps => {
       />
       <br />
       Main or Alt?{" "}
-      <fieldset id="is-alt">
+      <fieldset id="isAlt">
         <input
           type="radio"
-          value={true}
-          name="is-alt"
+          value={false}
+          name="isAlt"
           onChange={ownProps.handleChange}
         />MAIN
         <input
           type="radio"
-          value={false}
-          name="is-alt"
+          value={true}
+          name="isAlt"
           onChange={ownProps.handleChange}
         />ALT
       </fieldset>
@@ -40,14 +40,14 @@ export const FormCharacter = ownProps => {
       <fieldset id="is-alt-unapproved">
         <input
           type="radio"
-          value={ownProps.state.isAltUnapproved}
-          name="is-alt-unapproved"
+          value={false}
+          name="isAltUnapproved"
           onChange={ownProps.handleChange}
         />MAIN OR APPROVED ALT
         <input
           type="radio"
           value={true}
-          name="is-alt-unapproved"
+          name="isAltUnapproved"
           onChange={ownProps.handleChange}
         />UNAPPROVED ALT
       </fieldset>

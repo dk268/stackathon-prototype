@@ -9,6 +9,7 @@ import Loading from "./Loading";
 import Error from "./Error";
 import TableRaids from "./TableRaids";
 import TableItems from "./TableItems";
+import { isAdmin } from "..";
 
 class SingleCharacter extends Component {
   componentDidMount = () => {
@@ -27,11 +28,21 @@ class SingleCharacter extends Component {
         return (
           <div id="single-character-div">
             <h2>{this.props.singleCharacter.characterName}</h2>
+            {this.props.singleCharacter.isAlt ? <small>alt</small> : ""}
             <h6>DKP: {this.props.singleCharacter.dkp}</h6>
             <h3>Raids</h3>
             <TableRaids character={this.props.singleCharacter} />
             <h3>Items</h3>
             <TableItems character={this.props.singleCharacter} />
+            {isAdmin ? (
+              <Link to={`/characters/edit/${this.props.match.params.charId}`}>
+                <button type="button" id="character-edit-admin-button-link">
+                  EDIT ME!
+                </button>
+              </Link>
+            ) : (
+              ""
+            )}
           </div>
         );
       default:
