@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class DeleteField extends Component {
+export default class DeleteField extends Component {
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value,

@@ -25,6 +25,7 @@ import {
 import { getSingleItem, editItem } from "../reducers/singleItem";
 import { getSingleRaid, editRaid } from "../reducers/singleRaid";
 import { getSingleCharacter, editCharacter } from "../reducers/singleCharacter";
+import DeleteField from "./aux/Delete";
 
 class EditForm extends Component {
   constructor(props) {
@@ -226,7 +227,7 @@ class EditForm extends Component {
     this.props.getSingleRaid(this.props.match.params.raidId);
     this.props.history.push(`/raids/${editedRaid.id}`);
   };
-  render = () => {
+  pickForm = () => {
     switch (this.props.formName) {
       case "editCharacter":
         return (
@@ -275,6 +276,17 @@ class EditForm extends Component {
       default:
         return <Error />;
     }
+  };
+  render = () => {
+    return (
+      <div id="form-return-div">
+        {this.pickForm()}
+        <DeleteField
+          formName={this.props.formName}
+          handleDelete={this.handleDelete}
+        />
+      </div>
+    );
   };
 }
 const mapStateToProps = state => ({

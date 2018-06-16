@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import DeleteField from "./aux/Delete";
 
 export const FormCheckpoint = ownProps => {
   return (
