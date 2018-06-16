@@ -78,6 +78,6 @@ const setCheckpointsToRaid = async (checkpoints, raid) => {
 const setItemsToRaid = async (items, raid) => {
   for (let i = 0; i < items.length; i++) {
     const item = await Item.findById(items[i].id);
-    await item.setRaidAcquired(raid);
+    await item.setRaid(raid);
   }
 };

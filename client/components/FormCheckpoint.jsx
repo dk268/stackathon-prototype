@@ -23,27 +23,30 @@ export const FormCheckpoint = ownProps => {
       <br />
       <br />
       <ul>
-        {" "}
-        Checkpoint belongs to this raid:
-        <li className="add-checkpoint-to-raid-belongs-to-div">
-          <Link to={`/raids/${ownProps.state.raid.id}`}>
-            {ownProps.state.raid.raidName}
-          </Link>
-          <button
-            className="remove-from"
-            type="button"
-            onClick={e =>
-              ownProps.handleRemoveFromCheckpoint(e, ownProps.state.raid)
-            }>
-            Remove
-          </button>
-        </li>
+        {!ownProps.state.raid || !ownProps.state.raid.id ? (
+          ` checkpoint not yet assigned a raid`
+        ) : (
+          <li className="add-checkpoint-to-raid-belongs-to-div">
+            Checkpoint belongs to this raid:
+            <Link to={`/raids/${ownProps.state.raid.id}`}>
+              {ownProps.state.raid.raidName}
+            </Link>
+            <button
+              className="remove-from"
+              type="button"
+              onClick={e =>
+                ownProps.handleRemoveFromCheckpoint(e, ownProps.state.raid)
+              }>
+              Remove
+            </button>
+          </li>
+        )}
       </ul>{" "}
       <br />
       <ul>
         Add this checkpoint to a raid:
         {ownProps.state.raid.id
-          ? "\nCheckpoint already belongs to a raid!"
+          ? " Checkpoint already belongs to a raid!"
           : ownProps.props.raids
               .filter(raid => raid.id !== ownProps.state.raid.id)
               .map(raid => {
@@ -69,41 +72,37 @@ export const FormCheckpoint = ownProps => {
         {" "}
         Checkpoint has the following characters:
         {!ownProps.state.characters.length
-          ? "\nno characters on this checkpoint"
-          : ownProps.state.characters
+          ? " no characters on this checkpoint"
+          : ownProps.state.characters.map(character => (
+              <li
+                key={character.id}
+                className="add-character-to-checkpoint-belongs-to-div">
+                <Link to={`/characters/${character.id}`}>
+                  {character.characterName}
+                </Link>
+                <button
+                  className="remove-from"
+                  type="button"
+                  onClick={e =>
+                    ownProps.handleRemoveFromCheckpoint(e, character)
+                  }>
+                  Remove
+                </button>
+              </li>
+            ))}
+      </ul>{" "}
+      <ul>
+        Add characters to this checkpoint:
+        {!ownProps.props.characters.filter(character =>
+          ownProps.props.characters.map(c => c.id).includes(character.id)
+        ).length
+          ? " no characters that weren't at this checkpoint"
+          : ownProps.props.characters
               .filter(
                 character =>
                   !ownProps.state.characters
                     .map(c => c.id)
                     .includes(character.id)
-              )
-              .map(character => (
-                <li
-                  key={character.id}
-                  className="add-character-to-character-belongs-to-div">
-                  <Link to={`/items/${character.id}`}>
-                    {character.itemName}
-                  </Link>
-                  <button
-                    className="remove-from"
-                    type="button"
-                    onClick={e =>
-                      ownProps.handleRemoveFromCheckpoint(e, character)
-                    }>
-                    Remove
-                  </button>
-                </li>
-              ))}
-      </ul>{" "}
-      <ul>
-        Add characters to this checkpoint:
-        {!ownProps.props.characters.filter(character =>
-          ownProps.state.characters.map(c => c.id).includes(character.id)
-        ).length
-          ? "\nno unclaimed items"
-          : ownProps.props.characters
-              .filter(character =>
-                ownProps.state.characters.map(c => c.id).includes(character.id)
               )
               .map(character => {
                 return (
