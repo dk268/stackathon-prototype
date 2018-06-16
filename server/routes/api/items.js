@@ -71,11 +71,25 @@ router.delete("/:itemId", async (req, res, next) => {
 module.exports = router;
 
 const setCharacterToItem = async (character, item) => {
-  const foundChar = await Character.findById(character.id);
-  await item.setCharacter(foundChar);
+  try {
+    if (!character.id) await item.setCharacter(null);
+    else {
+      const foundChar = await Character.findById(character.id);
+      await item.setCharacter(foundChar);
+    }
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 const setRaidToItem = async (raid, item) => {
-  const foundRaid = await Raid.findById(raid.id);
-  await item.setRaidAcquired(foundRaid);
+  try {
+    if (!raid.id) await item.setRaidAcquired(null);
+    else {
+      const foundRaid = await Raid.findById(raid.id);
+      await item.setRaidAcquired(foundRaid);
+    }
+  } catch (e) {
+    console.log(e);
+  }
 };
