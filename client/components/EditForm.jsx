@@ -169,13 +169,15 @@ class EditForm extends Component {
   };
 
   handleRemoveFromItem = (e, payload) => {
+    console.log("called", payload);
     if (payload.characterName) {
       this.setState({
         character: {},
       });
     }
     if (payload.raidName) {
-      this.setState({ raid: {} });
+      console.log(payload.raidName);
+      this.setState({ RaidAcquired: {} });
     }
   };
   handleAddToRaid = (e, payload) => {

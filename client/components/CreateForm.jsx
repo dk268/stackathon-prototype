@@ -142,7 +142,7 @@ class Form extends Component {
       });
     }
     if (payload.raidName) {
-      this.setState({ raid: {} });
+      this.setState({ RaidAcquired: {} });
     }
   };
   handleAddToRaid = (e, payload) => {

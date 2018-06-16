@@ -34,13 +34,14 @@ class AllRaids extends Component {
                       Raid Name: {raid.raidName}
                     </li>
                   </Link>
+                  <br /> Checkpoints:
                   <li className="raid-details-raid-dkp">
-                    Checkpoints: <RowCheckpoint raid={raid} />
+                    <RowCheckpoint raid={raid} />
                   </li>
                   <li className="raid-details-character-mapper-li">
                     <RowCharactersMapper characters={raid.characters} />
                   </li>
-                  <br />
+                  <br /> Items:
                   <li className="raid-details-item-mapper-li">
                     <RowItemsMapper items={raid.items} />
                   </li>

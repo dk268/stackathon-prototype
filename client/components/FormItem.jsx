@@ -48,8 +48,8 @@ export const FormItem = ownProps => {
       <ul>
         {" "}
         Item belongs to the following character:
-        {!ownProps.state.character ? (
-          "Item belongs to no character, yet"
+        {!ownProps.state.character || !ownProps.state.character.id ? (
+          " Item belongs to no character, yet"
         ) : (
           <li className="add-item-to-character-div">
             <Link to={`/characters/${ownProps.state.character.id}`}>
@@ -93,7 +93,7 @@ export const FormItem = ownProps => {
       <ul>
         {" "}
         Item acquired at raid:
-        {!ownProps.state.RaidAcquired ? (
+        {!ownProps.state.RaidAcquired || !ownProps.state.RaidAcquired.id ? (
           "\nItem not yet set a raid acquired"
         ) : (
           <li
@@ -115,7 +115,7 @@ export const FormItem = ownProps => {
       </ul>{" "}
       <ul>
         Set raid acquired for this item:
-        {ownProps.state.RaidAcquired
+        {ownProps.state.RaidAcquired && ownProps.state.RaidAcquired.id
           ? "\nItem already belongs to a raid!"
           : ownProps.props.raids.map(raid => {
               return (
