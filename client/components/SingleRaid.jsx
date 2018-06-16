@@ -41,7 +41,7 @@ class SingleRaid extends Component {
             </h5>
             <h3>Items</h3>
             <TableItems raid={this.props.singleRaid} />
-            {isAdmin ? (
+            {isAdmin() ? (
               <Link to={`/raids/edit/${this.props.match.params.raidId}`}>
                 <button type="button" id="raid-edit-admin-button-link">
                   EDIT ME!

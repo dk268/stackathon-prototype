@@ -49,7 +49,7 @@ class SingleCheckpoint extends Component {
                 </li>
               ))}
             </ul>
-            {isAdmin ? (
+            {isAdmin() ? (
               <Link
                 to={`/checkpoints/edit/${
                   this.props.match.params.checkpointId

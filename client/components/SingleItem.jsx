@@ -50,7 +50,7 @@ class SingleItem extends Component {
             <ul>
               <TableCharacters item={this.props.singleItem} />
             </ul>
-            {isAdmin ? (
+            {isAdmin() ? (
               <Link to={`/items/edit/${this.props.match.params.itemId}`}>
                 <button type="button" id="item-edit-admin-button-link">
                   EDIT ME!

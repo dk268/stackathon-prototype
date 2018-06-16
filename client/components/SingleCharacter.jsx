@@ -34,7 +34,7 @@ class SingleCharacter extends Component {
             <TableRaids character={this.props.singleCharacter} />
             <h3>Items</h3>
             <TableItems character={this.props.singleCharacter} />
-            {isAdmin ? (
+            {isAdmin() ? (
               <Link to={`/characters/edit/${this.props.match.params.charId}`}>
                 <button type="button" id="character-edit-admin-button-link">
                   EDIT ME!
