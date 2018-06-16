@@ -23,13 +23,14 @@ class TableItems extends Component {
         <div id="table-raids-div">
           {filteredItems.map(item => (
             <p key={item.id}>
-              name: <Link to={`/items/${item.id}`}>{item.itemName}</Link> raid:{!item.RaidAcquired ? (
+              name: <Link to={`/items/${item.id}`}>{item.itemName}</Link> raid:{" "}
+              {!item.RaidAcquired ? (
                 ` no raid acquisition specified, `
               ) : (
                 <Link to={`/raids/${item.RaidAcquired.id}`}>
                   {item.RaidAcquired.raidName}
                 </Link>
-              )}
+              )}{" "}
               for {item.itemDKPCost} dkp
             </p>
           ))}
@@ -48,9 +49,13 @@ class TableItems extends Component {
           {filteredItems.map(item => (
             <p key={item.id}>
               name: <Link to={`/items/${item.id}`}>{item.itemName}</Link> to{" "}
-              <Link to={`/characters/${item.character.id}`}>{`${
-                item.character.characterName
-              }`}</Link>{" "}
+              {item.character && item.character.id ? (
+                <Link to={`/characters/${item.character.id}`}>{`${
+                  item.character.characterName
+                }`}</Link>
+              ) : (
+                ` no character for this item`
+              )}{" "}
               for {item.itemDKPCost} dkp
             </p>
           ))}
