@@ -55,7 +55,7 @@ const allCharacters = (state = initialState, action) => {
     case DELETE_CHARACTER:
       return {
         ...state,
-        status: LOADED,
+        status: LOADING,
         collection: action.payload,
       };
     case ERROR_CHARACTERS:

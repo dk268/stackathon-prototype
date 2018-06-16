@@ -55,7 +55,7 @@ const allCheckpoints = (state = initialState, action) => {
     case DELETE_CHECKPOINT:
       return {
         ...state,
-        status: LOADED,
+        status: LOADING,
         collection: remainingCheckpoints,
       };
     case ERROR_CHECKPOINTS:

@@ -55,7 +55,7 @@ const allItems = (state = initialState, action) => {
     case DELETE_ITEM:
       return {
         ...state,
-        status: LOADED,
+        status: LOADING,
         collection: action.payload,
       };
     case ERROR_ITEMS:

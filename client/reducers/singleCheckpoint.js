@@ -23,12 +23,12 @@ export const getSingleCheckpoint = id => async dispatch => {
 export const editCheckpoint = checkpointData => async dispatch => {
   try {
     dispatch(aCC(LOADING_CHECKPOINT));
-    const singleCheckpoint = await Axios.put(
+    const updatedCheckpoint = await Axios.put(
       `/api/checkpoints/${checkpointData.id}`,
       checkpointData
     );
-    dispatch(aCC(EDIT_CHECKPOINT, singleCheckpoint.data));
-    return singleCheckpoint.data;
+    dispatch(aCC(EDIT_CHECKPOINT, updatedCheckpoint.data));
+    return updatedCheckpoint.data;
   } catch (e) {
     dispatch(aCC(ERROR_CHECKPOINT, e));
   }

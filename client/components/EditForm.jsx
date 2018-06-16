@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { getRaids } from "../reducers/allRaids";
-import { getCharacters } from "../reducers/allCharacters";
-import { getCheckpoints } from "../reducers/allCheckpoints";
-import { getItems } from "../reducers/allItems";
+import { getRaids, deleteRaid } from "../reducers/allRaids";
+import { getCharacters, deleteCharacter } from "../reducers/allCharacters";
+import { getCheckpoints, deleteCheckpoint } from "../reducers/allCheckpoints";
+import { getItems, deleteItem } from "../reducers/allItems";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { LOADED, aCC } from "../reducers";
@@ -25,7 +25,8 @@ import {
 import { getSingleItem, editItem } from "../reducers/singleItem";
 import { getSingleRaid, editRaid } from "../reducers/singleRaid";
 import { getSingleCharacter, editCharacter } from "../reducers/singleCharacter";
-import DeleteField from "./aux/Delete";
+import DeleteField from "./aux/DeleteField";
+import Axios from "axios";
 
 class EditForm extends Component {
   constructor(props) {
@@ -224,8 +225,38 @@ class EditForm extends Component {
   handleSubmitRaid = async e => {
     e.preventDefault();
     const editedRaid = await this.props.editRaid(this.state);
+    console.log(editedRaid);
     this.props.getSingleRaid(this.props.match.params.raidId);
     this.props.history.push(`/raids/${editedRaid.id}`);
+  };
+  handleDelete = () => {
+    console.log("THISPROPS", this.props);
+    switch (this.props.formName) {
+      case "editCharacter": {
+        this.props.deleteCharacter(this.props.match.params.charId);
+        this.props.history.push(`/characters`);
+        this.props.getCharacters();
+        break;
+      }
+      case "editCheckpoint": {
+        this.props.deleteCheckpoint(this.props.match.params.checkpointId);
+        this.props.history.push(`/checkpoints`);
+        this.props.getCheckpoints();
+        break;
+      }
+      case "editItem": {
+        this.props.deleteItem(this.props.match.params.itemId);
+        this.props.history.push(`/items`);
+        this.props.getItems();
+        break;
+      }
+      case "editRaid": {
+        this.props.deleteRaid(this.props.match.params.raidId);
+        this.props.history.push(`/raids`);
+        this.props.getRaids();
+        break;
+      }
+    }
   };
   pickForm = () => {
     switch (this.props.formName) {
@@ -317,8 +348,11 @@ const mapDispatchToProps = {
   editCheckpoint,
   editItem,
   editRaid,
+  deleteCharacter,
+  deleteCheckpoint,
+  deleteItem,
+  deleteRaid,
 };
-
 export default withRouter(
   connect(
     mapStateToProps,

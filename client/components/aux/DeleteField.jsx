@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
 export default class DeleteField extends Component {
+  constructor() {
+    super();
+    this.state = { deleteField: "I dare you" };
+  }
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -11,13 +15,14 @@ export default class DeleteField extends Component {
       <div id="delete-field-wrapper-div">
         <button
           type="button"
-          disabled={this.validateDelete()}
-          onClick={this.props.delete}>
-          destroy this {this.props.formName.slice(3).toLowerCase()}
+          disabled={!this.validateDelete()}
+          onClick={this.props.handleDelete}>
+          destroy this {this.props.formName.slice(4).toLowerCase()}
         </button>
         <input
           type="text"
           name="deleteField"
+          onChange={this.handleChange}
           value={this.state && this.state.deleteField}
         />{" "}
         type in "delete" to enable delete button

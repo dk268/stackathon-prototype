@@ -53,7 +53,7 @@ const allRaids = (state = initialState, action) => {
     case DELETE_RAID:
       return {
         ...state,
-        status: LOADED,
+        status: LOADING,
         collection: action.payload,
       };
     case ERROR_RAIDS:
