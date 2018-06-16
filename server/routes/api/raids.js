@@ -41,7 +41,7 @@ router.put("/:raidId", async (req, res, next) => {
   try {
     const [, updatedRaid] = await Raid.update(req.body, {
       where: {
-        id: raidId,
+        id: req.params.raidId,
       },
       returning: true,
       plain: true,

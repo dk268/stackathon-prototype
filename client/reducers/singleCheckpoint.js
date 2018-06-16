@@ -25,7 +25,7 @@ export const editCheckpoint = checkpointData => async dispatch => {
     dispatch(aCC(LOADING_CHECKPOINT));
     const singleCheckpoint = await Axios.put(
       `/api/checkpoints/${checkpointData.id}`,
-      { checkpointData, where: { id: checkpointData.id } }
+      checkpointData
     );
     dispatch(aCC(EDIT_CHECKPOINT, singleCheckpoint.data));
     return singleCheckpoint.data;

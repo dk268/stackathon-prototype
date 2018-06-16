@@ -48,7 +48,7 @@ router.put("/:charId", async (req, res, next) => {
   try {
     const [, updatedCharacter] = await Character.update(req.body, {
       where: {
-        id: charId,
+        id: req.params.charId,
       },
       returning: true,
       plain: true,

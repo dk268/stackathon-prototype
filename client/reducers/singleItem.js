@@ -23,10 +23,10 @@ export const getSingleItem = id => async dispatch => {
 export const editItem = itemData => async dispatch => {
   try {
     dispatch(aCC(LOADING_ITEM));
-    const [, singleItem] = await Axios.put(`/api/items/${itemData.id}`, {
-      itemData,
-      where: { id: itemData.id },
-    });
+    const [, singleItem] = await Axios.put(
+      `/api/items/${itemData.id}`,
+      itemData
+    );
     dispatch(aCC(EDIT_ITEM, singleItem.data));
     return singleItem.data;
   } catch (e) {

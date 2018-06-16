@@ -35,7 +35,7 @@ router.put("/:checkpointId", async (req, res, next) => {
   try {
     const [, updatedCheckpoint] = await Checkpoint.update(req.body, {
       where: {
-        id: checkpointId,
+        id: req.params.checkpointId,
       },
       returning: true,
       plain: true,

@@ -81,12 +81,12 @@ class EditForm extends Component {
         break;
       }
       default:
-      this.state = {};
+        this.state = {};
     }
-        if (this.props.allCharacters.status != LOADED) this.props.getCharacters();
-        if (this.props.allCheckpoints.status != LOADED) this.props.getCheckpoints();
-        if (this.props.allItems.status != LOADED) this.props.getItems();
-        if (this.props.allRaids.status != LOADED) this.props.getRaids();
+    if (this.props.allCharacters.status != LOADED) this.props.getCharacters();
+    if (this.props.allCheckpoints.status != LOADED) this.props.getCheckpoints();
+    if (this.props.allItems.status != LOADED) this.props.getItems();
+    if (this.props.allRaids.status != LOADED) this.props.getRaids();
   };
 
   handleChange = evt => {
@@ -205,6 +205,7 @@ class EditForm extends Component {
     e.preventDefault();
     const editedChar = await this.props.editCharacter(this.state);
     this.props.getSingleCharacter(this.props.match.params.charId);
+    console.log(editedChar);
     this.props.history.push(`/characters/${editedChar.id}`);
   };
   handleSubmitCheckpoint = async e => {

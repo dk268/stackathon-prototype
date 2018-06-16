@@ -23,10 +23,10 @@ export const getSingleRaid = id => async dispatch => {
 export const editRaid = raidData => async dispatch => {
   try {
     dispatch(aCC(LOADING_RAID));
-    const [, singleRaid] = await Axios.put(`/api/raids/${raidData.id}`, {
-      raidData,
-      where: { id: raidData.id },
-    });
+    const [, singleRaid] = await Axios.put(
+      `/api/raids/${raidData.id}`,
+      raidData
+    );
     dispatch(aCC(EDIT_RAID, singleRaid.data));
     return singleRaid.data;
   } catch (e) {

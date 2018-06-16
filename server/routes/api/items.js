@@ -43,7 +43,7 @@ router.put("/:itemId", async (req, res, next) => {
   try {
     const [, updatedItem] = await Item.update(req.body, {
       where: {
-        id: itemId,
+        id: req.params.itemId,
       },
       returning: true,
       plain: true,
