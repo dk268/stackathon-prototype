@@ -50,13 +50,15 @@ class TableItems extends Component {
             <p key={item.id}>
               name: <Link to={`/items/${item.id}`}>{item.itemName}</Link> to{" "}
               {item.character && item.character.id ? (
-                <Link to={`/characters/${item.character.id}`}>{`${
-                  item.character.characterName
-                }`}</Link>
+                <div id="character-exists-div">
+                  <Link to={`/characters/${item.character.id}`}>{`${
+                    item.character.characterName
+                  }`}</Link>
+                  for {item.itemDKPCost} dkp
+                </div>
               ) : (
-                ` no character for this item`
-              )}{" "}
-              for {item.itemDKPCost} dkp
+                `no owner for this item`
+              )}
             </p>
           ))}
         </div>
