@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const FormCharacter = ownProps => {
-  console.log(ownProps);
   return (
     <form onSubmit={ownProps.handleSubmit}>
       Character Name: <br />
