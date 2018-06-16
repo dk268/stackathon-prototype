@@ -36,6 +36,19 @@ export const logout = () => async dispatch => {
   }
 };
 
+export const me = () => async dispatch => {
+  try {
+    dispatch(aCC(LOADING_AUTH));
+    const currentUser = await Axios.get("/auth/me");
+    currentUser.data
+      ? dispatch(aCC(LOGGED_IN_AUTH, currentUser.data))
+      : dispatch(aCC(NO_LOGIN_AUTH));
+    if (currentUser.data.isAdmin) dispatch(aCC(ADMIN_AUTH, currentUser.data));
+  } catch (e) {
+    dispatch(aCC(ERROR_AUTH, e));
+  }
+};
+
 const initialState = { status: NO_LOGIN_AUTH, collection: {}, error: {} };
 
 const auth = (state = initialState, action) => {

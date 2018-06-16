@@ -13,8 +13,11 @@ import SingleCheckpoint from "./SingleCheckpoint";
 import CreateForm from "./CreateForm";
 import EditForm from "./EditForm";
 import EditLinks from "./EditLinks";
-
+import { me } from "../reducers/auth";
 class Root extends Component {
+  componentDidMount = () => {
+    this.props.me();
+  };
   render() {
     return (
       <div id="root-component-div">
@@ -86,8 +89,8 @@ class Root extends Component {
     );
   }
 }
-
+const mapStateToProps = state => {};
 export default connect(
   null,
-  null
+  { me }
 )(Root);
