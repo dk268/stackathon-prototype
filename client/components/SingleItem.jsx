@@ -40,8 +40,7 @@ class SingleItem extends Component {
               Raid Found:{!this.props.singleItem.RaidAcquired ? (
                 ` no raid acquisition specified`
               ) : (
-                <Link
-                  to={`/characters/${this.props.singleItem.RaidAcquired.id}`}>
+                <Link to={`/raids/${this.props.singleItem.RaidAcquired.id}`}>
                   {this.props.singleItem.RaidAcquired.raidName}
                 </Link>
               )}
