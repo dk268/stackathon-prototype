@@ -10,6 +10,7 @@ import Error from "./Error";
 import TableRaids from "./TableRaids";
 import TableItems from "./TableItems";
 import RowCheckpoint from "./RowCheckpoint";
+import { isAdmin } from "..";
 
 class SingleRaid extends Component {
   componentDidMount = () => {

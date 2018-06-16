@@ -7,6 +7,7 @@ import Unasked from "./Unasked";
 import Loading from "./Loading";
 import Error from "./Error";
 import TableCharacters from "./TableCharacters";
+import { isAdmin } from "..";
 
 class SingleItem extends Component {
   componentDidMount = () => {

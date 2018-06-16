@@ -9,6 +9,7 @@ import Loading from "./Loading";
 import Error from "./Error";
 import TableRaids from "./TableRaids";
 import TableItems from "./TableItems";
+import { isAdmin } from "..";
 
 class SingleCheckpoint extends Component {
   componentDidMount = () => {
