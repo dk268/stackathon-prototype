@@ -68,12 +68,16 @@ const setCheckpointToRaid = async (raid, checkpoint) => {
   } else await checkpoint.setRaid(null);
 };
 const setCharactersToCheckpoint = async (characters, checkpoint) => {
-  const foundCharacters = await Character.findAll({
-    where: {
-      characterName: {
-        [Op.in]: characters.map(c => c.characterName),
+  try {
+    const foundCharacters = await Character.findAll({
+      where: {
+        characterName: {
+          [Op.in]: characters.map(c => c.characterName),
+        },
       },
-    },
-  });
-  await checkpoint.setCharacters(foundCharacters);
+    });
+    await checkpoint.setCharacters(foundCharacters);
+  } catch (e) {
+    console.log(e);
+  }
 };

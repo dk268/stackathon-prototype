@@ -1,5 +1,6 @@
 const {
   User,
+  db,
   Item,
   Raid,
   Character,
@@ -7,6 +8,7 @@ const {
 } = require("../../db/index.js");
 const express = require("express");
 const router = express.Router();
+const Op = db.Op;
 
 // /api/characters/
 
@@ -53,12 +55,9 @@ router.put("/:charId", async (req, res, next) => {
       returning: true,
       plain: true,
     });
-    if (req.body.raids.length)
-      await setRaidsToCharacter(req.body.raids, updatedCharacter);
-    if (req.body.items.length)
-      await setItemsToCharacter(req.body.items, updatedCharacter);
-    if (req.body.checkpoints.length)
-      await setCheckpointsToCharacter(req.body.checkpoints, updatedCharacter);
+    await setRaidsToCharacter(req.body.raids, updatedCharacter);
+    await setItemsToCharacter(req.body.items, updatedCharacter);
+    await setCheckpointsToCharacter(req.body.checkpoints, updatedCharacter);
     res.json(updatedCharacter);
   } catch (e) {
     next(e);
@@ -78,22 +77,46 @@ router.delete("/:charId", async (req, res, next) => {
 module.exports = router;
 
 const setRaidsToCharacter = async (raids, character) => {
-  for (let i = 0; i < raids.length; i++) {
-    const raid = await Raid.findById(raids[i].id);
-    await raid.addCharacter(character);
+  try {
+    const foundRaids = await Raid.findAll({
+      where: {
+        raidName: {
+          [Op.in]: raids.map(r => r.raidName),
+        },
+      },
+    });
+    await character.setRaids(foundRaids);
+  } catch (e) {
+    console.log(e);
   }
 };
 
 const setItemsToCharacter = async (items, character) => {
-  for (let i = 0; i < items.length; i++) {
-    const item = await Item.findById(items[i].id);
-    await item.setCharacter(character);
+  try {
+    const foundItems = await Item.findAll({
+      where: {
+        itemName: {
+          [Op.in]: items.map(c => c.itemName),
+        },
+      },
+    });
+    await character.setItems(foundItems);
+  } catch (e) {
+    console.log(e);
   }
 };
 
 const setCheckpointsToCharacter = async (checkpoints, character) => {
-  for (let i = 0; i < checkpoints.length; i++) {
-    const checkpoint = await Checkpoint.findById(checkpoints[i].id);
-    await checkpoint.addCharacter(character);
+  try {
+    const foundCheckpoints = await Checkpoint.findAll({
+      where: {
+        checkpointName: {
+          [Op.in]: checkpoints.map(c => c.checkpointName),
+        },
+      },
+    });
+    await character.setCheckpoints(foundCheckpoints);
+  } catch (e) {
+    console.log(e);
   }
 };
