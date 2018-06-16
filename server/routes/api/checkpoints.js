@@ -1,6 +1,7 @@
-const { User, Raid, Checkpoint, Character } = require("../../db/index.js");
+const { User, Raid, Checkpoint, db, Character } = require("../../db/index.js");
 const express = require("express");
 const router = express.Router();
+const Op = db.Op;
 
 // /api/checkpoints/
 
@@ -43,7 +44,7 @@ router.put("/:checkpointId", async (req, res, next) => {
     if (req.body.raid && req.body.raid.id)
       await setCheckpointToRaid(req.body.raid, updatedCheckpoint);
     if (req.body.characters.length)
-      await setCharactersToCheckpoint(req.body.checkpoints, updatedCheckpoint);
+      await setCharactersToCheckpoint(req.body.characters, updatedCheckpoint);
     res.json(updatedCheckpoint);
   } catch (e) {
     next(e);
@@ -67,8 +68,12 @@ const setCheckpointToRaid = async (raid, checkpoint) => {
   await checkpoint.setRaid(foundRaid);
 };
 const setCharactersToCheckpoint = async (characters, checkpoint) => {
-  for (let i = 0; i < characters.length; i++) {
-    const character = await Character.findById(characters[i].id);
-    await character.addCheckpoint(checkpoint);
-  }
+  const foundCharacters = await Character.findAll({
+    where: {
+      characterName: {
+        [Op.in]: characters.map(c => c.characterName),
+      },
+    },
+  });
+  await checkpoint.setCharacters(foundCharacters);
 };
