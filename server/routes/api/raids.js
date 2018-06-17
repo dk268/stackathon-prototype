@@ -78,9 +78,20 @@ const setCheckpointsToRaid = async (checkpoints, raid) => {
 };
 
 const setItemsToRaid = async (items, raid) => {
-  const allItems = await Item.findAll({
-    where: {
-      RaidAcquiredId: { [Op.ne]: null },
-    },
-  });
+  const allItems = await Item.findAll();
+  if (!allItems || !allItems.length) {
+    await raid.setItems(null);
+    return raid;
+  }
+  if (!items || !items.length) {
+    await raid.setItems(null);
+    return raid;
+  }
+  const itemsToAdd = allItems.filter(item =>
+    items.map(item => item.id).includes(item.id)
+  );
+  await raid.setItems(itemsToAdd);
+  // const itemsToRemove = allItems.filter(item =>
+  //   items.map(item => !item.id.includes(item.id))
+  // );
 };

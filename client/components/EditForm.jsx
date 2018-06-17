@@ -25,7 +25,7 @@ import {
 import { getSingleItem, editItem } from "../reducers/singleItem";
 import { getSingleRaid, editRaid } from "../reducers/singleRaid";
 import { getSingleCharacter, editCharacter } from "../reducers/singleCharacter";
-import DeleteField from "./aux/DeleteField";
+import DeleteField from "./helpers/DeleteField";
 import Axios from "axios";
 
 class EditForm extends Component {

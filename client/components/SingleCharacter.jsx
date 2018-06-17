@@ -10,7 +10,7 @@ import Error from "./Error";
 import TableRaids from "./TableRaids";
 import TableItems from "./TableItems";
 import { isAdmin } from "..";
-import DeleteField from "./aux/DeleteField";
+import DeleteField from "./helpers/DeleteField";
 
 class SingleCharacter extends Component {
   componentDidMount = () => {

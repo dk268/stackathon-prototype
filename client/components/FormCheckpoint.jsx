@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DeleteField from "./aux/DeleteField";
+import DeleteField from "./helpers/DeleteField";
 
 export const FormCheckpoint = ownProps => {
   return (
@@ -36,7 +36,8 @@ export const FormCheckpoint = ownProps => {
               type="button"
               onClick={e =>
                 ownProps.handleRemoveFromCheckpoint(e, ownProps.state.raid)
-              }>
+              }
+            >
               Remove
             </button>
           </li>
@@ -54,13 +55,15 @@ export const FormCheckpoint = ownProps => {
                   <li key={raid.id} className="add-raid-to-character-li">
                     <Link
                       className="add-raid-to-character-Link"
-                      to={`/raids/${raid.id}`}>
+                      to={`/raids/${raid.id}`}
+                    >
                       {raid.raidName}
                     </Link>
                     <button
                       type="button"
                       className="add-to"
-                      onClick={e => ownProps.handleAddToCheckpoint(e, raid)}>
+                      onClick={e => ownProps.handleAddToCheckpoint(e, raid)}
+                    >
                       Add
                     </button>
                   </li>
@@ -76,7 +79,8 @@ export const FormCheckpoint = ownProps => {
           : ownProps.state.characters.map(character => (
               <li
                 key={character.id}
-                className="add-character-to-checkpoint-belongs-to-div">
+                className="add-character-to-checkpoint-belongs-to-div"
+              >
                 <Link to={`/characters/${character.id}`}>
                   {character.characterName}
                 </Link>
@@ -85,7 +89,8 @@ export const FormCheckpoint = ownProps => {
                   type="button"
                   onClick={e =>
                     ownProps.handleRemoveFromCheckpoint(e, character)
-                  }>
+                  }
+                >
                   Remove
                 </button>
               </li>
@@ -108,10 +113,12 @@ export const FormCheckpoint = ownProps => {
                 return (
                   <li
                     key={character.id}
-                    className="add-character-to-checkpoint-li">
+                    className="add-character-to-checkpoint-li"
+                  >
                     <Link
                       className="add-character-to-checkpoint-Link"
-                      to={`/characters/${character.id}`}>
+                      to={`/characters/${character.id}`}
+                    >
                       {character.characterName}
                     </Link>
                     <button
@@ -119,7 +126,8 @@ export const FormCheckpoint = ownProps => {
                       className="add-to"
                       onClick={e =>
                         ownProps.handleAddToCheckpoint(e, character)
-                      }>
+                      }
+                    >
                       Add
                     </button>
                   </li>
