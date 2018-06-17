@@ -91,7 +91,15 @@ const setItemsToRaid = async (items, raid) => {
     items.map(item => item.id).includes(item.id)
   );
   await raid.setItems(itemsToAdd);
-  // const itemsToRemove = allItems.filter(item =>
-  //   items.map(item => !item.id.includes(item.id))
-  // );
+  if (itemsToAdd)
+    for (let i = 0; i < itemsToAdd.length; i++) {
+      await itemsToAdd[0].setRaidAcquired(raid);
+    }
+  const itemsToRemove = allItems.filter(item =>
+    items.map(item => !item.id).includes(item.id)
+  );
+  if (itemsToRemove)
+    for (let i = 0; i < itemsToAdd.length; i++) {
+      await itemsToAdd[0].setRaidAcquired(null);
+    }
 };
