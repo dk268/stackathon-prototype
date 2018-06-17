@@ -5,10 +5,10 @@ const {
   Raid,
   Character,
   Checkpoint,
+  Op,
 } = require("../../db/index.js");
 const express = require("express");
 const router = express.Router();
-const Op = db.Op;
 
 // /api/characters/
 

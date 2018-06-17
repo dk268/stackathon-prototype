@@ -2,6 +2,7 @@
 
 const db = require("./database.js");
 const Sequelize = require("sequelize");
+const Op = db.Op;
 
 const User = require("./User.js");
 const Item = require("./Item.js");
@@ -31,4 +32,5 @@ module.exports = {
   User,
   Character,
   Checkpoint,
+  Op,
 };

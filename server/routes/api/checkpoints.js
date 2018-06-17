@@ -1,7 +1,6 @@
-const { User, Raid, Checkpoint, db, Character } = require("../../db/index.js");
+const { User, Raid, Checkpoint, Op, Character } = require("../../db/index.js");
 const express = require("express");
 const router = express.Router();
-const Op = db.Op;
 
 // /api/checkpoints/
 

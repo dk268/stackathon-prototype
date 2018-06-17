@@ -4,6 +4,7 @@ const {
   Raid,
   Character,
   Checkpoint,
+  Op,
 } = require("../../db/index.js");
 const express = require("express");
 const router = express.Router();
@@ -39,6 +40,7 @@ router.post("/", async (req, res, next) => {
 
 router.put("/:raidId", async (req, res, next) => {
   try {
+    console.log(req.body.items);
     const [, updatedRaid] = await Raid.update(req.body, {
       where: {
         id: req.params.raidId,
@@ -46,10 +48,8 @@ router.put("/:raidId", async (req, res, next) => {
       returning: true,
       plain: true,
     });
-    if (req.body.checkpoints.length)
-      await setCheckpointsToRaid(req.body.checkpoints, updatedRaid);
-    if (req.body.items.length)
-      await setItemsToRaid(req.body.items, updatedRaid);
+    await setCheckpointsToRaid(req.body.checkpoints, updatedRaid);
+    await setItemsToRaid(req.body.items, updatedRaid);
     res.json(updatedRaid);
   } catch (e) {
     next(e);
@@ -69,16 +69,18 @@ router.delete("/:raidId", async (req, res, next) => {
 module.exports = router;
 
 const setCheckpointsToRaid = async (checkpoints, raid) => {
-  for (let i = 0; i < checkpoints.length; i++) {
-    const foundCheckpoint = await Checkpoint.findById(checkpoints[i].id);
-    await foundCheckpoint.setRaid(raid);
+  if (checkpoints) {
+    for (let i = 0; i < checkpoints.length; i++) {
+      const foundCheckpoint = await Checkpoint.findById(checkpoints[i].id);
+      await foundCheckpoint.setRaid(raid);
+    }
   }
 };
 
 const setItemsToRaid = async (items, raid) => {
-  for (let i = 0; i < items.length; i++) {
-    const item = await Item.findById(items[i].id);
-    if (item) await raid.addItem(item);
-    if (item) await item.setRaidAcquired(raid);
-  }
+  const allItems = await Item.findAll({
+    where: {
+      RaidAcquiredId: { [Op.ne]: null },
+    },
+  });
 };
