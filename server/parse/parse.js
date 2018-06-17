@@ -8,7 +8,7 @@ const chalk = require("chalk");
 const parseFile = async () => {
   fs.readFile(
     process.env.SHELL === "C:\\Program Files\\Git\\usr\\bin\\bash.exe"
-      ? "D:\\Users\\Public\\Daybreak Game Company\\Installed Games\\EverQuest\\Logs\\eqlog_Goliath_coirnav.txt"
+      ? "./server/parse/eqlog_Goliath_coirnav.txt"
       : "./server/parse/eqlog_Goliath_coirnav.txt",
     "utf8",
     (err, data) => {
@@ -200,6 +200,7 @@ async function populateDatabase(raidName, attendance, itemsObjArr) {
       let char = await Character.findOne({
         where: { characterName: itemsObjArr[i].characterName },
       });
+      console.log(itemsObjArr[i].characterName);
       await char.spendDKP(item.itemDKPCost);
       await newRaid[0].addItem(item);
       await item.setCharacter(char);

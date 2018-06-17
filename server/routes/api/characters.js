@@ -95,8 +95,8 @@ const setItemsToCharacter = async (items, character) => {
   try {
     const foundItems = await Item.findAll({
       where: {
-        itemName: {
-          [Op.in]: items.map(c => c.itemName),
+        id: {
+          [Op.in]: items.map(c => c.id),
         },
       },
     });
