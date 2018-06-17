@@ -15,7 +15,7 @@ import {
   initialAddCheckpointState,
   initialAddItemState,
   initialAddRaidState,
-} from "./aux/initialStates";
+} from "./helpers/initialStates";
 import { FormItem } from "./FormItem";
 import { FormRaid } from "./FormRaid";
 import {
