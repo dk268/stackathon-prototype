@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { UNASKED, LOADING, LOADED, ERROR } from "../reducers";
 import Unasked from "./Unasked";
 import Loading from "./Loading";
 import Error from "./Error";
 import { getItems } from "../reducers/allItems";
 import { Link } from "react-router-dom";
+import { getSingleRaid } from "../reducers/singleRaid";
 
 class TableItems extends Component {
   componentDidMount = () => {
-    if (this.props.character) this.props.getItems();
+    this.props.getItems();
   };
 
   TableItemsCharacter = props => {
@@ -35,12 +37,18 @@ class TableItems extends Component {
 
   TableItemsRaid = props => {
     {
+      const filteredItems = props.allItems.filter(item =>
+        props.raid.items.map(item => item.id).includes(item.id)
+      );
       return (
         <div id="table-raids-div">
-          {props.raid.items.map(item => (
+          {filteredItems.map(item => (
             <p key={item.id}>
-              name: <Link to={`/items/${item.id}`}>{item.itemName}</Link> for{" "}
-              {item.itemDKPCost} dkp
+              name: <Link to={`/items/${item.id}`}>{item.itemName}</Link> to{" "}
+              <Link to={`/characters/${item.character.id}`}>{`${
+                item.character.characterName
+              }`}</Link>{" "}
+              for {item.itemDKPCost} dkp
             </p>
           ))}
         </div>
@@ -73,9 +81,11 @@ const mapStateToProps = state => {
     allItems: state.allItems.collection,
   };
 };
-const mapDispatchToProps = { getItems };
+const mapDispatchToProps = { getItems, getSingleRaid };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TableItems);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(TableItems)
+);

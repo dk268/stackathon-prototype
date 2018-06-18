@@ -7,6 +7,8 @@ import singleItem from "./singleItem.js";
 import singleRaid from "./singleRaid.js";
 import Axios from "axios";
 import allCheckpoints from "./allCheckpoints.js";
+import singleCheckpoint from "./singleCheckpoint.js";
+import auth from "./auth.js";
 
 export const [UNASKED, LOADING, LOADED, ERROR] = [
   `UNASKED`,
@@ -31,18 +33,18 @@ const globalStatus = (state = initialState, action) => {
       return state;
   }
 };
-
 const rootReducer = combineReducers({
   allCharacters,
   allItems,
   allRaids,
   allCheckpoints,
+  auth,
   singleCharacter,
   singleItem,
   singleRaid,
+  singleCheckpoint,
   globalStatus,
 });
-
 export const aCC = (type, payload) => ({ type, payload });
 
 export default rootReducer;

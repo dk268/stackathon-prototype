@@ -13,7 +13,9 @@ const RowCheckpointRaids = props => (
     {props.raid.checkpoints.map(checkpoint => (
       <ul key={checkpoint.id} className="checkpoint-detail-map-item">
         <li className="checkpoint-detail-name-li">
-          {checkpoint.checkpointName}
+          <Link to={`/checkpoints/${checkpoint.id}`}>
+            {checkpoint.checkpointName}
+          </Link>
         </li>{" "}
         <li className="checkpoint-detail-dkp-li">
           {"dkp value: "}

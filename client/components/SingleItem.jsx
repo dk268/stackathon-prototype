@@ -41,9 +41,7 @@ class SingleItem extends Component {
             </h6>
             <h5>Characters in Possession: </h5>
             <ul>
-              <li>
-                <TableCharacters item={this.props.singleItem} />
-              </li>
+              <TableCharacters item={this.props.singleItem} />
             </ul>
           </div>
         );

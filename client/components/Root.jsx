@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  withRouter,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AllCharacters from "./AllCharacters.jsx";
 import Navbar from "./Navbar";
 import AllItems from "./AllItems";
@@ -14,12 +9,12 @@ import SingleCharacter from "./SingleCharacter";
 import AllCheckpoints from "./AllCheckpoints";
 import SingleItem from "./SingleItem";
 import SingleRaid from "./SingleRaid";
+import SingleCheckpoint from "./SingleCheckpoint";
 
 class Root extends Component {
   render() {
     return (
       <div id="root-component-div">
-        <h2 id="hello-world">Hi there from redux!!</h2>
         <Router>
           <div id="body-root">
             <Navbar />
@@ -35,6 +30,11 @@ class Root extends Component {
               />
               <Route exact path="/items/:itemId" component={SingleItem} />
               <Route exact path="/raids/:raidId" component={SingleRaid} />
+              <Route
+                exact
+                path="/checkpoints/:checkpointId"
+                component={SingleCheckpoint}
+              />
             </Switch>
           </div>
         </Router>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import { getSingleCharacter } from "../reducers/singleCharacter";
+import { getSingleCheckpoint } from "../reducers/singleCheckpoint";
 import { getAllRaids } from "../reducers/allRaids";
 import { UNASKED, LOADING, LOADED, ERROR } from "../reducers";
 import Unasked from "./Unasked";
@@ -10,29 +10,40 @@ import Error from "./Error";
 import TableRaids from "./TableRaids";
 import TableItems from "./TableItems";
 
-class SingleCharacter extends Component {
+class SingleCheckpoint extends Component {
   componentDidMount = () => {
-    this.props.getSingleCharacter(this.props.match.params.charId);
+    this.props.getSingleCheckpoint(this.props.match.params.checkpointId);
   };
 
   render = () => {
-    console.log(this.props.status);
     switch (this.props.status) {
       case UNASKED:
         return <Unasked />;
       case ERROR:
-        return <Error componentName="SingleCharacter" />;
+        return <Error componentName="SingleCheckpoint" />;
       case LOADING:
-        return <Loading name="single character" />;
+        return <Loading name="single checkpoint" />;
       case LOADED:
         return (
-          <div id="single-character-div">
-            <h2>{this.props.singleCharacter.characterName}</h2>
-            <h6>DKP: {this.props.singleCharacter.dkp}</h6>
-            <h3>Raids</h3>
-            <TableRaids character={this.props.singleCharacter} />
-            <h3>Items</h3>
-            <TableItems character={this.props.singleCharacter} />
+          <div id="single-checkpoint-div">
+            <h2>{this.props.singleCheckpoint.checkpointName}</h2>
+            <h6>DKP: {this.props.singleCheckpoint.checkpointDKP}</h6>
+            <h3>
+              Raid:{" "}
+              <Link to={`/raids/${this.props.singleCheckpoint.raid.id}`}>
+                {this.props.singleCheckpoint.raid.raidName}
+              </Link>{" "}
+            </h3>
+            <h4>Characters in attendance:</h4>
+            <ul id="single-checkpoint-characters-ul">
+              {this.props.singleCheckpoint.characters.map(character => (
+                <li key={character.id}>
+                  <Link to={`/characters/${character.id}`}>
+                    {character.characterName}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         );
       default:
@@ -42,15 +53,15 @@ class SingleCharacter extends Component {
 }
 
 const mapStateToProps = state => ({
-  singleCharacter: state.singleCharacter.collection,
-  status: state.singleCharacter.status,
+  singleCheckpoint: state.singleCheckpoint.collection,
+  status: state.singleCheckpoint.status,
 });
 
-const mapDispatchToProps = { getSingleCharacter, getAllRaids };
+const mapDispatchToProps = { getSingleCheckpoint, getAllRaids };
 
 export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(SingleCharacter)
+  )(SingleCheckpoint)
 );
