@@ -8,7 +8,8 @@
     "start:dev": "webpack -w & nodemon server.js -e html,js,css --ignore public",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node seed.js",
-    "parse": "node ./server/parse/parse.js"
+    "parse": "node ./server/parse/parse.js",
+    "deploy": "script/deploy"
   },
   "keywords": [],
   "author": "",
