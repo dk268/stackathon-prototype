@@ -13,42 +13,92 @@ import {
   ERROR_AUTH,
 } from "../reducers/auth";
 import Loading from "./Loading";
+import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import MenuIcon from "@material-ui/icons/Menu";
+import PropTypes from "prop-types";
+import { Toolbar, Button } from "@material-ui/core";
+import { AppBar, IconButton } from "material-ui";
+
+const styles = {
+  // root: {
+  //   flexGrow: 1,
+  // },
+  flex: {
+    flex: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
 
 const Navbar = props => {
-  let { isLogin, swapType } = props;
-  console.log(props.loginStatus);
+  let { isLogin, swapType, classes } = props;
   switch (props.loginStatus) {
     case LOADING_AUTH:
       return (
-        <div id={`${props.loginStatus}-switch-div`}>
-          <MainLinks props={props} />
-          <Loading name="navbar" />
-        </div>
+        <AppBar
+          id={`${props.loginStatus}-switch-AppBar`}
+          className="navbar-appbar"
+        >
+          <Toolbar className="toolbar">
+            <IconButton
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="Menu"
+            >
+              <MenuIcon />
+            </IconButton>
+            <h1 className="navbar-title">AO DKP</h1>
+            <MainLinks props={props} />
+            <Loading name="navbar" />
+            <button className="login-button" color="inherit">
+              Login
+            </button>
+          </Toolbar>
+        </AppBar>
       );
     case NO_LOGIN_AUTH:
       return (
-        <div id={`${props.loginStatus}-switch-div`}>
+        <AppBar id={`${props.loginStatus}-switch-AppBar`}>
           <MainLinks props={props} />
           <LoginPane props={props} isLogin={isLogin} swapType={swapType} />
-        </div>
+        </AppBar>
       );
     case LOGGED_IN_AUTH:
       return (
-        <div id={`${props.loginStatus}-switch-div`}>
-          <MainLinks props={props} />
-          <Link to={`/`} onClick={props.logout}>
-            <small>log out:/</small>
+        <AppBar
+          id={`${props.loginStatus}-switch-AppBar`}
+          className="navbar-appbar"
+          position="static"
+        >
+          <Toolbar className="toolbar">
+            <h1 className="navbar-title">AO DKP</h1>
+          </Toolbar>
+          <MainLinks props={props} className={classes.flex} />
+          <IconButton
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="Menu"
+          />
+          <Link to={`/users/logout`} onClick={props.logout}>
+            <button className="login-button">log out:/</button>
           </Link>
-        </div>
+        </AppBar>
       );
     case ADMIN_AUTH:
-      return <p>You're an admin!</p>;
+      return (
+        <Link to={`/users/logout`} onClick={props.logout}>
+          <small>You're an admin!! Log out?</small>
+        </Link>
+      );
     case ERROR_AUTH:
       return (
-        <div id={`${props.loginStatus}-switch-div`}>
+        <AppBar id={`${props.loginStatus}-switch-AppBar`}>
           <MainLinks props={props} />
           <LoginPane props={props} isLogin={isLogin} swapType={swapType} />
-        </div>
+        </AppBar>
       );
     default:
       return <MainLinks props={props} />;
@@ -69,14 +119,33 @@ const MainLinks = props => (
       All Checkpoints
     </Link>
     <br />
-    <Link to="/add/character"> Add a character </Link>
-    <Link to="/add/checkpoint"> Add a checkpoint </Link>
-    <Link to="/add/item"> Add an item </Link>
-    <Link to="/add/raid"> Add a raid </Link>
+    <Link to="/add/character" className="navbar-link">
+      {" "}
+      Add a character{" "}
+    </Link>
+    <Link to="/add/checkpoint" className="navbar-link">
+      {" "}
+      Add a checkpoint{" "}
+    </Link>
+    <Link to="/add/item" className="navbar-link">
+      {" "}
+      Add an item{" "}
+    </Link>
+    <Link to="/add/raid" className="navbar-link">
+      {" "}
+      Add a raid{" "}
+    </Link>
     <br />
-    <Link to="/edit/"> EDIT THE THINGS </Link>
+    <Link to="/edit/" className="navbar-link">
+      {" "}
+      EDIT THE THINGS{" "}
+    </Link>
   </div>
 );
+
+Navbar.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 const LoginPane = props => (
   <div id="login-signup-form-div">
@@ -84,7 +153,8 @@ const LoginPane = props => (
     <button
       type="button"
       id="login-signup-swap-button"
-      onClick={props.swapType}>
+      onClick={props.swapType}
+    >
       {props.isLogin ? `to signup` : `to login`}
     </button>
     {props.isLogin ? (
@@ -100,12 +170,17 @@ const mapStateToProps = state => ({
   isLogin: state.forms.isLogin,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
   swapType: () => dispatch(aCC(SWAP_TYPE)),
-  logout: () => dispatch(logout()),
+  logout: () => {
+    // props.history.push("/");
+    dispatch(logout());
+  },
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Navbar);
+export default withStyles(styles)(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Navbar)
+);

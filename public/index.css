@@ -1,3 +1,43 @@
 #hello-world {
   color: blue;
 }
+
+#navbar-links-div {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.navbar-link {
+  margin: 10px;
+  padding: 2px;
+  background-color: gold;
+  color: black;
+  text-decoration-line: none;
+  border-radius: 20%;
+}
+
+.login-button {
+  background-color: gold;
+  color: black;
+  text-decoration-line: none;
+  border-radius: 10%;
+}
+
+.toolbar {
+  display: flex;
+}
+
+.navbar-title {
+  text-align: flex-start;
+}
+
+.navbar-appbar {
+  display: flex;
+}
+
+link:hover,
+.selected {
+  background-color: white;
+}

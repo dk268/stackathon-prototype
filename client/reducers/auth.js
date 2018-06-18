@@ -39,7 +39,8 @@ export const logout = () => async dispatch => {
 export const me = () => async dispatch => {
   try {
     dispatch(aCC(LOADING_AUTH));
-    const currentUser = await Axios.get("/auth/me");
+    const currentUser = await Axios.get("/users/me");
+    console.dir(currentUser.data);
     currentUser.data
       ? dispatch(aCC(LOGGED_IN_AUTH, currentUser.data))
       : dispatch(aCC(NO_LOGIN_AUTH));

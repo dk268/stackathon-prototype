@@ -48,6 +48,7 @@ router.post("/signup", async (req, res, next) => {
 });
 
 router.post("/logout", (req, res, next) => {
+  console.log("hit this route");
   req.logout();
   req.session.destroy();
   res.sendStatus(200);
