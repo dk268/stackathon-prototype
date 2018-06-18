@@ -107,38 +107,38 @@ const Navbar = props => {
 const MainLinks = props => (
   <div id="navbar-links-div">
     <Link to="/characters" className="navbar-link">
-      All Characters
+      <button className="navbar-link-button">All Characters</button>
     </Link>
     <Link to="/items" className="navbar-link">
-      All Items
+      <button className="navbar-link-button">All Items</button>
     </Link>
     <Link to="/raids" className="navbar-link">
-      All Raids
+      <button className="navbar-link-button">All Raids</button>
     </Link>
     <Link to="/checkpoints" className="navbar-link">
-      All Checkpoints
+      <button className="navbar-link-button">All Checkpoints</button>
     </Link>
     <br />
     <Link to="/add/character" className="navbar-link">
       {" "}
-      Add a character{" "}
+      <button className="navbar-link-button">Add a character </button>
     </Link>
     <Link to="/add/checkpoint" className="navbar-link">
       {" "}
-      Add a checkpoint{" "}
+      <button className="navbar-link-button">Add a checkpoint </button>
     </Link>
     <Link to="/add/item" className="navbar-link">
       {" "}
-      Add an item{" "}
+      <button className="navbar-link-button">Add an item </button>
     </Link>
     <Link to="/add/raid" className="navbar-link">
       {" "}
-      Add a raid{" "}
+      <button className="navbar-link-button">Add a raid </button>
     </Link>
     <br />
     <Link to="/edit/" className="navbar-link">
       {" "}
-      EDIT THE THINGS{" "}
+      <button className="navbar-link-button"> EDIT THE THINGS </button>
     </Link>
   </div>
 );
