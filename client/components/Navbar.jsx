@@ -1,60 +1,13 @@
 import React from "react";
 import { Router, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { Login, Signup } from "./Navbar-LoginPane";
-import { aCC } from "../reducers";
-import { SWAP_TYPE } from "../reducers/forms";
-import {
-  NO_LOGIN_AUTH,
-  LOADING_AUTH,
-  LOGGED_IN_AUTH,
-  ADMIN_AUTH,
-  logout,
-  ERROR_AUTH,
-} from "../reducers/auth";
-import Loading from "./Loading";
+import { login, login as signup } from "../reducers/auth";
 
-const Navbar = props => {
-  let { isLogin, swapType } = props;
-  console.log(props.loginStatus);
-  switch (props.loginStatus) {
-    case LOADING_AUTH:
-      return (
-        <div id={`${props.loginStatus}-switch-div`}>
-          <MainLinks props={props} />
-          <Loading name="navbar" />
-        </div>
-      );
-    case NO_LOGIN_AUTH:
-      return (
-        <div id={`${props.loginStatus}-switch-div`}>
-          <MainLinks props={props} />
-          <LoginPane props={props} isLogin={isLogin} swapType={swapType} />
-        </div>
-      );
-    case LOGGED_IN_AUTH:
-      return (
-        <div id={`${props.loginStatus}-switch-div`}>
-          <MainLinks props={props} />
-          <Link to={`/`} onClick={props.logout}>
-            <small>log out:/</small>
-          </Link>
-        </div>
-      );
-    case ADMIN_AUTH:
-      return <p>You're an admin!</p>;
-    case ERROR_AUTH:
-      return (
-        <div id={`${props.loginStatus}-switch-div`}>
-          <MainLinks props={props} />
-          <LoginPane props={props} isLogin={isLogin} swapType={swapType} />
-        </div>
-      );
-    default:
-      return <MainLinks props={props} />;
-  }
-};
-const MainLinks = props => (
+// const LoginPane = props => (
+//   <form
+// )
+
+const Navbar = props => (
   <div id="navbar-links-div">
     <Link to="/characters" className="navbar-link">
       All Characters
@@ -68,42 +21,14 @@ const MainLinks = props => (
     <Link to="/checkpoints" className="navbar-link">
       All Checkpoints
     </Link>
-    <br />
-    <Link to="/add/character"> Add a character </Link>
-    <Link to="/add/checkpoint"> Add a checkpoint </Link>
-    <Link to="/add/item"> Add an item </Link>
-    <Link to="/add/raid"> Add a raid </Link>
-    <br />
-    <Link to="/edit/"> EDIT THE THINGS </Link>
-  </div>
-);
-
-const LoginPane = props => (
-  <div id="login-signup-form-div">
-    {props.isLogin ? `Log in!` : `Sign up!`}
-    <button
-      type="button"
-      id="login-signup-swap-button"
-      onClick={props.swapType}>
-      {props.isLogin ? `to signup` : `to login`}
-    </button>
-    {props.isLogin ? (
-      <Login name="login" displayName="Log in!" />
-    ) : (
-      <Signup name="signup" displayName="Sign up!" />
-    )}
   </div>
 );
 
 const mapStateToProps = state => ({
   loginStatus: state.auth.status,
-  isLogin: state.forms.isLogin,
 });
 
-const mapDispatchToProps = dispatch => ({
-  swapType: () => dispatch(aCC(SWAP_TYPE)),
-  logout: () => dispatch(logout()),
-});
+const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,

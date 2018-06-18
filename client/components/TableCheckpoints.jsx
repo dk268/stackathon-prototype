@@ -33,10 +33,9 @@ class TableCheckpoints extends Component {
         return (
           <div className="table-checkpoints-div">
             {filteredCheckpoints.map(checkpoint => (
-              <small key={checkpoint.id}>
-                {checkpoint.checkpointName} for {checkpoint.checkpointDKP} dkp{" "}
-                <br />
-              </small>
+              <p key={checkpoint.id}>
+                {checkpoint.checkpointName} for {checkpoint.checkpointDKP} dkp
+              </p>
             ))}
             <p>
               Total DKP{" "}

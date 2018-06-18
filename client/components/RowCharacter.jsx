@@ -6,11 +6,9 @@ const RowCharacter = props => {
     <div id="row-character-div">
       <Link to={`/characters/${props.character.id}`}>
         {props.character.characterName}
-      </Link>{" "}
-      <br />
-      character DKP total: {props.character.dkp}
-      <br />
-      {props.character.isAlt ? `alt` : ``}
+      </Link>
+      <p>character DKP total: {props.character.dkp}</p>
+      <p>{props.character.isAlt ? `alt` : ``}</p>
     </div>
   );
 };

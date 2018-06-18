@@ -10,7 +10,6 @@ import Error from "./Error";
 import TableRaids from "./TableRaids";
 import TableItems from "./TableItems";
 import RowCheckpoint from "./RowCheckpoint";
-import { isAdmin } from "..";
 
 class SingleRaid extends Component {
   componentDidMount = () => {
@@ -41,15 +40,6 @@ class SingleRaid extends Component {
             </h5>
             <h3>Items</h3>
             <TableItems raid={this.props.singleRaid} />
-            {isAdmin() ? (
-              <Link to={`/raids/edit/${this.props.match.params.raidId}`}>
-                <button type="button" id="raid-edit-admin-button-link">
-                  EDIT ME!
-                </button>
-              </Link>
-            ) : (
-              ""
-            )}
           </div>
         );
       default:
