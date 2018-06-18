@@ -50,7 +50,9 @@ const Navbar = props => {
             >
               <MenuIcon />
             </IconButton>
-            <h1 className="navbar-title">AO DKP</h1>
+            <Link to="/">
+              <h1 className="navbar-title">AODKP</h1>
+            </Link>
             <MainLinks props={props} />
             <Loading name="navbar" />
             <button className="login-button" color="inherit">
@@ -74,7 +76,9 @@ const Navbar = props => {
           position="static"
         >
           <Toolbar className="toolbar">
-            <h1 className="navbar-title">AO DKP</h1>
+            <Link to="/">
+              <h1 className="navbar-title">AODKP</h1>
+            </Link>
           </Toolbar>
           <MainLinks props={props} className={classes.flex} />
           <IconButton
