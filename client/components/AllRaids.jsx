@@ -12,7 +12,7 @@ import RowItemsMapper from "./RowItem";
 
 class AllRaids extends Component {
   componentDidMount = () => {
-    if (this.props.status != LOADED) this.props.getRaids();
+    this.props.getRaids();
   };
 
   render = () => {
@@ -34,17 +34,11 @@ class AllRaids extends Component {
                       Raid Name: {raid.raidName}
                     </li>
                   </Link>
-                  <br /> Checkpoints:
                   <li className="raid-details-raid-dkp">
-                    <RowCheckpoint raid={raid} />
+                    Checkpoints: <RowCheckpoint raid={raid} />
                   </li>
-                  <li className="raid-details-character-mapper-li">
-                    <RowCharactersMapper characters={raid.characters} />
-                  </li>
-                  <br /> Items:
-                  <li className="raid-details-item-mapper-li">
-                    <RowItemsMapper items={raid.items} />
-                  </li>
+                  <RowCharactersMapper characters={raid.characters} />
+                  <RowItemsMapper items={raid.items} />
                 </ul>
               </div>
             ))}

@@ -3,7 +3,7 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const session = require("express-session");
-const { db, User } = require("./db/index.js");
+const { db } = require("./db/index.js");
 const passport = require("passport");
 
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -23,7 +23,7 @@ app.use(
     // secret: process.env.SESSION_SECRET || 'a wildly insecure secret',
     store: dbStore,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: false
   })
 );
 
