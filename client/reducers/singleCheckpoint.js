@@ -42,6 +42,8 @@ const singleCheckpoint = (state = initialState, action) => {
       return { ...state, status: LOADING };
     case LOADED_CHECKPOINT:
       return { ...state, status: LOADED, collection: action.payload };
+    case EDIT_CHECKPOINT:
+      return { ...state, status: LOADED, collection: action.payload };
     case ERROR_CHECKPOINT:
       return { ...state, status: ERROR };
     default:

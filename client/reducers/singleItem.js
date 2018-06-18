@@ -39,6 +39,8 @@ const singleItem = (state = initialState, action) => {
       return { ...state, status: LOADING };
     case LOADED_ITEM:
       return { ...state, status: LOADED, collection: action.payload };
+    case EDIT_ITEM:
+      return { ...state, status: LOADED, collection: action.payload };
     case ERROR_ITEM:
       return { ...state, status: ERROR };
     default:

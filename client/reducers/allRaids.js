@@ -47,7 +47,7 @@ const allRaids = (state = initialState, action) => {
     case ADD_RAID:
       return {
         ...state,
-        status: LOADED,
+        status: LOADING,
         collection: [...state.collection, action.payload],
       };
     case DELETE_RAID:

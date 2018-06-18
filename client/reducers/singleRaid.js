@@ -39,6 +39,8 @@ const singleRaid = (state = initialState, action) => {
       return { ...state, status: LOADING };
     case LOADED_RAID:
       return { ...state, status: LOADED, collection: action.payload };
+    case EDIT_RAID:
+      return { ...state, status: LOADED, collection: action.payload };
     case ERROR_RAID:
       return { ...state, status: ERROR };
     default:

@@ -49,7 +49,7 @@ const allCheckpoints = (state = initialState, action) => {
     case ADD_CHECKPOINT:
       return {
         ...state,
-        status: LOADED,
+        status: LOADING,
         collection: [...state.collection, action.payload],
       };
     case DELETE_CHECKPOINT:

@@ -42,6 +42,8 @@ const singleCharacter = (state = initialState, action) => {
       return { ...state, status: LOADING };
     case LOADED_CHARACTER:
       return { ...state, status: LOADED, collection: action.payload };
+    case EDIT_CHARACTER:
+      return { ...state, status: LOADED, collection: action.payload };
     case ERROR_CHARACTER:
       return { ...state, status: ERROR };
     default:

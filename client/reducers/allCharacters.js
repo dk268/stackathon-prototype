@@ -49,7 +49,7 @@ const allCharacters = (state = initialState, action) => {
     case ADD_CHARACTER:
       return {
         ...state,
-        status: LOADED,
+        status: LOADING,
         collection: [...state.collection, action.payload],
       };
     case DELETE_CHARACTER:
