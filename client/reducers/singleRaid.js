@@ -5,12 +5,27 @@ const DIRECT_OBJECT = "RAID";
 const LOADING_RAID = `LOADING_` + DIRECT_OBJECT;
 const LOADED_RAID = `LOADED_` + DIRECT_OBJECT;
 const ERROR_RAID = `ERROR_` + DIRECT_OBJECT;
+export const ADD_RAID = `ADD_` + DIRECT_OBJECT;
+const EDIT_RAID = `EDIT_` + DIRECT_OBJECT;
+export const DELETE_RAID = `DELETE_` + DIRECT_OBJECT;
 
 export const getSingleRaid = id => async dispatch => {
   try {
     dispatch(aCC(LOADING_RAID));
     const singleRaid = await Axios.get(`/api/raids/${id}`);
     dispatch(aCC(LOADED_RAID, singleRaid.data));
+    return singleRaid.data;
+  } catch (e) {
+    dispatch(aCC(ERROR_RAID, e));
+  }
+};
+
+export const editRaid = raidData => async dispatch => {
+  try {
+    dispatch(aCC(LOADING_RAID));
+    const updatedRaid = await Axios.put(`/api/raids/${raidData.id}`, raidData);
+    dispatch(aCC(EDIT_RAID, updatedRaid.data));
+    return updatedRaid.data;
   } catch (e) {
     dispatch(aCC(ERROR_RAID, e));
   }

@@ -17,16 +17,20 @@ class TableItems extends Component {
   TableItemsCharacter = props => {
     {
       const filteredItems = props.allItems.filter(
-        item => item.character.id === props.character.id
+        item => item.character && item.character.id === props.character.id
       );
       return (
         <div id="table-raids-div">
           {filteredItems.map(item => (
             <p key={item.id}>
               name: <Link to={`/items/${item.id}`}>{item.itemName}</Link> raid:{" "}
-              <Link to={`/raids/${item.RaidAcquired.id}`}>
-                {item.RaidAcquired.raidName}
-              </Link>{" "}
+              {!item.RaidAcquired ? (
+                ` no raid acquisition specified, `
+              ) : (
+                <Link to={`/raids/${item.RaidAcquired.id}`}>
+                  {item.RaidAcquired.raidName}
+                </Link>
+              )}{" "}
               for {item.itemDKPCost} dkp
             </p>
           ))}
@@ -45,10 +49,16 @@ class TableItems extends Component {
           {filteredItems.map(item => (
             <p key={item.id}>
               name: <Link to={`/items/${item.id}`}>{item.itemName}</Link> to{" "}
-              <Link to={`/characters/${item.character.id}`}>{`${
-                item.character.characterName
-              }`}</Link>{" "}
-              for {item.itemDKPCost} dkp
+              {item.character && item.character.id ? (
+                <div id="character-exists-div">
+                  <Link to={`/characters/${item.character.id}`}>{`${
+                    item.character.characterName
+                  }`}</Link>
+                  for {item.itemDKPCost} dkp
+                </div>
+              ) : (
+                `no owner for this item`
+              )}
             </p>
           ))}
         </div>

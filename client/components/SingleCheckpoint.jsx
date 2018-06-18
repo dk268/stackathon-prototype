@@ -9,6 +9,7 @@ import Loading from "./Loading";
 import Error from "./Error";
 import TableRaids from "./TableRaids";
 import TableItems from "./TableItems";
+import { isAdmin } from "..";
 
 class SingleCheckpoint extends Component {
   componentDidMount = () => {
@@ -30,9 +31,13 @@ class SingleCheckpoint extends Component {
             <h6>DKP: {this.props.singleCheckpoint.checkpointDKP}</h6>
             <h3>
               Raid:{" "}
-              <Link to={`/raids/${this.props.singleCheckpoint.raid.id}`}>
-                {this.props.singleCheckpoint.raid.raidName}
-              </Link>{" "}
+              {!this.props.singleCheckpoint.raid ? (
+                `Checkpoint not yet associated with a raid`
+              ) : (
+                <Link to={`/raids/${this.props.singleCheckpoint.raid.id}`}>
+                  {this.props.singleCheckpoint.raid.raidName}
+                </Link>
+              )}
             </h3>
             <h4>Characters in attendance:</h4>
             <ul id="single-checkpoint-characters-ul">
@@ -44,6 +49,18 @@ class SingleCheckpoint extends Component {
                 </li>
               ))}
             </ul>
+            {isAdmin() ? (
+              <Link
+                to={`/checkpoints/edit/${
+                  this.props.match.params.checkpointId
+                }`}>
+                <button type="button" id="checkpoint-edit-admin-button-link">
+                  EDIT ME!
+                </button>
+              </Link>
+            ) : (
+              ""
+            )}
           </div>
         );
       default:

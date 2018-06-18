@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require("path");
 
 router.use("/api", require("./api/index.js"));
+router.use("/users", require("./api/users.js"));
 // app.use("/ROUTENAME", require("./routes/ROUTENEAME"));
 
 router.get("*", (req, res) => {
