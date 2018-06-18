@@ -9,7 +9,9 @@ import Error from "./Error";
 
 class AllItems extends Component {
   componentDidMount = () => {
-    if (this.props.status != LOADED) this.props.getItems();
+    console.log(this.props);
+    this.props.getItems();
+    console.log(this.props);
   };
 
   render = () => {
@@ -34,23 +36,16 @@ class AllItems extends Component {
                   <li className="item-details-item-dkp">
                     DKP cost: {item.itemDKPCost}
                   </li>
-                  {!item.character ? (
-                    ` Item not assigned a buyer`
-                  ) : (
-                    <Link to={`/characters/${item.character.id}`}>
-                      <li className="item-details-buyer-name">
-                        Buyer Name: {item.character.characterName}
-                      </li>
-                    </Link>
-                  )}
+                  <Link to={`/characters/${item.character.id}`}>
+                    <li className="item-details-buyer-name">
+                      Buyer Name: {item.character.characterName}
+                    </li>
+                  </Link>
                   <li className="item-details-raid-acquired">
-                    Acquired at Raid:{!item.RaidAcquired ? (
-                      ` Raid acquired not set`
-                    ) : (
-                      <Link to={`/raids/${item.RaidAcquired.id}`}>
-                        {item.RaidAcquired.raidName}
-                      </Link>
-                    )}
+                    Acquired at Raid:{" "}
+                    <Link to={`/raids/${item.RaidAcquired.id}`}>
+                      {item.RaidAcquired.raidName}
+                    </Link>
                   </li>
                 </ul>
               </div>

@@ -265,7 +265,7 @@ class AllCharacters extends Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   componentDidMount = () => {
-    if (this.props.status != LOADED) this.props.getCharacters();
+    this.props.getCharacters();
   };
 
   render = () => {

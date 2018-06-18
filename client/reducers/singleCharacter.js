@@ -5,32 +5,12 @@ const DIRECT_OBJECT = "CHARACTER";
 const LOADING_CHARACTER = `LOADING_` + DIRECT_OBJECT;
 const LOADED_CHARACTER = `LOADED_` + DIRECT_OBJECT;
 const ERROR_CHARACTER = `ERROR_` + DIRECT_OBJECT;
-export const ADD_CHARACTER = `ADD_` + DIRECT_OBJECT;
-const EDIT_CHARACTER = `EDIT_` + DIRECT_OBJECT;
-export const DELETE_CHARACTER = `DELETE_` + DIRECT_OBJECT;
 
 export const getSingleCharacter = id => async dispatch => {
   try {
     dispatch(aCC(LOADING_CHARACTER));
     const singleCharacter = await Axios.get(`/api/characters/${id}`);
     dispatch(aCC(LOADED_CHARACTER, singleCharacter.data));
-    return singleCharacter.data;
-  } catch (e) {
-    dispatch(aCC(ERROR_CHARACTER, e));
-  }
-};
-
-export const editCharacter = characterData => async dispatch => {
-  try {
-    console.log("CALLED");
-    dispatch(aCC(LOADING_CHARACTER));
-    console.log("CHARACTER DATA", characterData);
-    const singleCharacter = await Axios.put(
-      `/api/characters/${characterData.id}`,
-      characterData
-    );
-    dispatch(aCC(EDIT_CHARACTER, singleCharacter.data));
-    return singleCharacter.data;
   } catch (e) {
     dispatch(aCC(ERROR_CHARACTER, e));
   }

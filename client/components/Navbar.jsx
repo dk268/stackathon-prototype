@@ -1,6 +1,6 @@
 import React from "react";
 import { Router, Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, withRouter } from "react-redux";
 import { Login, Signup } from "./Navbar-LoginPane";
 import { aCC } from "../reducers";
 import { SWAP_TYPE } from "../reducers/forms";
@@ -171,20 +171,21 @@ const LoginPane = props => (
 
 const mapStateToProps = state => ({
   loginStatus: state.auth.status,
-  isLogin: state.forms.isLogin,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
   swapType: () => dispatch(aCC(SWAP_TYPE)),
   logout: () => {
-    // props.history.push("/");
+    props.history.push("/");
     dispatch(logout());
   },
 });
 
 export default withStyles(styles)(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
+  withRouter(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )
   )(Navbar)
 );

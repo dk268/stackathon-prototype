@@ -4,17 +4,15 @@ const {
   Raid,
   Character,
   Checkpoint,
-  Op,
 } = require("../../db/index.js");
 const express = require("express");
 const router = express.Router();
 
-// /api/checkpoints/
+// /api/raids/
 
 router.get("/", async (req, res, next) => {
   const allRaids = await Raid.findAll({
     include: [Item, Character, Checkpoint],
-    order: [[Character, "characterName", "ASC"]],
   });
   res.json(allRaids);
 });
@@ -29,9 +27,6 @@ router.get("/:raidId", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const newRaid = await Raid.create(req.body);
-    if (req.body.checkpoints.length)
-      await setCheckpointsToRaid(req.body.checkpoints, newRaid);
-    if (req.body.items.length) await setItemsToRaid(req.body.items, newRaid);
     res.json(newRaid);
   } catch (e) {
     next(e);
@@ -40,17 +35,13 @@ router.post("/", async (req, res, next) => {
 
 router.put("/:raidId", async (req, res, next) => {
   try {
-    console.log(req.body.items);
     const [, updatedRaid] = await Raid.update(req.body, {
       where: {
-        id: req.params.raidId,
+        id: raidId,
       },
       returning: true,
       plain: true,
     });
-    await setCheckpointsToRaid(req.body.checkpoints, updatedRaid);
-    await setItemsToRaid(req.body.items, updatedRaid);
-    res.json(updatedRaid);
   } catch (e) {
     next(e);
   }
@@ -67,39 +58,3 @@ router.delete("/:raidId", async (req, res, next) => {
 });
 
 module.exports = router;
-
-const setCheckpointsToRaid = async (checkpoints, raid) => {
-  if (checkpoints) {
-    for (let i = 0; i < checkpoints.length; i++) {
-      const foundCheckpoint = await Checkpoint.findById(checkpoints[i].id);
-      await foundCheckpoint.setRaid(raid);
-    }
-  }
-};
-
-const setItemsToRaid = async (items, raid) => {
-  const allItems = await Item.findAll();
-  if (!allItems || !allItems.length) {
-    await raid.setItems(null);
-    return raid;
-  }
-  if (!items || !items.length) {
-    await raid.setItems(null);
-    return raid;
-  }
-  const itemsToAdd = allItems.filter(item =>
-    items.map(item => item.id).includes(item.id)
-  );
-  await raid.setItems(itemsToAdd);
-  if (itemsToAdd)
-    for (let i = 0; i < itemsToAdd.length; i++) {
-      await itemsToAdd[0].setRaidAcquired(raid);
-    }
-  const itemsToRemove = allItems.filter(item =>
-    items.map(item => !item.id).includes(item.id)
-  );
-  if (itemsToRemove)
-    for (let i = 0; i < itemsToAdd.length; i++) {
-      await itemsToAdd[0].setRaidAcquired(null);
-    }
-};

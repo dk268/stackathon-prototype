@@ -15,10 +15,8 @@ import EditForm from "./EditForm";
 import EditLinks from "./EditLinks";
 import { me } from "../reducers/auth";
 import Landing from "./Landing";
+
 class Root extends Component {
-  componentDidMount = () => {
-    this.props.me();
-  };
   render() {
     return (
       <div id="root-component-div">
@@ -43,47 +41,6 @@ class Root extends Component {
                 path="/checkpoints/:checkpointId"
                 component={SingleCheckpoint}
               />
-              <Route
-                exact
-                path="/add/character"
-                render={() => <CreateForm formName="addCharacter" />}
-              />
-              <Route
-                exact
-                path="/add/checkpoint"
-                render={() => <CreateForm formName="addCheckpoint" />}
-              />
-              <Route
-                exact
-                path="/add/item"
-                render={() => <CreateForm formName="addItem" />}
-              />
-              <Route
-                exact
-                path="/add/raid"
-                render={() => <CreateForm formName="addRaid" />}
-              />
-              <Route exact path="/edit" component={EditLinks} />
-              <Route
-                exact
-                path="/characters/edit/:charId"
-                render={() => <EditForm formName="editCharacter" />}
-              />
-              <Route
-                exact
-                path="/checkpoints/edit/:checkpointId"
-                render={() => <EditForm formName="editCheckpoint" />}
-              />
-              <Route
-                exact
-                path="/items/edit/:itemId"
-                render={() => <EditForm formName="editItem" />}
-              />
-              <Route
-                exact
-                path="/raids/edit/:raidId"
-                render={() => <EditForm formName="editRaid" />}
-              />
             </Switch>
           </div>
         </Router>
@@ -91,8 +48,8 @@ class Root extends Component {
     );
   }
 }
-const mapStateToProps = state => {};
+
 export default connect(
   null,
-  { me }
+  null
 )(Root);
