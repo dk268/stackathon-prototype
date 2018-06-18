@@ -66,6 +66,7 @@ const setCheckpointToRaid = async (raid, checkpoint) => {
     await checkpoint.setRaid(foundRaid);
   } else await checkpoint.setRaid(null);
 };
+
 const setCharactersToCheckpoint = async (characters, checkpoint) => {
   try {
     const foundCharacters = await Character.findAll({

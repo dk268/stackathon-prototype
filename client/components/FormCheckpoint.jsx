@@ -46,10 +46,14 @@ export const FormCheckpoint = ownProps => {
       <br />
       <ul>
         Add this checkpoint to a raid:
-        {ownProps.state.raid.id
+        {ownProps.state.raid && ownProps.state.raid.id
           ? " Checkpoint already belongs to a raid!"
           : ownProps.props.raids
-              .filter(raid => raid.id !== ownProps.state.raid.id)
+              .filter(
+                raid =>
+                  (raid && raid.id !== ownProps.state.raid) ||
+                  ownProps.state.raid.id
+              )
               .map(raid => {
                 return (
                   <li key={raid.id} className="add-raid-to-character-li">
