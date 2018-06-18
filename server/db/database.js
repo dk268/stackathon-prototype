@@ -12,6 +12,7 @@ console.log(chalk.yellow("Opening database connection"));
 console.log(chalk.blue(`process.env.SHELL: ${process.env.SHELL}`));
 
 const currentDBUrl = `postgres://sctvjqlfeoszpk:c027269f585280bf0cbf45c694eed4f0b99b6fa44edc9861fd567bdb6b146093@ec2-54-235-132-202.compute-1.amazonaws.com:5432/daht5bo9gk4gq9`;
+console.log(currentDBUrl);
 // create the database instance that can be used in other database files
 const db = new Sequelize(
   // process.env.SHELL === "C:\\Program Files\\Git\\usr\\bin\\bash.exe"
