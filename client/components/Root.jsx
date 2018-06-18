@@ -14,6 +14,7 @@ import CreateForm from "./CreateForm";
 import EditForm from "./EditForm";
 import EditLinks from "./EditLinks";
 import { me } from "../reducers/auth";
+import Landing from "./Landing";
 class Root extends Component {
   componentDidMount = () => {
     this.props.me();
@@ -25,6 +26,7 @@ class Root extends Component {
           <div id="body-root">
             <Navbar />
             <Switch>
+              <Route exact path="/" component={Landing} />
               <Route exact path="/characters" component={AllCharacters} />
               <Route exact path="/items" component={AllItems} />
               <Route exact path="/raids" component={AllRaids} />

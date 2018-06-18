@@ -40,7 +40,7 @@ const columnData = [
     label: "Character Name",
   },
   { id: "dkp", numeric: true, disablePadding: false, label: "DKP" },
-  { id: "isAlt", numeric: false, disablePadding: false, label: "Main?" },
+  { id: "isAlt", numeric: false, disablePadding: false, label: "is Alt?" },
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -321,7 +321,7 @@ class AllCharacters extends Component {
                           </TableCell>
                           <TableCell numeric>{n.dkp}</TableCell>
                           <TableCell component="th" scope="row" padding="none">
-                            {n.isAlt + ""}
+                            {n.isAlt ? `alt` : ``}
                           </TableCell>
                         </TableRow>
                       );

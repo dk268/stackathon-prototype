@@ -55,3 +55,41 @@
   font-weight: bold;
   text-decoration-style: solid;
 }
+
+#landing-div {
+  display: flex;
+  flex-direction: column;
+}
+
+#landing-div > a {
+  align-self: center;
+}
+#landing-div > a > img {
+  align-self: center;
+  background-color: rgba(47, 34, 165, 0.8);
+  margin: 0 auto;
+}
+
+#landing-div > a > img:hover {
+  background-color: rgba(160, 160, 80, 0.6);
+}
+
+#landing-div-text {
+  color: black;
+  background-color: rgba(180, 180, 180, 0.8);
+  flex-shrink: 1;
+}
+
+body {
+  background: url(http://ashenoath.com/data/files/system/desktopgraphy.com-graphic-design-burning-tree-light-man-wallpaper-pictures-hd.jpg)
+    no-repeat fixed center top #eee;
+  font-size: 13px;
+  font-family: Tahoma, Arial, Verdana, sans-serif;
+  color: #eee;
+  text-align: left;
+}
+
+#body-root {
+  background-color: rgb(221, 255, 221);
+  color: black;
+}
