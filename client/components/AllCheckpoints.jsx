@@ -10,7 +10,7 @@ import RowCheckpoint from "./RowCheckpoint";
 
 class AllCheckpoints extends Component {
   componentDidMount = () => {
-    if (this.props.status != LOADED) this.props.getCheckpoints();
+    this.props.getCheckpoints();
   };
 
   render = () => {
@@ -34,7 +34,7 @@ class AllCheckpoints extends Component {
                     </Link>
                   </li>
                   <li className="checkpoint-details-checkpoint-dkp">
-                    <RowCheckpoint checkpoint={checkpoint} />
+                    Checkpoints: <RowCheckpoint checkpoint={checkpoint} />
                   </li>
                 </ul>
               </div>

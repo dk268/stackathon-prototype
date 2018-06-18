@@ -30,8 +30,8 @@ const parseFile = async () => {
         console.log(err);
       }
     }
-  );
-};
+  }
+);
 
 function splitThenTrim(text) {
   return text
@@ -172,24 +172,45 @@ async function populateDatabase(raidName, attendance, itemsObjArr) {
 
       //For each checkpoint, add the associated users to the checkpoint.
       console.log(
-        "setting attendance for checkpoint ",
-        checkpointsUpdatedWithRaids[i].checkpointName,
-        "..."
+        "about to set",
+        checkpointsUpdatedWithRaids[i].checkpointName
       );
       await checkpointsUpdatedWithRaids[i].setCharacters(attendingChars);
-      for (let j = 0; j < attendingChars.length; j++) {
-        await attendingChars[j].earnDKP(
-          checkpointsUpdatedWithRaids[i].checkpointDKP
-        );
-      }
-      console.log(
-        `${attendingChars.length} characters' attendance ${chalk.bold(`set!`)}`
-      );
+      console.log(`${attendingChars.length} characters ${chalk.bold(`set!`)}`);
     }
     allCharactersOfTheNight = new Set(allCharactersOfTheNight);
     allCharactersOfTheNight = [...allCharactersOfTheNight];
-    console.log("-----------------------------");
-    console.log(chalk.green("preparing to process items"));
+    const charSetButNotASet = await Character.findAll({
+      where: {
+        characterName: {
+          [Op.in]: allCharactersOfTheNight,
+        },
+      },
+    });
+
+    console.log(chalk.green("preparing to set up items"));
+    //Create each item. Not findOrCreate; we want separate instances of an item.
+    // const items = await Promise.all(
+    //   itemsObjArr.map(item =>
+    //     Item.create({ itemName: item.itemName, itemDKPCost: item.itemDKPCost })
+    //   )
+    // );
+    // console.log(itemsObjArr);
+    // console.log(chalk.blue(`${items.length} items created`));
+    // await Promise.all(
+    //   items.map(item => {
+    //     item.setRaidAcquired(newRaid[0]);
+    //   })
+    // );
+    // console.log(
+    //   chalk.blue(
+    //     `${items.length} items set to ${chalk.yellow(newRaid[0].raidName)}`
+    //   )
+    // );
+    // console.log(
+    //   charSetButNotASet.find(char => char.characterName === "Goliath")
+    // );
+    // console.log(items[0]);
 
     for (let i = 0; i < itemsObjArr.length; i++) {
       let item = await Item.create({
@@ -205,36 +226,8 @@ async function populateDatabase(raidName, attendance, itemsObjArr) {
       await newRaid[0].addItem(item);
       await item.setCharacter(char);
     }
-    console.log(`${itemsObjArr.length} items processed!`);
-    console.log("-----------------------------");
-    const allChars = await Character.findAll();
-    console.log(
-      chalk.yellow(`Adding ${allChars.length} characters to raid...`)
-    );
-    for (let i = 0; i < allChars.length; i++) {
-      await newRaid[0].addCharacter(allChars[i]);
-    }
-    console.log(chalk.red.bold("enforcing DKP maxima"));
-    for (let i = 0; i < allChars.length; i++) {
-      if (allChars[i].isAlt && allChars[i].dkp > 120)
-        await allChars[i].update({
-          overflowDKP: allChars[i].dkp,
-          dkp: 120,
-        });
-      else if (allChars[i].isAlt && allChars[i].isAltUnapproved)
-        await allChars[i].update({ dkp: 0 });
-      else if (allChars[i].dkp > 800)
-        await allChars[i].update({
-          overflowDKP: allChars[i].dkp,
-          dkp: 800,
-        });
-    }
-
-    console.log("all done!");
-    process.exit(0);
+    console.log("all done?!");
   } catch (e) {
     console.log(e);
   }
 }
-
-parseFile();
