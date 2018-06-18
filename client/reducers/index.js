@@ -48,6 +48,7 @@ const rootReducer = combineReducers({
   singleCheckpoint,
   globalStatus,
 });
+
 export const aCC = (type, payload) => ({ type, payload });
 
 export default rootReducer;

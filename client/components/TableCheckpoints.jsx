@@ -4,6 +4,7 @@ import { UNASKED, LOADING, LOADED, ERROR } from "../reducers";
 import Unasked from "./Unasked";
 import Loading from "./Loading";
 import Error from "./Error";
+import { Link } from "react-router-dom";
 import { getCheckpoints } from "../reducers/allCheckpoints";
 
 class TableCheckpoints extends Component {
@@ -34,8 +35,10 @@ class TableCheckpoints extends Component {
           <div className="table-checkpoints-div">
             {filteredCheckpoints.map(checkpoint => (
               <small key={checkpoint.id}>
-                {checkpoint.checkpointName} for {checkpoint.checkpointDKP} dkp{" "}
-                <br />
+                <Link to={`/checkpoints/${checkpoint.id}`}>
+                  {checkpoint.checkpointName}
+                </Link>{" "}
+                for {checkpoint.checkpointDKP} dkp <br />
               </small>
             ))}
             <p>

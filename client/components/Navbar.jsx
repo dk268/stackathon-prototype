@@ -19,11 +19,12 @@ import MenuIcon from "@material-ui/icons/Menu";
 import PropTypes from "prop-types";
 import { Toolbar, Button } from "@material-ui/core";
 import { AppBar, IconButton } from "material-ui";
+import { isAdmin } from "..";
 
 const styles = {
-  // root: {
-  //   flexGrow: 1,
-  // },
+  root: {
+    flexGrow: 1,
+  },
   flex: {
     flex: 1,
   },
@@ -34,6 +35,7 @@ const styles = {
 };
 
 const Navbar = props => {
+  console.log(props.isAdmin);
   let { isLogin, swapType, classes } = props;
   switch (props.loginStatus) {
     case LOADING_AUTH:
@@ -80,7 +82,7 @@ const Navbar = props => {
               <h1 className="navbar-title">AODKP</h1>
             </Link>
           </Toolbar>
-          <MainLinks props={props} className={classes.flex} />
+          <MainLinks {...props} className={classes.flex} />
           <IconButton
             className={classes.menuButton}
             color="inherit"
@@ -100,7 +102,7 @@ const Navbar = props => {
     case ERROR_AUTH:
       return (
         <AppBar id={`${props.loginStatus}-switch-AppBar`}>
-          <MainLinks props={props} />
+          <MainLinks {...props} />
           <LoginPane props={props} isLogin={isLogin} swapType={swapType} />
         </AppBar>
       );
@@ -123,27 +125,47 @@ const MainLinks = props => (
       <button className="navbar-link-button">All Checkpoints</button>
     </Link>
     <br />
-    <Link to="/add/character" className="navbar-link">
-      {" "}
-      <button className="navbar-link-button">Add a character </button>
-    </Link>
-    <Link to="/add/checkpoint" className="navbar-link">
-      {" "}
-      <button className="navbar-link-button">Add a checkpoint </button>
-    </Link>
-    <Link to="/add/item" className="navbar-link">
-      {" "}
-      <button className="navbar-link-button">Add an item </button>
-    </Link>
-    <Link to="/add/raid" className="navbar-link">
-      {" "}
-      <button className="navbar-link-button">Add a raid </button>
-    </Link>
+    {!props.isAdmin ? (
+      ""
+    ) : (
+      <Link to="/add/character" className="navbar-link">
+        {" "}
+        <button className="navbar-link-button">Add a character </button>
+      </Link>
+    )}
+    {!props.isAdmin ? (
+      ""
+    ) : (
+      <Link to="/add/checkpoint" className="navbar-link">
+        {" "}
+        <button className="navbar-link-button">Add a checkpoint </button>
+      </Link>
+    )}
+    {!props.isAdmin ? (
+      ""
+    ) : (
+      <Link to="/add/item" className="navbar-link">
+        {" "}
+        <button className="navbar-link-button">Add an item </button>
+      </Link>
+    )}
+    {!props.isAdmin ? (
+      ""
+    ) : (
+      <Link to="/add/raid" className="navbar-link">
+        {" "}
+        <button className="navbar-link-button">Add a raid </button>
+      </Link>
+    )}
     <br />
-    <Link to="/edit/" className="navbar-link">
-      {" "}
-      <button className="navbar-link-button"> EDIT THE THINGS </button>
-    </Link>
+    {!props.isAdmin ? (
+      ""
+    ) : (
+      <Link to="/edit/" className="navbar-link">
+        {" "}
+        <button className="navbar-link-button"> EDIT THE THINGS </button>
+      </Link>
+    )}
   </div>
 );
 
@@ -171,6 +193,8 @@ const LoginPane = props => (
 
 const mapStateToProps = state => ({
   loginStatus: state.auth.status,
+  isAdmin:
+    state.auth.status === LOGGED_IN_AUTH || state.auth.status === ADMIN_AUTH,
   isLogin: state.forms.isLogin,
 });
 
