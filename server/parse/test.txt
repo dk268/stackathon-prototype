@@ -1,6 +1,6 @@
 [Tue Jun 12 20:09:19 2018] You told kaizo, 'BEGIN 800 ATTENDANCE'
 [Tue Jun 12 20:09:20 2018] Players in EverQuest:
-[Tue Jun 12 20:09:20 2018] ---------------------------
+[Tue Jun 12 20:09:20 2018] --------------------------
 
 [Tue Jun 12 20:09:20 2018] [52 Illusionist (Enchanter)] Snuuk (Dark Elf) <Ashen Oath> ZONE: airplane  
 [Tue Jun 12 20:09:20 2018] [53 Minstrel (Bard)] Freddi (Half Elf) <Ashen Oath> ZONE: airplane  
