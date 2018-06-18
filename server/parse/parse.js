@@ -25,7 +25,7 @@ const parseFile = async () => {
         );
         let items = findItemDrops(slicedArray);
 
-        populateDatabase(raidName, attendance, items);
+        populateDatabase.call(this, raidName, attendance, items);
       } catch (e) {
         console.log(err);
       }
@@ -124,6 +124,7 @@ function findDummyRaidName() {
 
 async function populateDatabase(raidName, attendance, itemsObjArr) {
   try {
+    const now = Date.now();
     let allCharactersOfTheNight = [];
     await db.sync({ force: true });
     //Take the raid's name and create a new Raid.
@@ -229,7 +230,7 @@ async function populateDatabase(raidName, attendance, itemsObjArr) {
           dkp: 800,
         });
     }
-
+    console.log(`Database population complete in ${Date.now() - now} ms`);
     console.log("all done!");
     process.exit(0);
   } catch (e) {
