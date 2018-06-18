@@ -14,7 +14,8 @@ import DeleteField from "./helpers/DeleteField";
 
 class SingleCharacter extends Component {
   componentDidMount = () => {
-    this.props.getSingleCharacter(this.props.match.params.charId);
+    if (this.props.status !== LOADED)
+      this.props.getSingleCharacter(this.props.match.params.charId);
   };
 
   render = () => {

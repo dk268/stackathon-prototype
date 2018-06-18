@@ -11,7 +11,8 @@ import { isAdmin } from "..";
 
 class SingleItem extends Component {
   componentDidMount = () => {
-    this.props.getSingleItem(this.props.match.params.itemId);
+    if (this.props.status !== LOADED)
+      this.props.getSingleItem(this.props.match.params.itemId);
   };
 
   render = () => {

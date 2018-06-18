@@ -14,7 +14,8 @@ import { isAdmin } from "..";
 
 class SingleRaid extends Component {
   componentDidMount = () => {
-    this.props.getSingleRaid(this.props.match.params.raidId);
+    if (this.props.status !== LOADED)
+      this.props.getSingleRaid(this.props.match.params.raidId);
   };
 
   render = () => {

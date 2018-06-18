@@ -13,7 +13,8 @@ import { isAdmin } from "..";
 
 class SingleCheckpoint extends Component {
   componentDidMount = () => {
-    this.props.getSingleCheckpoint(this.props.match.params.checkpointId);
+    if (this.props.status !== LOADED)
+      this.props.getSingleCheckpoint(this.props.match.params.checkpointId);
   };
 
   render = () => {
