@@ -22,9 +22,7 @@ export const getSingleCharacter = id => async dispatch => {
 
 export const editCharacter = characterData => async dispatch => {
   try {
-    console.log("CALLED");
     dispatch(aCC(LOADING_CHARACTER));
-    console.log("CHARACTER DATA", characterData);
     const singleCharacter = await Axios.put(
       `/api/characters/${characterData.id}`,
       characterData

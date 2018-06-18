@@ -169,7 +169,6 @@ class EditForm extends Component {
   };
 
   handleRemoveFromItem = (e, payload) => {
-    console.log("called", payload);
     if (payload.characterName) {
       this.setState({
         character: {},
